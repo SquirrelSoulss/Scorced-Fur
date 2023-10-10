@@ -24,6 +24,10 @@ class PLANTSTATEMACHINE_API UPlantStateBase : public UObject
 	UPROPERTY(BlueprintReadOnly, EditDefaultsOnly)
 	FName StateDisplayName;
 
+
+	
+	UPROPERTY(BluePrintReadOnly)
+	AActor* enemy = nullptr;
 	public:
 		virtual void OnEnterState(AActor* stateOwner);
 		virtual void OnExitState();

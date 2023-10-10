@@ -4,15 +4,15 @@
 #include "PlantStateManagerComponent.h"
 
 // Sets default values
-APlantStateManagerComponent::APlantStateManagerComponent()
+UPlantStateManagerComponent::UPlantStateManagerComponent()
 {
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
-	PrimaryActorTick.bCanEverTick = true;
+	PrimaryComponentTick.bCanEverTick = true;
 
 }
 
 // Called when the game starts or when spawned
-void APlantStateManagerComponent::BeginPlay()
+void UPlantStateManagerComponent::BeginPlay()
 {
 	Super::BeginPlay();
 	InitializeStates();
@@ -21,17 +21,17 @@ void APlantStateManagerComponent::BeginPlay()
 }
 
 // Called every frame
-void APlantStateManagerComponent::Tick(float DeltaTime)
+void UPlantStateManagerComponent::TickComponent(float DeltaTime,ELevelTick ticktype, FActorComponentTickFunction* ThisTickFunction)
 {
-	Super::Tick(DeltaTime);
+	Super::TickComponent(DeltaTime, ticktype, ThisTickFunction);
 	if (bCanTickState == true)
 	{
 		CurrentState->TickState();
 	}
-
+	
 }
 
-void APlantStateManagerComponent::SwitchStateByKey(FString StateKey)
+void UPlantStateManagerComponent::SwitchStateByKey(FString StateKey)
 {
 	UPlantStateBase* NewState = StateMap.FindRef(StateKey);
 	if (NewState->IsValidLowLevel()) 
@@ -77,17 +77,17 @@ void APlantStateManagerComponent::SwitchStateByKey(FString StateKey)
 
 }
 
-void APlantStateManagerComponent::SwitchState(UPlantStateBase* NewState)
+void UPlantStateManagerComponent::SwitchState(UPlantStateBase* NewState)
 {
 
 }
 
-void APlantStateManagerComponent::InitStateManager()
+void UPlantStateManagerComponent::InitStateManager()
 {
 	SwitchStateByKey(InitialState);
 }
 
-void APlantStateManagerComponent::InitializeStates()
+void UPlantStateManagerComponent::InitializeStates()
 {
 	for (auto It = AvailableStates.CreateConstIterator(); It; ++It)
 	{

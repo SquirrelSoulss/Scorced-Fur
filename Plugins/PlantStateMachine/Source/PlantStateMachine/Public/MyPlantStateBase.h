@@ -16,8 +16,6 @@ class PLANTSTATEMACHINE_API UMyPlantStateBase : public UPlantStateBase
 	GENERATED_BODY()
 	
 	public:
-	UPROPERTY(BluePrintReadOnly)
-	AActor* enemy = nullptr;
 	
 	virtual void OnEnterState(AActor* stateOwner) override;
 	virtual void OnExitState()override;

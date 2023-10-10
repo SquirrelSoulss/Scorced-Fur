@@ -3,20 +3,20 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "GameFramework/Actor.h"
+#include "Components/ActorComponent.h"
 #include "PlantStateBase.h"
 #include "PlantStateManagerComponent.generated.h"
 
 
 
-UCLASS()
-class PLANTSTATEMACHINE_API APlantStateManagerComponent : public AActor
+UCLASS(ClassGroup = (Custom), meta = (BlueprintSpawnableComponent))
+class PLANTSTATEMACHINE_API UPlantStateManagerComponent : public UActorComponent
 {
 	GENERATED_BODY()
 	
 public:	
 	// Sets default values for this actor's properties
-	APlantStateManagerComponent();
+	UPlantStateManagerComponent();
 
 protected:
 	// Called when the game starts or when spawned
@@ -24,7 +24,7 @@ protected:
 
 public:	
 	// Called every frame
-	virtual void Tick(float DeltaTime) override;
+	virtual void TickComponent(float DeltaTime, ELevelTick ticktype, FActorComponentTickFunction* ThisTickFunction) override;
 	
 	UPROPERTY(BluePrintReadOnly, EditDefaultsOnly, Category = "State Machine")
 	FString InitialState;
@@ -44,11 +44,11 @@ public:
 	UPROPERTY()
 	TMap<FString, UPlantStateBase*> StateMap;
 
-	UFUNCTION(BluePrintCallable, Category = "State Machine")
+	UFUNCTION(BlueprintCallable, Category = "State Machine")
 	void SwitchStateByKey(FString StateKey);
-	UFUNCTION(BluePrintCallable, Category = "State Machine")
+	UFUNCTION(BlueprintCallable, Category = "State Machine")
 	void SwitchState(UPlantStateBase* NewState);
-	UFUNCTION(BluePrintCallable, Category = "State Machine")
+	UFUNCTION(BlueprintCallable, Category = "State Machine")
 	void InitStateManager();
 
 private:
