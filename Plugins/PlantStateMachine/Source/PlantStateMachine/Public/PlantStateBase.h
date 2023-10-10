@@ -9,7 +9,7 @@
 /**
  * 
  */
-UCLASS()
+UCLASS(Blueprintable)
 class PLANTSTATEMACHINE_API UPlantStateBase : public UObject
 {
 	GENERATED_BODY()
@@ -26,7 +26,7 @@ class PLANTSTATEMACHINE_API UPlantStateBase : public UObject
 
 
 	
-	UPROPERTY(BluePrintReadOnly)
+	UPROPERTY(BlueprintReadOnly)
 	AActor* enemy = nullptr;
 	public:
 		virtual void OnEnterState(AActor* stateOwner);

@@ -1,16 +1,14 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "IPlant.h"
-#include "MyPlantStateBase.h"
+#include "AggroState.h"
 
-void UMyPlantStateBase::OnEnterState(AActor *stateOwner)
+void UAggroState::OnEnterState(AActor* stateOwner)
 {
-    Super::OnEnterState(stateOwner);
-
-    if(!enemy)
+    if (!enemy)
     {
         enemy = Cast<AActor>(stateOwner);
-        if(enemy->GetClass()->ImplementsInterface(UIPlant::StaticClass()))
+        if (enemy->GetClass()->ImplementsInterface(UIPlant::StaticClass()))
         {
             IIPlant* s = Cast<IIPlant>(enemy);
             s->DoAttack();
@@ -19,10 +17,10 @@ void UMyPlantStateBase::OnEnterState(AActor *stateOwner)
     }
 }
 
-void UMyPlantStateBase::OnExitState()
+void UAggroState::OnExitState()
 {
 }
 
-void UMyPlantStateBase::TickState()
+void UAggroState::TickState()
 {
 }

@@ -26,19 +26,19 @@ public:
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick ticktype, FActorComponentTickFunction* ThisTickFunction) override;
 	
-	UPROPERTY(BluePrintReadOnly, EditDefaultsOnly, Category = "State Machine")
+	UPROPERTY(BlueprintReadOnly, EditDefaultsOnly, Category = "State Machine")
 	FString InitialState;
-	UPROPERTY(BluePrintReadOnly, EditDefaultsOnly, Category = "State Machine")
+	UPROPERTY(EditDefaultsOnly, Category = "State Machine")
 	TMap<FString, TSubclassOf<UPlantStateBase>> AvailableStates;
-	UPROPERTY(BluePrintReadOnly, EditDefaultsOnly, Category = "State Machine Debug")
+	UPROPERTY(BlueprintReadOnly, EditDefaultsOnly, Category = "State Machine Debug")
 	bool bDebug = false;
 	
-	UPROPERTY(BluePrintReadOnly)
+	UPROPERTY(BlueprintReadOnly)
 	TArray<UPlantStateBase*> StateHistory;
 
 	UPROPERTY(BlueprintReadOnly, EditDefaultsOnly, Category = "State Machine Debug", meta = (ClampMin = "0", ClampMax = "10", UIMin = "0", UIMax = "10"))
 	int32 StateHistoryLenght;
-	UPROPERTY(BluePrintReadOnly)
+	UPROPERTY(BlueprintReadOnly)
 	UPlantStateBase* CurrentState;
 
 	UPROPERTY()

@@ -28,7 +28,6 @@ void UPlantStateManagerComponent::TickComponent(float DeltaTime,ELevelTick tickt
 	{
 		CurrentState->TickState();
 	}
-	
 }
 
 void UPlantStateManagerComponent::SwitchStateByKey(FString StateKey)
