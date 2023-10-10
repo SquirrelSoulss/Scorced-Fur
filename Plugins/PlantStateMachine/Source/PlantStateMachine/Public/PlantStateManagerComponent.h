@@ -28,7 +28,7 @@ public:
 	
 	UPROPERTY(BlueprintReadOnly, EditDefaultsOnly, Category = "State Machine")
 	FString InitialState;
-	UPROPERTY(EditDefaultsOnly, Category = "State Machine")
+	UPROPERTY(Category = "State Machine")
 	TMap<FString, TSubclassOf<UPlantStateBase>> AvailableStates;
 	UPROPERTY(BlueprintReadOnly, EditDefaultsOnly, Category = "State Machine Debug")
 	bool bDebug = false;
