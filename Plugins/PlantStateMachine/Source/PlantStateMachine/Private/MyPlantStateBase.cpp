@@ -14,7 +14,8 @@ void UMyPlantStateBase::OnEnterState(AActor *stateOwner)
         {
             IIPlant* s = Cast<IIPlant>(enemy);
            // s->DoAttack();
-            IIPlant::Execute_DoAttack(enemy);
+            //IIPlant::Execute_DoAttack(enemy);
+            //s->Execute_DoAttack(enemy);
         }
     }
 }

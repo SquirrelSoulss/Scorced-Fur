@@ -14,7 +14,7 @@ void UAggroState::OnEnterState(AActor* stateOwner)
         {
             IIPlant* s = Cast<IIPlant>(enemy);
             //s->DoAttack();
-            IIPlant::Execute_TakeDamage(enemy);
+           // s->Execute_TakeDamage(enemy);
            
         }
        
