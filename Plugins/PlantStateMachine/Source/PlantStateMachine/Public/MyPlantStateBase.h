@@ -4,7 +4,6 @@
 
 #include "CoreMinimal.h"
 #include "PlantStateBase.h"
-#include "PlantStateBase.h"
 #include "MyPlantStateBase.generated.h"
 
 /**

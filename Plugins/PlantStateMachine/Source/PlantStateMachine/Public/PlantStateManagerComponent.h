@@ -38,7 +38,7 @@ public:
 
 	UPROPERTY(BlueprintReadOnly, EditDefaultsOnly, Category = "State Machine Debug", meta = (ClampMin = "0", ClampMax = "10", UIMin = "0", UIMax = "10"))
 	int32 StateHistoryLenght;
-	UPROPERTY(BlueprintReadOnly)
+	UPROPERTY(BlueprintReadOnly, Category = "State Machine")
 	UPlantStateBase* CurrentState;
 
 	UPROPERTY()
