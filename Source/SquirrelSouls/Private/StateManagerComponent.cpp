@@ -49,7 +49,8 @@ void UStateManagerComponent::SwitchStateByKey(FString StateKey)
 		{
 			if (CurrentState->GetClass() == NewState->GetClass() && CurrentState->bCanRepeatState == false)
 			{
-				GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Blue, TEXT("RepeatState not true in Blueprint"));// error invalid state
+				//GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Blue, TEXT("RepeatState not true in Blueprint"));// error invalid state
+				return;
 			}
 			else
 			{

@@ -3,16 +3,24 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "PlantBaseState.h"
-#include "PlantIdle.generated.h"
+#include "StateBase.h"
+#include "EnemyBaseClass.h"
+#include "PlantBaseState.generated.h"
+
 
 /**
  * 
  */
 UCLASS()
-class SQUIRRELSOULS_API UPlantIdle : public UPlantBaseState
+class SQUIRRELSOULS_API UPlantBaseState : public UStateBase
 {
 	GENERATED_BODY()
+public:
+	UPROPERTY()
+	AActor* mainCharacter = nullptr;
+
+	UPROPERTY()
+	AEnemyBaseClass* thisPlant = nullptr;
 public:
 	virtual void OnEnterState(AActor* stateOwner) override;
 	virtual void OnExitState() override;
