@@ -16,11 +16,17 @@ class SQUIRRELSOULS_API AEnemyBaseClass : public ACharacter
 	UPROPERTY(EditAnywhere, Category = "AI")
 	class UPawnSensingComponent* pawnSenser;
 
-	
 
+	
 public:
 	// Sets default values for this character's properties
 	AEnemyBaseClass(); 
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "BoolChanges")
+	bool sensesPlayer = false;
+
+	UPROPERTY(EditAnywhere, BluePrintReadWrite, Category = "MainCharacter") // switch to the class that is the main character
+	AActor* mainCharacter = nullptr;
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "SensedPlayer")
 	void PlayerSpotted();
 	virtual void PlayerSpotted_Implementation();
@@ -36,7 +42,6 @@ public:
 
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
-
 
 	
 	UFUNCTION()

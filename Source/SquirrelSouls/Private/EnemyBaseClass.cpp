@@ -23,8 +23,6 @@ void AEnemyBaseClass::PostInitializeComponents()
 void AEnemyBaseClass::BeginPlay()
 {
 	Super::BeginPlay();
-	PlayerSpotted_Implementation();
-	PlayerSpotted();
 }
 
 // Called every frame
@@ -43,12 +41,13 @@ void AEnemyBaseClass::SetupPlayerInputComponent(UInputComponent* PlayerInputComp
 
 void AEnemyBaseClass::OnSeePawn(APawn* player)
 {
-	APawn* Player = Cast<APawn>(player); 
+	APawn* Player = Cast<APawn>(player); //should cast to the main character blueprint
 	{
 		if (Player == nullptr)
 			return;
 	}
-	
+	mainCharacter = player;
+	stateManager->SwitchStateByKey("Aggro");
 }
 
 void AEnemyBaseClass::PlayerSpotted_Implementation()
