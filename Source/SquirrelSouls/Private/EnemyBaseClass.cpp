@@ -17,13 +17,14 @@ AEnemyBaseClass::AEnemyBaseClass()
 void AEnemyBaseClass::PostInitializeComponents()
 {
 	Super::PostInitializeComponents();
-	//C:\Program Files\Epic Games\UE_5.3\Engine\Source\Runtime\AIModule\Classes\Perception\PawnSensingComponent.h 
+	pawnSenser->OnSeePawn.AddDynamic(this, &AEnemyBaseClass::OnSeePawn);
 }
 // Called when the game starts or when spawned
 void AEnemyBaseClass::BeginPlay()
 {
 	Super::BeginPlay();
-	
+	PlayerSpotted_Implementation();
+	PlayerSpotted();
 }
 
 // Called every frame
@@ -42,8 +43,18 @@ void AEnemyBaseClass::SetupPlayerInputComponent(UInputComponent* PlayerInputComp
 
 void AEnemyBaseClass::OnSeePawn(APawn* player)
 {
-
+	APawn* Player = Cast<APawn>(player); 
+	{
+		if (Player == nullptr)
+			return;
+	}
 	
+}
+
+void AEnemyBaseClass::PlayerSpotted_Implementation()
+{
+	
+	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Blue, TEXT("poop"));
 }
 
 
