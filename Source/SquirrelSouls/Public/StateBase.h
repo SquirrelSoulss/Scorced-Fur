@@ -4,17 +4,17 @@
 
 #include "CoreMinimal.h"
 #include "UObject/NoExportTypes.h"
-#include "PlantStateBase.generated.h"
+#include "StateBase.generated.h"
 
 /**
  * 
  */
-UCLASS()
-class PLANTSTATEMACHINE_API UPlantStateBase : public UObject
+UCLASS(Blueprintable)
+class SQUIRRELSOULS_API UStateBase : public UObject
 {
 	GENERATED_BODY()
 
-	public:
+public:
 	UPROPERTY(BlueprintReadOnly, EditDefaultsOnly)
 	bool bCanTickState = false;
 
@@ -25,12 +25,11 @@ class PLANTSTATEMACHINE_API UPlantStateBase : public UObject
 	FName StateDisplayName;
 
 
-	
-	UPROPERTY(BluePrintReadOnly)
-	AActor* enemy = nullptr;
-	public:
-		virtual void OnEnterState(AActor* stateOwner);
-		virtual void OnExitState();
-		virtual void TickState();
 
+	UPROPERTY(BlueprintReadOnly)
+	AActor* enemy = nullptr;
+public:
+	virtual void OnEnterState(AActor* stateOwner);
+	virtual void OnExitState();
+	virtual void TickState();
 };
