@@ -49,5 +49,7 @@ void UPlantAggro::FixRotation(FVector actorLocation, FVector targetLocation)
 {
 	FRotator targetRot = UKismetMathLibrary::FindLookAtRotation(actorLocation, targetLocation);
 	FRotator newRotation = FMath::RInterpTo(thisPlant->GetActorRotation(), targetRot, thisPlant->GetWorld()->GetTimeSeconds(), 3);
-	thisPlant->SetActorRotation(newRotation);
+	FRotator doneRotation = FRotator(0,newRotation.Yaw,0);
+	//thisPlant->SetActorRotation(doneRotation);
+	thisPlant->targetBoneRotation = doneRotation;
 }

@@ -21,7 +21,8 @@ class SQUIRRELSOULS_API AEnemyBaseClass : public ACharacter
 public:
 	// Sets default values for this character's properties
 	AEnemyBaseClass(); 
-
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category= "BoolChanges")
+	FRotator targetBoneRotation;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "BoolChanges")
 	bool sensesPlayer = false;
 
@@ -30,6 +31,7 @@ public:
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "SensedPlayer")
 	void PlayerSpotted();
 	virtual void PlayerSpotted_Implementation();
+	
 
 protected:
 	// Called when the game starts or when spawned
