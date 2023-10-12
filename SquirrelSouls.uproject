@@ -21,6 +21,10 @@
 			"TargetAllowList": [
 				"Editor"
 			]
+		},
+		{
+			"Name": "PlantStateMachine",
+			"Enabled": false
 		}
 	]
 }

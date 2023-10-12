@@ -2,7 +2,7 @@
 
 
 #include "EnemyBaseClass.h"
-#include "Perception/PawnSensingComponent.h"
+#include "Perception\PawnSensingComponent.h"
 #include "StateManagerComponent.h"
 
 // Sets default values
@@ -17,7 +17,7 @@ AEnemyBaseClass::AEnemyBaseClass()
 void AEnemyBaseClass::PostInitializeComponents()
 {
 	Super::PostInitializeComponents();
-	//pawnSenser->OnSeePawn.AddDynamic(this, AEnemyBaseClass::OnSeePawn);
+	//C:\Program Files\Epic Games\UE_5.3\Engine\Source\Runtime\AIModule\Classes\Perception\PawnSensingComponent.h 
 }
 // Called when the game starts or when spawned
 void AEnemyBaseClass::BeginPlay()
