@@ -3,51 +3,53 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "StateBase.h"
 #include "Components/ActorComponent.h"
-#include "PlantStateBase.h"
-#include "PlantStateManagerComponent.generated.h"
+#include "StateManagerComponent.generated.h"
 
 
-
-UCLASS(ClassGroup = (Custom), meta = (BlueprintSpawnableComponent))
-class PLANTSTATEMACHINE_API UPlantStateManagerComponent : public UActorComponent
+UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
+class SQUIRRELSOULS_API UStateManagerComponent : public UActorComponent
 {
 	GENERATED_BODY()
-	
+
 public:	
-	// Sets default values for this actor's properties
-	UPlantStateManagerComponent();
+	// Sets default values for this component's properties
+	UStateManagerComponent();
 
 protected:
-	// Called when the game starts or when spawned
+	// Called when the game starts
 	virtual void BeginPlay() override;
 
 public:	
 	// Called every frame
-	virtual void TickComponent(float DeltaTime, ELevelTick ticktype, FActorComponentTickFunction* ThisTickFunction) override;
-	
+	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
+
 	UPROPERTY(BlueprintReadOnly, EditDefaultsOnly, Category = "State Machine")
 	FString InitialState;
-	UPROPERTY(EditDefaultsOnly,Category = "State Machine")
-	TMap<FString, TSubclassOf<UPlantStateBase>> AvailableStates;
-	UPROPERTY(BlueprintReadOnly, EditDefaultsOnly, Category = "State Machine Debug")
-	bool bDebug = false;
-	
+
+	UPROPERTY(EditDefaultsOnly, Category = "State Machine")
+	TMap<FString, TSubclassOf<UStateBase>> AvailableStates;
+
+	UPROPERTY(EditDefaultsOnly, Category = "State Machine")
+	bool shouldTrackStateHistory = false;
+
+
 	UPROPERTY(BlueprintReadOnly)
-	TArray<UPlantStateBase*> StateHistory;
+	TArray<UStateBase*> StateHistory;
 
 	UPROPERTY(BlueprintReadOnly, EditDefaultsOnly, Category = "State Machine Debug", meta = (ClampMin = "0", ClampMax = "10", UIMin = "0", UIMax = "10"))
 	int32 StateHistoryLenght;
 	UPROPERTY(BlueprintReadOnly, Category = "State Machine")
-	UPlantStateBase* CurrentState;
+	UStateBase* CurrentState;
 
 	UPROPERTY()
-	TMap<FString, UPlantStateBase*> StateMap;
+	TMap<FString, UStateBase*> StateMap;
 
 	UFUNCTION(BlueprintCallable, Category = "State Machine")
 	void SwitchStateByKey(FString StateKey);
 	UFUNCTION(BlueprintCallable, Category = "State Machine")
-	void SwitchState(UPlantStateBase* NewState);
+	void SwitchState(UStateBase* NewState);
 	UFUNCTION(BlueprintCallable, Category = "State Machine")
 	void InitStateManager();
 

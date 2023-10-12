@@ -3,19 +3,18 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "PlantStateBase.h"
-#include "AggroState.generated.h"
+#include "StateBase.h"
+#include "PlantAggro.generated.h"
 
 /**
  * 
  */
 UCLASS()
-class PLANTSTATEMACHINE_API UAggroState : public UPlantStateBase
+class SQUIRRELSOULS_API UPlantAggro : public UStateBase
 {
 	GENERATED_BODY()
-
 public:
 	virtual void OnEnterState(AActor* stateOwner) override;
-	virtual void OnExitState()override;
-	virtual void TickState()override;
+	virtual void OnExitState() override;
+	virtual void TickState() override;
 };
