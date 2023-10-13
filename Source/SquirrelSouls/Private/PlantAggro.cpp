@@ -50,7 +50,14 @@ void UPlantAggro::TickState()
 void UPlantAggro::DecideAttack()
 {
 	// talk to logic brain of who is attacking, all calculations of what to do
-	thisPlant->stateManager->SwitchStateByKey("MeleeAttack");
+	float distance = thisPlant->GetDistanceTo(mainCharacter);
+	if (distance >= .00001) {
+		thisPlant->stateManager->SwitchStateByKey("MeleeAttack");
+	}
+	else {
+		thisPlant->stateManager->SwitchStateByKey("RangedAttack");
+	}
+	
 }
 
 
