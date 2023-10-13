@@ -3,21 +3,16 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "StateBase.h"
-#include "EntClass.h"
-#include "EntStateBase.generated.h"
+#include "EntStateBase.h"
+#include "EntAggro.generated.h"
 
 /**
- * 
+ *
  */
 UCLASS()
-class SQUIRRELSOULS_API UEntStateBase : public UStateBase
+class SQUIRRELSOULS_API UEntAggro : public UEntStateBase
 {
 	GENERATED_BODY()
-	
-public:
-	UPROPERTY()
-	AActor* playerRef = nullptr;
 
 public:
 	virtual void OnEnterState(AActor* stateOwner) override;

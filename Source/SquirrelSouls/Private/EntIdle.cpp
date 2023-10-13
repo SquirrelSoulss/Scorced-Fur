@@ -17,3 +17,10 @@ void UEntIdle::OnExitState()
 void UEntIdle::TickState()
 {
 }
+
+
+void UEntIdle::MoveToPoint_Implementation(FVector point)
+{
+	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, TEXT("moving time"));
+
+}

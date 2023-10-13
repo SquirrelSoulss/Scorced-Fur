@@ -2,17 +2,33 @@
 
 
 #include "EntClass.h"
+#include "EntIdle.h"
+#include "EntAggro.h"
+#include "StateManagerComponent.h"
 
 // Sets default values
 AEntClass::AEntClass()
 {
- 	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
+	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
-
+	stateManager = CreateDefaultSubobject<UStateManagerComponent>(TEXT("State Manager"));
 }
 
-void AEntClass::StartFight()
+void AEntClass::StartFight(APawn* player)
 {
+	if (player != NULL) {
+		playerRef = player;
+	}
+	//stateManager->SwitchStateByKey("Aggro");
+	UEntIdle* idleState = Cast<UEntIdle>(stateManager->AvailableStates["Idle"]);
+	if (idleState) {
+		idleState->MoveToPoint(FVector(0, 0, 0));
+	}
+	else {
+		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("pissy"));
+
+	}
+	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Blue, TEXT("start fight"));
 
 }
 
@@ -20,7 +36,7 @@ void AEntClass::StartFight()
 void AEntClass::BeginPlay()
 {
 	Super::BeginPlay();
-	
+
 }
 
 // Called every frame
@@ -36,4 +52,5 @@ void AEntClass::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
 
 }
+
 

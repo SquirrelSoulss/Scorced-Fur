@@ -21,8 +21,9 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "PlayerRef")
 	AActor* playerRef = nullptr; // change to player class later
 
-	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "PlayerInStartRange")
-	void StartFight();
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "SensedPlayer")
+	void StartFight(APawn* player);
+	virtual void StartFight_Implementation(APawn* player);
 
 protected:
 	// Called when the game starts or when spawned
