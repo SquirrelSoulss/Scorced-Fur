@@ -4,6 +4,7 @@
 #include "StationaryPlantClass.h"
 #include "StateManagerComponent.h"
 #include "Perception\PawnSensingComponent.h"
+#include "PlantIdle.h"
 
 void AStationaryPlantClass::BeginPlay()
 {
@@ -40,7 +41,8 @@ void AStationaryPlantClass::OnSePawn(APawn* player)
 			return;
 	}
 	mainCharacter = player;
-	stateManager->SwitchStateByKey("Aggro");
+	if(stateManager->CurrentState->IsA(UPlantIdle::StaticClass()))
+		stateManager->SwitchStateByKey("Aggro");
 }
 
 

@@ -1,27 +1,25 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 
-#include "PlantRangedAttackState.h"
+#include "PlantMeleeAttack.h"
 #include "StateManagerComponent.h"
 #include "StationaryPlantClass.h"
 
-void UPlantRangedAttackState::OnEnterState(AActor* stateOwner)
+void UPlantMeleeAttack::OnEnterState(AActor* stateOwner)
 {
 	Super::OnEnterState(stateOwner);
-	thisPlant->rangedAttackCall = true;
-	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Blue, TEXT("Entered Ranged"));
+	thisPlant->meleeAttackTrigger = true;
+	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Blue, TEXT("Entered Melee"));
 }
 
-void UPlantRangedAttackState::OnExitState()
+void UPlantMeleeAttack::OnExitState()
 {
-	thisPlant->rangedAttackCall = false;
+	thisPlant->meleeAttackTrigger = false;
 	thisPlant->shouldTrack = true;
 	thisPlant->changeState = false;
-
-	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Blue, TEXT("Exit ranged"));
 }
 
-void UPlantRangedAttackState::TickState()
+void UPlantMeleeAttack::TickState()
 {
 	FVector playerLocation = mainCharacter->GetActorLocation();
 	FVector plantLocation = thisPlant->GetActorLocation();

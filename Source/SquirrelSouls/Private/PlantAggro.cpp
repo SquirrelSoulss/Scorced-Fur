@@ -9,9 +9,6 @@
 void UPlantAggro::OnEnterState(AActor* stateOwner)
 {
 	Super::OnEnterState(stateOwner);
-	enemy = stateOwner;
-	thisPlant = Cast<AStationaryPlantClass>(enemy);
-
 	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Blue, TEXT("Entered Aggro"));
 
 	if (thisPlant == nullptr) 
@@ -20,9 +17,8 @@ void UPlantAggro::OnEnterState(AActor* stateOwner)
 	}
 	thisPlant->sensesPlayer = true;
 
-	mainCharacter = thisPlant->mainCharacter;
 
-	//thisPlant->GetWorld()->GetTimerManager().SetTimer(timerHandle, this, &UPlantAggro::DecideAttack, 7, false);
+	thisPlant->GetWorld()->GetTimerManager().SetTimer(timerHandle, this, &UPlantAggro::DecideAttack, 5, false);
 }
 
 void UPlantAggro::OnExitState()
@@ -53,7 +49,8 @@ void UPlantAggro::TickState()
 
 void UPlantAggro::DecideAttack()
 {
-	thisPlant->stateManager->SwitchStateByKey("RangedAttack");
+	// talk to logic brain of who is attacking, all calculations of what to do
+	thisPlant->stateManager->SwitchStateByKey("MeleeAttack");
 }
 
 

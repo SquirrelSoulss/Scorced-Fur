@@ -23,6 +23,10 @@ public:
 	bool shouldTrack = true;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "BoolChanges")
 	bool rangedAttackCall = false;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "BoolChanges")
+	bool changeState = false;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "BoolChanges")
+	bool meleeAttackTrigger = false;
 
 protected:
 	// Called when the game starts or when spawned
