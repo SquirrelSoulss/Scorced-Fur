@@ -2,14 +2,14 @@
 
 
 #include "PlantAggro.h"
-#include "EnemyBaseClass.h"
+#include "StationaryPlantClass.h"
 #include "Kismet/KismetMathLibrary.h"
 
 void UPlantAggro::OnEnterState(AActor* stateOwner)
 {
 	Super::OnEnterState(stateOwner);
 	enemy = stateOwner;
-	thisPlant = Cast<AEnemyBaseClass>(enemy);
+	thisPlant = Cast<AStationaryPlantClass>(enemy);
 
 	if (thisPlant == nullptr) 
 	{
@@ -27,10 +27,13 @@ void UPlantAggro::OnExitState()
 
 void UPlantAggro::TickState()
 {
+
 	FHitResult hit;
 
 	FVector playerLocation = mainCharacter->GetActorLocation();
 	FVector plantLocation = thisPlant->GetActorLocation();
+
+	FixRotation(plantLocation, playerLocation);
 
 	FCollisionQueryParams queryParams;
 	queryParams.AddIgnoredActor(thisPlant);
@@ -42,14 +45,6 @@ void UPlantAggro::TickState()
 	{
 
 	}*/
-	FixRotation(plantLocation, playerLocation);
 }
 
-void UPlantAggro::FixRotation(FVector actorLocation, FVector targetLocation)
-{
-	FRotator targetRot = UKismetMathLibrary::FindLookAtRotation(actorLocation, targetLocation);
-	FRotator newRotation = FMath::RInterpTo(thisPlant->GetActorRotation(), targetRot, thisPlant->GetWorld()->GetTimeSeconds(), 3);
-	FRotator doneRotation = FRotator(0,newRotation.Yaw,0);
-	//thisPlant->SetActorRotation(doneRotation);
-	thisPlant->targetBoneRotation = doneRotation;
-}
+

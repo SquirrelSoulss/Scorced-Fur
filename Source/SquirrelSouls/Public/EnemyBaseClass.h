@@ -10,7 +10,7 @@ UCLASS()
 class SQUIRRELSOULS_API AEnemyBaseClass : public ACharacter
 {
 	GENERATED_BODY()
-
+protected:
 	UPROPERTY(EditAnywhere, Category = "StateMachine")
 	class UStateManagerComponent* stateManager;
 	UPROPERTY(EditAnywhere, Category = "AI")
@@ -21,8 +21,7 @@ class SQUIRRELSOULS_API AEnemyBaseClass : public ACharacter
 public:
 	// Sets default values for this character's properties
 	AEnemyBaseClass(); 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category= "BoolChanges")
-	FRotator targetBoneRotation;
+
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "BoolChanges")
 	bool sensesPlayer = false;
 
@@ -46,6 +45,5 @@ public:
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
 	
-	UFUNCTION()
-	void OnSeePawn(APawn* player);
+	virtual void OnSeePawn(APawn* player);
 };

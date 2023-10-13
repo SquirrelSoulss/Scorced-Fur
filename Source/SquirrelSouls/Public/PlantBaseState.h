@@ -4,7 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "StateBase.h"
-#include "EnemyBaseClass.h"
+#include "StationaryPlantClass.h"
 #include "PlantBaseState.generated.h"
 
 
@@ -20,9 +20,11 @@ public:
 	AActor* mainCharacter = nullptr;
 
 	UPROPERTY()
-	AEnemyBaseClass* thisPlant = nullptr;
+	AStationaryPlantClass* thisPlant = nullptr;
 public:
 	virtual void OnEnterState(AActor* stateOwner) override;
 	virtual void OnExitState() override;
 	virtual void TickState() override;
+	void FixRotation(FVector actorLocation, FVector targetLocation);
+	
 };

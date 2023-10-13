@@ -4,6 +4,7 @@
 #include "EnemyBaseClass.h"
 #include "Perception\PawnSensingComponent.h"
 #include "StateManagerComponent.h"
+#include "IDamageRecievers.h"
 
 // Sets default values
 AEnemyBaseClass::AEnemyBaseClass()
@@ -36,7 +37,7 @@ void AEnemyBaseClass::Tick(float DeltaTime)
 void AEnemyBaseClass::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
-
+	
 }
 
 void AEnemyBaseClass::OnSeePawn(APawn* player)
@@ -47,13 +48,14 @@ void AEnemyBaseClass::OnSeePawn(APawn* player)
 			return;
 	}
 	mainCharacter = player;
-	stateManager->SwitchStateByKey("Aggro");
+	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Blue, TEXT("Aggo"));
+	//stateManager->SwitchStateByKey("Aggro");
 }
 
 void AEnemyBaseClass::PlayerSpotted_Implementation()
 {
 	
-	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Blue, TEXT("poop"));
+	
 }
 
 
