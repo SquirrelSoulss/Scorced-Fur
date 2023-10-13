@@ -4,24 +4,17 @@
 
 #include "CoreMinimal.h"
 #include "PlantBaseState.h"
-#include "PlantAggro.generated.h"
+#include "PlantRangedAttackState.generated.h"
 
 /**
  * 
  */
 UCLASS()
-class SQUIRRELSOULS_API UPlantAggro : public UPlantBaseState
+class SQUIRRELSOULS_API UPlantRangedAttackState : public UPlantBaseState
 {
 	GENERATED_BODY()
-public:
-	UPROPERTY()
-	TEnumAsByte<ECollisionChannel> traceChannel = ECC_Pawn;
-private:
-	FTimerHandle timerHandle;
-
 public:
 	virtual void OnEnterState(AActor* stateOwner) override;
 	virtual void OnExitState() override;
 	virtual void TickState() override;
-	void DecideAttack();
 };

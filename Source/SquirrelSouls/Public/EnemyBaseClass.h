@@ -10,7 +10,7 @@ UCLASS()
 class SQUIRRELSOULS_API AEnemyBaseClass : public ACharacter
 {
 	GENERATED_BODY()
-protected:
+public:
 	UPROPERTY(EditAnywhere, Category = "StateMachine")
 	class UStateManagerComponent* stateManager;
 	UPROPERTY(EditAnywhere, Category = "AI")
