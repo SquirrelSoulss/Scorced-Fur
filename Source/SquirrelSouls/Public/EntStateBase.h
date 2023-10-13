@@ -14,4 +14,12 @@ class SQUIRRELSOULS_API UEntStateBase : public UStateBase
 {
 	GENERATED_BODY()
 	
+public:
+	UPROPERTY()
+	AActor* playerRef = nullptr;
+
+public:
+	virtual void OnEnterState(AActor* stateOwner) override;
+	virtual void OnExitState() override;
+	virtual void TickState() override;
 };
