@@ -25,6 +25,14 @@ public:
 	void StartFight(APawn* player);
 	virtual void StartFight_Implementation(APawn* player);
 
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "SensedPlayer")
+	void SetUpFight();
+	virtual void SetUpFight_Implementation();
+
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "MoveToPlayer")
+	void MoveToPlayer();
+	virtual void MoveToPlayer_Implementation();
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
@@ -35,5 +43,6 @@ public:
 
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
+
 
 };

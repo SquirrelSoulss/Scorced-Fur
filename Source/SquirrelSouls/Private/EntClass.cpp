@@ -14,11 +14,13 @@ AEntClass::AEntClass()
 	stateManager = CreateDefaultSubobject<UStateManagerComponent>(TEXT("State Manager"));
 }
 
-void AEntClass::StartFight(APawn* player)
+void AEntClass::StartFight_Implementation(APawn* player)
 {
 	if (player != NULL) {
 		playerRef = player;
 	}
+	SetUpFight();
+
 	//stateManager->SwitchStateByKey("Aggro");
 	UEntIdle* idleState = Cast<UEntIdle>(stateManager->AvailableStates["Idle"]);
 	if (idleState) {
@@ -28,8 +30,17 @@ void AEntClass::StartFight(APawn* player)
 		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("pissy"));
 
 	}
+	
 	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Blue, TEXT("start fight"));
 
+}
+
+void AEntClass::SetUpFight_Implementation()
+{
+}
+
+void AEntClass::MoveToPlayer_Implementation()
+{
 }
 
 // Called when the game starts or when spawned

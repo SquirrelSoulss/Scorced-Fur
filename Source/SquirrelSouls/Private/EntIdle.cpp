@@ -8,7 +8,9 @@ void UEntIdle::OnEnterState(AActor* stateOwner)
 	Super::OnEnterState(stateOwner);
 
 	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Blue, TEXT("Idle"));
-}
+
+	//stateOwner->MoveToPla
+}//KALLA PÅ GREJEN I CLASSEN
 
 void UEntIdle::OnExitState()
 {
