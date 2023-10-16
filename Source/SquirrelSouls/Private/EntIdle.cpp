@@ -14,7 +14,6 @@ void UEntIdle::OnEnterState(AActor* stateOwner)
 	AEntClass* ent = Cast<AEntClass>(stateOwner);
 	if (ent) {
 		entRef = ent;
-		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Blue, TEXT("hej"));
 	}
 	//Basically invoke repeating
 	GetWorld()->GetTimerManager().SetTimer(TimerHandle_UpdateDestination, this, &UEntIdle::MoveToPoint, IdleIntervall, true);
