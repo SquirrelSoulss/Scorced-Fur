@@ -4,10 +4,11 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
+#include "IDamageRecievers.h"
 #include "EnemyBaseClass.generated.h"
 
 UCLASS()
-class SQUIRRELSOULS_API AEnemyBaseClass : public ACharacter
+class SQUIRRELSOULS_API AEnemyBaseClass : public ACharacter, public IIDamageRecievers
 {
 	GENERATED_BODY()
 public:
@@ -15,9 +16,11 @@ public:
 	class UStateManagerComponent* stateManager;
 	UPROPERTY(EditAnywhere, Category = "AI")
 	class UPawnSensingComponent* pawnSenser;
+	UPROPERTY(EditAnywhere, Category = "Life")
+	float health = 30;
+	UPROPERTY(BlueprintReadOnly, Category = "Life")
+	bool dead = false ;
 
-
-	
 public:
 	// Sets default values for this character's properties
 	AEnemyBaseClass(); 
@@ -30,7 +33,7 @@ public:
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "SensedPlayer")
 	void PlayerSpotted();
 	virtual void PlayerSpotted_Implementation();
-	
+	//virtual void TakeDamage(float damageTaken) override; part of an interface should be changed
 
 protected:
 	// Called when the game starts or when spawned

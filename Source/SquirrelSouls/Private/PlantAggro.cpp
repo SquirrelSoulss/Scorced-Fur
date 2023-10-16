@@ -5,6 +5,7 @@
 #include "StationaryPlantClass.h"
 #include "StateManagerComponent.h"
 #include "Kismet/KismetMathLibrary.h"
+#include "Math/UnrealMathUtility.h"
 
 void UPlantAggro::OnEnterState(AActor* stateOwner)
 {
@@ -17,17 +18,17 @@ void UPlantAggro::OnEnterState(AActor* stateOwner)
 	}
 	thisPlant->sensesPlayer = true;
 
-
-	thisPlant->GetWorld()->GetTimerManager().SetTimer(timerHandle, this, &UPlantAggro::DecideAttack, 5, false);
+	float randTime = FMath::RandRange(3, 6);
+	thisPlant->GetWorld()->GetTimerManager().SetTimer(timerHandle, this, &UPlantAggro::DecideAttack, randTime, false); // randomize the amount of time before the call
 }
 
 void UPlantAggro::OnExitState()
 {
+	thisPlant->GetWorld()->GetTimerManager().ClearAllTimersForObject(this);
 }
 
 void UPlantAggro::TickState()
 {
-
 	FHitResult hit;
 
 	FVector playerLocation = mainCharacter->GetActorLocation();
@@ -50,14 +51,15 @@ void UPlantAggro::TickState()
 void UPlantAggro::DecideAttack()
 {
 	// talk to logic brain of who is attacking, all calculations of what to do
-	float distance = thisPlant->GetDistanceTo(mainCharacter);
-	if (distance >= .00001) {
+	FVector dist = thisPlant->GetActorLocation() - mainCharacter->GetActorLocation();
+
+	float distance = dist.Length();
+	if (distance <= 400) {
 		thisPlant->stateManager->SwitchStateByKey("MeleeAttack");
 	}
 	else {
 		thisPlant->stateManager->SwitchStateByKey("RangedAttack");
 	}
-	
 }
 
 

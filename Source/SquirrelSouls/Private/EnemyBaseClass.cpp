@@ -58,4 +58,9 @@ void AEnemyBaseClass::PlayerSpotted_Implementation()
 	
 }
 
+//void AEnemyBaseClass::TakeDamage(float damageTaken)
+//{
+//	health -= damageTaken;
+//}
+
 
