@@ -22,14 +22,6 @@ void AEntClass::StartFight_Implementation(APawn* player)
 	SetUpFight();
 
 	//stateManager->SwitchStateByKey("Aggro");
-	UEntIdle* idleState = Cast<UEntIdle>(stateManager->AvailableStates["Idle"]);
-	if (idleState) {
-		idleState->MoveToPoint(FVector(0, 0, 0));
-	}
-	else {
-		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("pissy"));
-
-	}
 	
 	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Blue, TEXT("start fight"));
 
@@ -41,6 +33,14 @@ void AEntClass::SetUpFight_Implementation()
 
 void AEntClass::MoveToPlayer_Implementation()
 {
+	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Blue, TEXT("moving to player"));
+
+}
+
+void AEntClass::MoveToRandomPoint_Implementation(FVector destination)
+{
+	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Blue, TEXT("moving to point"));
+
 }
 
 // Called when the game starts or when spawned

@@ -2,6 +2,8 @@
 
 
 #include "EntIdle.h"
+#include "NavigationSystem.h"
+#include "TimerManager.h"
 
 void UEntIdle::OnEnterState(AActor* stateOwner)
 {
@@ -9,20 +11,50 @@ void UEntIdle::OnEnterState(AActor* stateOwner)
 
 	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Blue, TEXT("Idle"));
 
-	//stateOwner->MoveToPla
-}//KALLA PÅ GREJEN I CLASSEN
+	AEntClass* ent = Cast<AEntClass>(stateOwner);
+	if (ent) {
+		entRef = ent;
+		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Blue, TEXT("hej"));
+	}
+	//Basically invoke repeating
+	GetWorld()->GetTimerManager().SetTimer(TimerHandle_UpdateDestination, this, &UEntIdle::MoveToPoint, IdleIntervall, true);
+	MoveToPoint();
+}
 
 void UEntIdle::OnExitState()
 {
+	//sluta invoka
+	GetWorld()->GetTimerManager().ClearTimer(TimerHandle_UpdateDestination);
 }
 
 void UEntIdle::TickState()
 {
 }
 
-
-void UEntIdle::MoveToPoint_Implementation(FVector point)
+void UEntIdle::MoveToPoint()
 {
 	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, TEXT("moving time"));
 
+	FVector NewDestination;
+	if (GetRandomPoint(entRef->GetActorLocation(), RandomPointRadius, NewDestination))
+	{
+		entRef->MoveToRandomPoint(NewDestination);
+	}
+}
+
+bool UEntIdle::GetRandomPoint(const FVector& Origin, float Radius, FVector& OutLocation)
+{
+	UNavigationSystemV1* NavSystem = FNavigationSystem::GetCurrent<UNavigationSystemV1>(entRef);
+		if (NavSystem)
+		{
+			FNavLocation RandomTargetLocation;
+			if (NavSystem->GetRandomReachablePointInRadius(Origin, Radius, RandomTargetLocation))
+			{
+				OutLocation = RandomTargetLocation.Location;
+				GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, TEXT("found location"));
+
+				return true;
+			}
+		}
+	return false;
 }

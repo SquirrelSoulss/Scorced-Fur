@@ -33,6 +33,10 @@ public:
 	void MoveToPlayer();
 	virtual void MoveToPlayer_Implementation();
 
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "MoveToPlayer")
+	void MoveToRandomPoint(FVector destination);
+	virtual void MoveToRandomPoint_Implementation(FVector destination);
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;

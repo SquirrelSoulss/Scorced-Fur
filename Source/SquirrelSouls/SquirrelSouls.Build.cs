@@ -9,7 +9,7 @@ public class SquirrelSouls : ModuleRules
 		PCHUsage = PCHUsageMode.UseExplicitOrSharedPCHs;
 	
 		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", "AIModule", "GameplayTasks", });
-
+		PublicDependencyModuleNames.AddRange(new string[]{ "Core", "CoreUObject", "Engine",  "NavigationSystem"});
 		PrivateDependencyModuleNames.AddRange(new string[] {"AIModule", });
 
 		// Uncomment if you are using Slate UI

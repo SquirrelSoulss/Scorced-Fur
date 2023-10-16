@@ -19,7 +19,20 @@ public:
 	virtual void OnExitState() override;
 	virtual void TickState() override;
 
-	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "MoveTo")
-	void MoveToPoint(FVector point);
-	virtual	void MoveToPoint_Implementation(FVector point);
+private:
+	FVector CurrentLocation;
+	AEntClass* entRef;
+
+	FTimerHandle TimerHandle_UpdateDestination;
+
+public:
+	UPROPERTY(EditAnywhere)
+	float RandomPointRadius = 1000.f;
+	
+	UPROPERTY(EditAnywhere)
+	float IdleIntervall = 10.f;
+
+	UFUNCTION()
+	void MoveToPoint();
+	bool GetRandomPoint(const FVector& Origin, float Radius, FVector& OutLocation);
 };
