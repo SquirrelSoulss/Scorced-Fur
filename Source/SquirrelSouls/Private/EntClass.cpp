@@ -21,7 +21,7 @@ void AEntClass::StartFight_Implementation(APawn* player)
 	}
 	SetUpFight();
 
-	//stateManager->SwitchStateByKey("Aggro");
+	stateManager->SwitchStateByKey("Aggro");
 	
 	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Blue, TEXT("start fight"));
 

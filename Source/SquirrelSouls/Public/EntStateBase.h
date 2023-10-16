@@ -19,6 +19,9 @@ public:
 	UPROPERTY()
 	AActor* playerRef = nullptr;
 
+	UPROPERTY(EditDefaultsOnly, Category = "Attack types")
+	TMap<FString, int> AttackTypes;
+
 public:
 	virtual void OnEnterState(AActor* stateOwner) override;
 	virtual void OnExitState() override;
