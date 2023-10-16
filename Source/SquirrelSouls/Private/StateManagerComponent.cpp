@@ -75,6 +75,7 @@ void UStateManagerComponent::SwitchStateByKey(FString StateKey)
 
 		if (CurrentState)
 		{
+
 			CurrentState->OnEnterState(GetOwner());
 			bCanTickState = true;
 		}
