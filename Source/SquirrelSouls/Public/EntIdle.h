@@ -21,7 +21,6 @@ public:
 
 private:
 	FVector CurrentLocation;
-	AEntClass* entRef;
 
 	FTimerHandle TimerHandle_UpdateDestination;
 

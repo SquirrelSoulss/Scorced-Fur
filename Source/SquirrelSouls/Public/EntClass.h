@@ -21,6 +21,17 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "PlayerRef")
 	AActor* playerRef = nullptr; // change to player class later
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "CheckForHit")
+	bool IsAttacking = false;
+
+
+
+protected:
+	// Called when the game starts or when spawned
+	virtual void BeginPlay() override;
+
+
+public:
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "SensedPlayer")
 	void StartFight(APawn* player);
 	virtual void StartFight_Implementation(APawn* player);
@@ -29,17 +40,25 @@ public:
 	void SetUpFight();
 	virtual void SetUpFight_Implementation();
 
-	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "MoveToPlayer")
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Move")
 	void MoveToPlayer();
 	virtual void MoveToPlayer_Implementation();
 
-	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "MoveToPlayer")
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Move")
 	void MoveToRandomPoint(FVector destination);
 	virtual void MoveToRandomPoint_Implementation(FVector destination);
 
-protected:
-	// Called when the game starts or when spawned
-	virtual void BeginPlay() override;
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "ChooseAttack")
+	void ChooseAttack(float Distance);
+	virtual void ChooseAttack_Implementation(float Distance);
+
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "CheckForHit")
+	void CheckForHit();
+	virtual void CheckForHit_Implementation();
+
+	UFUNCTION(BlueprintCallable, Category = "SwitchState")
+	void SwitchState(FString StateKey);
+
 
 public:
 	// Called every frame

@@ -14,6 +14,13 @@ AEntClass::AEntClass()
 	stateManager = CreateDefaultSubobject<UStateManagerComponent>(TEXT("State Manager"));
 }
 
+// Called when the game starts or when spawned
+void AEntClass::BeginPlay()
+{
+	Super::BeginPlay();
+
+}
+
 void AEntClass::StartFight_Implementation(APawn* _player)
 {
 	AActor* player = Cast<AActor>(_player);
@@ -21,7 +28,7 @@ void AEntClass::StartFight_Implementation(APawn* _player)
 	if (player == nullptr) {
 		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Blue, TEXT("playyer is null"));
 		return;
-	}		
+	}
 	playerRef = player;
 
 	SetUpFight();
@@ -42,12 +49,19 @@ void AEntClass::MoveToRandomPoint_Implementation(FVector destination)
 {
 }
 
-// Called when the game starts or when spawned
-void AEntClass::BeginPlay()
+void AEntClass::ChooseAttack_Implementation(float Distance)
 {
-	Super::BeginPlay();
-
 }
+
+void AEntClass::CheckForHit_Implementation()
+{
+}
+
+void AEntClass::SwitchState(FString StateKey)
+{
+	stateManager->SwitchStateByKey(StateKey);
+}
+
 
 // Called every frame
 void AEntClass::Tick(float DeltaTime)

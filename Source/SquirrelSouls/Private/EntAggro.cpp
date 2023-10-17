@@ -8,7 +8,7 @@ void UEntAggro::OnEnterState(AActor* stateOwner)
 {
 	bCanTickState = true;
 
-	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Blue, TEXT("Aggro"));
+	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Aggro"));
 
 	EntRef = Cast<AEntClass>(stateOwner);
 	playerRef = EntRef->playerRef;
@@ -32,11 +32,9 @@ void UEntAggro::TickState()
 		DrawDebugLine(EntRef->GetWorld(), EntRef->GetActorLocation(), playerRef->GetActorLocation(), FColor::Red);
 
 		float distance = hit.Distance;
-		if (distance >= rangedRange) {
 
-		}
+		EntRef->ChooseAttack(distance);
 	}
-
 }
 
 void UEntAggro::ChooseAttackP1()
