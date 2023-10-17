@@ -31,15 +31,15 @@ void UStateManagerComponent::TickComponent(float DeltaTime, ELevelTick TickType,
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 	if (bCanTickState == true)
 	{
-		CurrentState->TickState();
+		CurrentState->TickState(); // provides tick/update to the states that uses it
 	}
 	// ...
 }
 
 void UStateManagerComponent::SwitchStateByKey(FString StateKey)
 {
-	UStateBase* NewState = StateMap.FindRef(StateKey);
-	if (NewState->IsValidLowLevel())
+	UStateBase* NewState = StateMap.FindRef(StateKey); //stateMap is the holder of all states
+	if (NewState->IsValidLowLevel()) 
 	{
 		if (!CurrentState)
 		{
@@ -47,17 +47,15 @@ void UStateManagerComponent::SwitchStateByKey(FString StateKey)
 		}
 		else
 		{
-			if (CurrentState->GetClass() == NewState->GetClass() && CurrentState->bCanRepeatState == false)
+			if (CurrentState->GetClass() == NewState->GetClass() && CurrentState->bCanRepeatState == false) // if the state we entered is the same as current state, check if it can enter itself
 			{
-				//GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Blue, TEXT("RepeatState not true in Blueprint"));// error invalid state
 				return;
 			}
 			else
 			{
 				bCanTickState = false;
-				CurrentState->OnExitState();
-
-				if (shouldTrackStateHistory == true) 
+				CurrentState->OnExitState(); // exit the state
+				if (shouldTrackStateHistory == true)
 				{
 					if (StateHistory.Num() < StateHistoryLenght)
 					{
@@ -69,14 +67,13 @@ void UStateManagerComponent::SwitchStateByKey(FString StateKey)
 						StateHistory.Push(CurrentState);
 					}
 				}
-				CurrentState = NewState;
+				CurrentState = NewState; // set the new state
 			}
 		}
 
 		if (CurrentState)
 		{
-
-			CurrentState->OnEnterState(GetOwner());
+			CurrentState->OnEnterState(GetOwner()); // enter the new state
 			bCanTickState = true;
 		}
 		else
