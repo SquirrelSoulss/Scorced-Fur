@@ -40,9 +40,15 @@ void AStationaryPlantClass::OnSePawn(APawn* player)
 		if (Player == nullptr)
 			return;
 	}
-	mainCharacter = player;
-	if(stateManager->CurrentState->IsA(UPlantIdle::StaticClass()))
-		stateManager->SwitchStateByKey("Aggro");
+	if(mainCharacter == nullptr)
+		mainCharacter = player;
+
+	if (stateManager->CurrentState->IsA(UPlantIdle::StaticClass())) {
+		
+		stateManager->SwitchStateByKey("Suspicious");
+		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Blue, TEXT("Sensed"));
+	}
+		
 }
 
 

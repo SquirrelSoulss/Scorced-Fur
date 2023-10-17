@@ -7,6 +7,7 @@
 #include "IDamageRecievers.h"
 #include "EnemyBaseClass.generated.h"
 
+
 UCLASS()
 class SQUIRRELSOULS_API AEnemyBaseClass : public ACharacter//, public IIDamageRecievers
 {

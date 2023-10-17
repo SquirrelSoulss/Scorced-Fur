@@ -5,6 +5,7 @@
 #include "StationaryPlantClass.h"
 #include "StateManagerComponent.h"
 #include "Kismet/KismetMathLibrary.h"
+#include "SquirrelSouls/PlayerCharacter.h"
 #include "Math/UnrealMathUtility.h"
 
 void UPlantAggro::OnEnterState(AActor* stateOwner)
@@ -29,23 +30,18 @@ void UPlantAggro::OnExitState()
 
 void UPlantAggro::TickState()
 {
-	FHitResult hit;
-
-	FVector playerLocation = mainCharacter->GetActorLocation();
-	FVector plantLocation = thisPlant->GetActorLocation();
+	playerLocation = mainCharacter->GetActorLocation();
+	plantLocation = thisPlant->GetActorLocation();
 
 	FixRotation(plantLocation, playerLocation);
 
-	FCollisionQueryParams queryParams;
-	queryParams.AddIgnoredActor(thisPlant);
+	if (ShootRay(plantLocation, playerLocation) == false || DistanceToPlayer() >= AggroRange) // or player is to far away
+	{
+		thisPlant->stateManager->SwitchStateByKey("Suspicious");
+		return;
+	}
 
-	thisPlant->GetWorld()->LineTraceSingleByChannel(hit, plantLocation, playerLocation, traceChannel, queryParams);
-	DrawDebugLine(thisPlant->GetWorld(), plantLocation, playerLocation, FColor::Red);
-
-	FVector dist = thisPlant->GetActorLocation() - mainCharacter->GetActorLocation();
-
-	float distance = dist.Length();
-	if (distance <= 400) {
+	if (DistanceToPlayer() <= 400) {
 		thisPlant->stateManager->SwitchStateByKey("MeleeAttack");
 	}
 }
@@ -53,7 +49,6 @@ void UPlantAggro::TickState()
 void UPlantAggro::RangedAttack()
 {
 	thisPlant->stateManager->SwitchStateByKey("RangedAttack");
-	
 }
 
 

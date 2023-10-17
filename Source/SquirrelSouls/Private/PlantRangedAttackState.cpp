@@ -23,8 +23,8 @@ void UPlantRangedAttackState::OnExitState()
 
 void UPlantRangedAttackState::TickState()
 {
-	FVector playerLocation = mainCharacter->GetActorLocation();
-	FVector plantLocation = thisPlant->GetActorLocation();
+	playerLocation = mainCharacter->GetActorLocation();
+	plantLocation = thisPlant->GetActorLocation();
 	FixRotation(plantLocation, playerLocation);
 
 	if (thisPlant->changeState == true) {

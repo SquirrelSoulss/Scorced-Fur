@@ -21,8 +21,8 @@ void UPlantMeleeAttack::OnExitState()
 
 void UPlantMeleeAttack::TickState()
 {
-	FVector playerLocation = mainCharacter->GetActorLocation();
-	FVector plantLocation = thisPlant->GetActorLocation();
+	playerLocation = mainCharacter->GetActorLocation();
+	plantLocation = thisPlant->GetActorLocation();
 	FixRotation(plantLocation, playerLocation);
 
 	if (thisPlant->changeState == true) { // chenge state gets set to true at the end of the animation 

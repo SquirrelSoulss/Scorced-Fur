@@ -21,10 +21,23 @@ public:
 
 	UPROPERTY()
 	AStationaryPlantClass* thisPlant = nullptr;
+
+	UPROPERTY()
+	FVector playerLocation;
+	UPROPERTY()
+	FVector plantLocation;
+	UPROPERTY()
+	float AggroRange = 2000;
+	UPROPERTY()
+	TEnumAsByte<ECollisionChannel> traceChannel = ECC_WorldDynamic;
+
+protected:
+	FTimerHandle timerHandle;
 public:
 	virtual void OnEnterState(AActor* stateOwner) override;
 	virtual void OnExitState() override;
 	virtual void TickState() override;
 	void FixRotation(FVector actorLocation, FVector targetLocation);
-	
+	bool ShootRay(FVector origin, FVector end);
+	float DistanceToPlayer();
 };

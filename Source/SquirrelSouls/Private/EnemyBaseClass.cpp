@@ -3,6 +3,7 @@
 
 #include "EnemyBaseClass.h"
 #include "Perception\PawnSensingComponent.h"
+#include "SquirrelSouls/PlayerCharacter.h"
 #include "StateManagerComponent.h"
 #include "IDamageRecievers.h"
 
@@ -42,12 +43,14 @@ void AEnemyBaseClass::SetupPlayerInputComponent(UInputComponent* PlayerInputComp
 
 void AEnemyBaseClass::OnSeePawn(APawn* player)
 {
-	APawn* Player = Cast<APawn>(player); //should cast to the main character blueprint
+	APawn* Player = Cast<APlayerCharacter>(player); //should cast to the main character blueprint
 	{
 		if (Player == nullptr)
 			return;
+
+		mainCharacter = player;
 	}
-	mainCharacter = player;
+	
 	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Blue, TEXT("Aggo"));
 	//stateManager->SwitchStateByKey("Aggro");
 }
