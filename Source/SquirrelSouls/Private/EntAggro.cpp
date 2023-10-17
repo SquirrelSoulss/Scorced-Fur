@@ -10,11 +10,12 @@ void UEntAggro::OnEnterState(AActor* stateOwner)
 
 	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Blue, TEXT("Aggro"));
 
-	AEntClass* ent = Cast<AEntClass>(stateOwner);
-	if (ent) {
-		entRef = ent;
-	}
-	entRef->MoveToPlayer();
+	EntRef = Cast<AEntClass>(stateOwner);
+	playerRef = EntRef->playerRef;
+
+	queryParams.AddIgnoredActor(EntRef);
+
+	EntRef->MoveToPlayer();
 }
 
 void UEntAggro::OnExitState()
@@ -24,11 +25,18 @@ void UEntAggro::OnExitState()
 void UEntAggro::TickState()
 {
 	FHitResult hit;
-	FCollisionQueryParams queryParams;
-	queryParams.AddIgnoredActor(entRef);
 
-	entRef->GetWorld()->LineTraceSingleByChannel(hit, entRef->GetActorLocation(), playerRef->GetActorLocation(), traceChannel, queryParams);
-	DrawDebugLine(entRef->GetWorld(), entRef->GetActorLocation(), playerRef->GetActorLocation(), FColor::Red);
+	if (EntRef && playerRef)
+	{
+		EntRef->GetWorld()->LineTraceSingleByChannel(hit, EntRef->GetActorLocation(), playerRef->GetActorLocation(), traceChannel, queryParams);
+		DrawDebugLine(EntRef->GetWorld(), EntRef->GetActorLocation(), playerRef->GetActorLocation(), FColor::Red);
+
+		float distance = hit.Distance;
+		if (distance >= rangedRange) {
+
+		}
+	}
+
 }
 
 void UEntAggro::ChooseAttackP1()

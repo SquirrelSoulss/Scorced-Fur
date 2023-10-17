@@ -21,9 +21,13 @@ public:
 
 	UPROPERTY()
 	TEnumAsByte<ECollisionChannel> traceChannel = ECC_Pawn;
+	FCollisionQueryParams queryParams;
 
-	UPROPERTY()
-	AEntClass* entRef;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "ChooseAttack")
+	float inNormalRange = 400.f;
+	float inStompRange = 200.f;
+	float rangedRange = 800.f;
 
 	UFUNCTION()
 	void ChooseAttackP1();

@@ -6,6 +6,8 @@
 void UEntStateBase::OnEnterState(AActor* stateOwner)
 {
 	Super::OnEnterState(stateOwner);
+	EntRef = Cast<AEntClass>(stateOwner);
+	playerRef = EntRef->playerRef;
 }
 
 void UEntStateBase::OnExitState()

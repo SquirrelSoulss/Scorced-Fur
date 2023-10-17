@@ -14,17 +14,18 @@ AEntClass::AEntClass()
 	stateManager = CreateDefaultSubobject<UStateManagerComponent>(TEXT("State Manager"));
 }
 
-void AEntClass::StartFight_Implementation(APawn* player)
+void AEntClass::StartFight_Implementation(APawn* _player)
 {
-	if (player != NULL) {
-		playerRef = player;
-	}
+	AActor* player = Cast<AActor>(_player);
+
+	if (player == nullptr) {
+		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Blue, TEXT("playyer is null"));
+		return;
+	}		
+	playerRef = player;
+
 	SetUpFight();
-
-	stateManager->SwitchStateByKey("Aggro");
-	
-	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Blue, TEXT("start fight"));
-
+	this->stateManager->SwitchStateByKey("Aggro");
 }
 
 void AEntClass::SetUpFight_Implementation()
@@ -33,14 +34,12 @@ void AEntClass::SetUpFight_Implementation()
 
 void AEntClass::MoveToPlayer_Implementation()
 {
-	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Blue, TEXT("moving to player"));
+	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Yellow, TEXT("moving to player"));
 
 }
 
 void AEntClass::MoveToRandomPoint_Implementation(FVector destination)
 {
-	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Blue, TEXT("moving to point"));
-
 }
 
 // Called when the game starts or when spawned
