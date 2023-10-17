@@ -19,7 +19,7 @@ void UPlantAggro::OnEnterState(AActor* stateOwner)
 	thisPlant->sensesPlayer = true; // senses player connected to animation blueprint, used to change into hostile idle
 
 	float randTime = FMath::RandRange(3, 6);
-	thisPlant->GetWorld()->GetTimerManager().SetTimer(timerHandle, this, &UPlantAggro::DecideAttack, randTime, false); // randomize the amount of time before the call
+	thisPlant->GetWorld()->GetTimerManager().SetTimer(timerHandle, this, &UPlantAggro::RangedAttack, randTime, false); // randomize the amount of time before the call
 }
 
 void UPlantAggro::OnExitState()
@@ -48,13 +48,9 @@ void UPlantAggro::TickState()
 	if (distance <= 400) {
 		thisPlant->stateManager->SwitchStateByKey("MeleeAttack");
 	}
-	/*if (Cast<MainCharacterBP>(hit.GetActor())) 
-	{
-
-	}*/
 }
 
-void UPlantAggro::DecideAttack()
+void UPlantAggro::RangedAttack()
 {
 	thisPlant->stateManager->SwitchStateByKey("RangedAttack");
 	
