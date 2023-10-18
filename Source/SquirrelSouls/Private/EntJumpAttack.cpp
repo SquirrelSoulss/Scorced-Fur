@@ -2,4 +2,23 @@
 
 
 #include "EntJumpAttack.h"
+#include "Kismet/KismetMathLibrary.h"
+
+void UEntJumpAttack::OnEnterState(AActor* stateOwner)
+{
+	Super::OnEnterState(stateOwner);
+
+	GEngine->AddOnScreenDebugMessage(-1, 20.f, FColor::Green, TEXT("Jump"));
+
+	EntRef->StartJumpAttack();
+}
+
+void UEntJumpAttack::OnExitState()
+{
+}
+
+void UEntJumpAttack::TickState()
+{
+}
+
 

@@ -24,7 +24,11 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "CheckForHit")
 	bool IsAttacking = false;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "CanMove")
+	bool CanMove = false;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "CanMove")
+	float ChilloutPeriod = 5.f;
 
 protected:
 	// Called when the game starts or when spawned
@@ -47,6 +51,20 @@ public:
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Move")
 	void MoveToRandomPoint(FVector destination);
 	virtual void MoveToRandomPoint_Implementation(FVector destination);
+
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "AttackTypes")
+	void StartHandAttack();
+	virtual void StartHandAttack_Implementation();
+
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "AttackTypes")
+	void StartStompAttack();
+	virtual void StartStompAttack_Implementation();
+
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "AttackTypes")
+	void StartJumpAttack();
+	virtual void StartJumpAttack_Implementation();
+
+
 
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "ChooseAttack")
 	void ChooseAttack(float Distance);

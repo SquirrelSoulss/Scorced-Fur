@@ -23,7 +23,9 @@ public:
 	TEnumAsByte<ECollisionChannel> traceChannel = ECC_Pawn;
 	FCollisionQueryParams queryParams;
 
-	UFUNCTION()
-	void ChooseAttackP1();
+	FTimerHandle TimerHandle_ChooseAttack;
+	float ChilloutPeriod;
 
+	UFUNCTION()
+	void ChooseAttack();
 };

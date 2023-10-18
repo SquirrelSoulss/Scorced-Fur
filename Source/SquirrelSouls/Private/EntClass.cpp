@@ -49,6 +49,18 @@ void AEntClass::MoveToRandomPoint_Implementation(FVector destination)
 {
 }
 
+void AEntClass::StartHandAttack_Implementation()
+{
+}
+
+void AEntClass::StartStompAttack_Implementation()
+{
+}
+
+void AEntClass::StartJumpAttack_Implementation()
+{
+}
+
 void AEntClass::ChooseAttack_Implementation(float Distance)
 {
 }

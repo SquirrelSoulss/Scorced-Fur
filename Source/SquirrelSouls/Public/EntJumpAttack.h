@@ -14,4 +14,10 @@ class SQUIRRELSOULS_API UEntJumpAttack : public UEntStateBase
 {
 	GENERATED_BODY()
 	
+public:
+	virtual void OnEnterState(AActor* stateOwner) override;
+	virtual void OnExitState() override;
+	virtual void TickState() override;
+
+
 };

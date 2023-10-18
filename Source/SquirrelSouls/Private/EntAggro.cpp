@@ -3,31 +3,42 @@
 
 #include "EntAggro.h"
 #include "Kismet/KismetMathLibrary.h"
+#include "TimerManager.h"
 
 void UEntAggro::OnEnterState(AActor* stateOwner)
 {
+	Super::OnEnterState(stateOwner);
+
 	bCanTickState = true;
 
 	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Aggro"));
 
-	EntRef = Cast<AEntClass>(stateOwner);
-	playerRef = EntRef->playerRef;
-
 	queryParams.AddIgnoredActor(EntRef);
 
 	EntRef->MoveToPlayer();
+
+	ChilloutPeriod = EntRef->ChilloutPeriod;
+	GetWorld()->GetTimerManager().SetTimer(TimerHandle_ChooseAttack, this, &UEntAggro::ChooseAttack, ChilloutPeriod, false);
 }
 
 void UEntAggro::OnExitState()
 {
+	GetWorld()->GetTimerManager().ClearTimer(TimerHandle_ChooseAttack);
+
 }
 
 void UEntAggro::TickState()
 {
-	FHitResult hit;
 
+
+}
+
+void UEntAggro::ChooseAttack()
+{
 	if (EntRef && playerRef)
 	{
+		FHitResult hit;
+
 		EntRef->GetWorld()->LineTraceSingleByChannel(hit, EntRef->GetActorLocation(), playerRef->GetActorLocation(), traceChannel, queryParams);
 		DrawDebugLine(EntRef->GetWorld(), EntRef->GetActorLocation(), playerRef->GetActorLocation(), FColor::Red);
 
@@ -35,10 +46,5 @@ void UEntAggro::TickState()
 
 		EntRef->ChooseAttack(distance);
 	}
-}
-
-void UEntAggro::ChooseAttackP1()
-{
-
 }
 
