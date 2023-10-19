@@ -46,8 +46,6 @@ bool UPlantBaseState::ShootRay(FVector origin, FVector end)
 	thisPlant->GetWorld()->LineTraceSingleByChannel(hit, origin, end, traceChannel, queryParams);
 
 	DrawDebugLine(thisPlant->GetWorld(), origin, end, FColor::Red);
-
-	FVector dist = thisPlant->GetActorLocation() - mainCharacter->GetActorLocation();
 	
 	if (Cast<APlayerCharacter>(hit.GetActor()) != nullptr) // if we are seeing the player
 	{

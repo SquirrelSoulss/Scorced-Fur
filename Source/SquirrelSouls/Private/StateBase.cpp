@@ -14,3 +14,7 @@ void UStateBase::OnExitState()
 void UStateBase::TickState()
 {
 }
+
+void UStateBase::PlayerOverlapping()
+{
+}

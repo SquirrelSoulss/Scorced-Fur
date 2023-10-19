@@ -52,6 +52,8 @@ public:
 	void SwitchState(UStateBase* NewState);
 	UFUNCTION(BlueprintCallable, Category = "State Machine")
 	void InitStateManager();
+	UFUNCTION(BlueprintCallable, Category = "State Machine")
+	void PlayerOverlapped();
 
 private:
 

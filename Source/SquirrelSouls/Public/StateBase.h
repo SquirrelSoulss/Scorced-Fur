@@ -32,4 +32,5 @@ public:
 	virtual void OnEnterState(AActor* stateOwner);
 	virtual void OnExitState();
 	virtual void TickState();
+	virtual void PlayerOverlapping();
 };

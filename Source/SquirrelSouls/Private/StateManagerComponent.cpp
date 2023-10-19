@@ -92,6 +92,11 @@ void UStateManagerComponent::InitStateManager()
 	SwitchStateByKey(InitialState);
 }
 
+void UStateManagerComponent::PlayerOverlapped()
+{
+	CurrentState->PlayerOverlapping();
+}
+
 void UStateManagerComponent::InitializeStates()
 {
 	for (auto It = AvailableStates.CreateConstIterator(); It; ++It)
