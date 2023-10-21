@@ -15,7 +15,6 @@ void UEntIdle::OnEnterState(AActor* stateOwner)
 
 	//Basically invoke repeating
 	GetWorld()->GetTimerManager().SetTimer(TimerHandle_UpdateDestination, this, &UEntIdle::MoveToPoint, IdleIntervall, true);
-	MoveToPoint();
 }
 
 void UEntIdle::OnExitState()

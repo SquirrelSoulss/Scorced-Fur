@@ -23,7 +23,7 @@ public:
 	AEntClass* EntRef = nullptr;
 
 	UPROPERTY(EditDefaultsOnly, Category = "Attack types")
-	TMap<FString, int> AttackTypes;
+	TMap<FString, TSubclassOf<UEntStateBase>> AttackTypes;
 
 public:
 	virtual void OnEnterState(AActor* stateOwner) override;

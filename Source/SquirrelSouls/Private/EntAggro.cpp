@@ -35,16 +35,28 @@ void UEntAggro::TickState()
 
 void UEntAggro::ChooseAttack()
 {
-	if (EntRef && playerRef)
+	if (EntRef && playerRef && !EntRef->IsAttacking)
 	{
-		FHitResult hit;
-
-		EntRef->GetWorld()->LineTraceSingleByChannel(hit, EntRef->GetActorLocation(), playerRef->GetActorLocation(), traceChannel, queryParams);
-		DrawDebugLine(EntRef->GetWorld(), EntRef->GetActorLocation(), playerRef->GetActorLocation(), FColor::Red);
-
-		float distance = hit.Distance;
-
-		EntRef->ChooseAttack(distance);
+		GetAttack(GetDistance());
 	}
 }
+
+void UEntAggro::DoAttack(FString AttackToDo)
+{
+	EntRef->SwitchState(AttackToDo);
+}
+
+float UEntAggro::GetDistance()
+{
+	FHitResult hit;
+
+	EntRef->GetWorld()->LineTraceSingleByChannel(hit, EntRef->GetActorLocation(), playerRef->GetActorLocation(), traceChannel, queryParams);
+	DrawDebugLine(EntRef->GetWorld(), EntRef->GetActorLocation(), playerRef->GetActorLocation(), FColor::Red);
+
+	float distance = hit.Distance;
+
+	return distance;
+}
+
+
 

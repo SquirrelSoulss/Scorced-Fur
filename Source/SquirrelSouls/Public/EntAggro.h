@@ -28,4 +28,11 @@ public:
 
 	UFUNCTION()
 	void ChooseAttack();
+	UFUNCTION(BlueprintCallable, Category = "ChooseAttack")
+	void DoAttack(FString AttackToDo);
+	UFUNCTION()
+	float GetDistance();
+
+	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable, Category = "ChooseAttack")
+	void GetAttack(float distance);
 };

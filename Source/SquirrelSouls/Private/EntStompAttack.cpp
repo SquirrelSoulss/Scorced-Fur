@@ -6,7 +6,7 @@
 void UEntStompAttack::OnEnterState(AActor* stateOwner)
 {
 	Super::OnEnterState(stateOwner);
-	GEngine->AddOnScreenDebugMessage(-1, 20.f, FColor::Black, TEXT("Stomp"));
+	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Orange, TEXT("Stomp"));
 
 
 	EntRef->StartStompAttack();
