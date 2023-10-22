@@ -28,7 +28,7 @@ public:
 	bool CanMove = false;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "CanMove")
-	float ChilloutPeriod = 6.f;
+	float ChilloutPeriod = 2.f;
 
 protected:
 	// Called when the game starts or when spawned

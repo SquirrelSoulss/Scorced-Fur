@@ -17,6 +17,5 @@ void UEntHandAttack::OnExitState()
 
 void UEntHandAttack::TickState()
 {
-	if (EntRef->IsAttacking)
-		EntRef->CheckForHit();
+	EntRef->CheckForHit();
 }

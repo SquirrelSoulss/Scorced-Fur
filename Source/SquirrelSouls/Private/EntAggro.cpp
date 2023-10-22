@@ -21,7 +21,7 @@ void UEntAggro::OnEnterState(AActor* stateOwner)
 	ChilloutPeriod = EntRef->ChilloutPeriod;
 
 	InitializeAttackArray();
-	GetWorld()->GetTimerManager().SetTimer(TimerHandle_ChooseAttack, this, &UEntAggro::ChooseAttack, ChilloutPeriod, false);
+	GetWorld()->GetTimerManager().SetTimer(TimerHandle_ChooseAttack, this, &UEntAggro::ChooseAttack, ChilloutPeriod, true);
 }
 
 void UEntAggro::OnExitState()
@@ -70,6 +70,9 @@ float UEntAggro::GetDistance()
 
 FEntAttackTypeData UEntAggro::ChooseAttackLogic(float distance)
 {
+	//Debug set attack
+	//return AvailableAttacks[2];
+
 	TArray<FEntAttackTypeData> ValidAttacks;
 
 	for (const FEntAttackTypeData& AttackData : AvailableAttacks)
