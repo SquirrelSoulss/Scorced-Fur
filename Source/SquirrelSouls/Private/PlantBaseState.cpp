@@ -5,6 +5,7 @@
 #include <Kismet/KismetMathLibrary.h>
 #include "SquirrelSouls/PlayerCharacter.h"
 #include "Engine/EngineTypes.h"
+#include "StateManagerComponent.h"
 
 void UPlantBaseState::OnEnterState(AActor* stateOwner) // every state who inherits from plantbase will do this when onenter is called
 {
@@ -24,6 +25,14 @@ void UPlantBaseState::OnExitState() //to be called when state exits
 void UPlantBaseState::TickState() // to be called when tick is called
 {
 	Super::TickState();
+}
+
+void UPlantBaseState::Damaged(float damage)
+{
+	Super::Damaged(damage);
+	thisPlant->stateManager->SwitchStateByKey("hurt");
+	//add a bool or call to the baseclass blueprint to play the hurt animation
+
 }
 
 void UPlantBaseState::FixRotation(FVector actorLocation, FVector targetLocation) // used to make the enemy face player

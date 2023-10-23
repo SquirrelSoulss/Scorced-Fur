@@ -18,3 +18,7 @@ void UStateBase::TickState()
 void UStateBase::PlayerOverlapping()
 {
 }
+
+void UStateBase::Damaged(float damage)
+{
+}

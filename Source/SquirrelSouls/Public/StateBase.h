@@ -33,4 +33,5 @@ public:
 	virtual void OnExitState();
 	virtual void TickState();
 	virtual void PlayerOverlapping();
+	virtual void Damaged(float damage);
 };
