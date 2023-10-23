@@ -31,7 +31,7 @@ void UStateManagerComponent::TickComponent(float DeltaTime, ELevelTick TickType,
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 	if (bCanTickState == true)
 	{
-		CurrentState->TickState();
+		CurrentState->TickState(DeltaTime);
 	}
 	// ...
 }

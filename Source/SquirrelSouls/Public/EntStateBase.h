@@ -17,7 +17,7 @@ class SQUIRRELSOULS_API UEntStateBase : public UStateBase
 	
 public:
 	UPROPERTY()
-	AActor* playerRef = nullptr;
+	AActor* PlayerRef = nullptr;
 
 	UPROPERTY()
 	AEntClass* EntRef = nullptr;
@@ -28,5 +28,5 @@ public:
 public:
 	virtual void OnEnterState(AActor* stateOwner) override;
 	virtual void OnExitState() override;
-	virtual void TickState() override;
+	virtual void TickState(float DeltaTime) override;
 };

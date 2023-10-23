@@ -5,6 +5,10 @@
 #include "Kismet/KismetMathLibrary.h"
 #include "TimerManager.h"
 #include "MathFunctions.h"
+#include "NavigationSystem.h"
+#include "AIController.h"
+#include "Misc/App.h"
+
 
 void UEntAggro::OnEnterState(AActor* stateOwner)
 {
@@ -16,7 +20,7 @@ void UEntAggro::OnEnterState(AActor* stateOwner)
 
 	queryParams.AddIgnoredActor(EntRef);
 
-	EntRef->MoveToPlayer();
+	//EntRef->MoveToPlayer();
 
 	ChilloutPeriod = EntRef->ChilloutPeriod;
 
@@ -27,11 +31,31 @@ void UEntAggro::OnEnterState(AActor* stateOwner)
 void UEntAggro::OnExitState()
 {
 	GetWorld()->GetTimerManager().ClearTimer(TimerHandle_ChooseAttack);
-
 }
 
-void UEntAggro::TickState()
+void UEntAggro::TickState(float DeltaTime)
 {
+	Super::TickState(DeltaTime);
+
+	if (!IsAttacking)
+		RotateToPlayer(DeltaTime);
+}
+
+void UEntAggro::RotateToPlayer(float DeltaTime)
+{
+	
+	FVector PlayerPos = PlayerRef->GetActorLocation();
+	FVector EntPos = EntRef->GetActorLocation();
+
+	//FVector NewPos = FMath::VInterpTo(EntPos, PlayerPos, DeltaTime, MovementSpeed);
+	//EntRef->SetActorLocation(NewPos);
+
+	FVector DirToPlayer = (PlayerPos - EntPos).GetSafeNormal();
+	FRotator RotToPlayer = DirToPlayer.Rotation();
+
+	FRotator CurrentRot = EntRef->GetActorRotation();
+	FRotator NewRot = FMath::RInterpTo(CurrentRot, RotToPlayer, DeltaTime, RotationSpeed);
+
 }
 
 void UEntAggro::InitializeAttackArray()
@@ -44,17 +68,20 @@ void UEntAggro::InitializeAttackArray()
 
 void UEntAggro::ChooseAttack()
 {
-	if (EntRef && playerRef && !EntRef->IsAttacking)
+	if (EntRef && PlayerRef && !EntRef->IsAttacking)
 	{
 		float PlayerDistance = GetDistance();
 
 		FEntAttackTypeData ChosenAttack = ChooseAttackLogic(PlayerDistance);
 
 		if (ChosenAttack.StateName.IsEmpty())
-			EntRef->MoveToPlayer();
+			IsAttacking = false;
 
 		else
+		{
+			IsAttacking = true;
 			EntRef->SwitchState(ChosenAttack.StateName);
+		}
 	}
 }
 
@@ -62,8 +89,8 @@ float UEntAggro::GetDistance()
 {
 	FHitResult hit;
 
-	EntRef->GetWorld()->LineTraceSingleByChannel(hit, EntRef->GetActorLocation(), playerRef->GetActorLocation(), traceChannel, queryParams);
-	DrawDebugLine(EntRef->GetWorld(), EntRef->GetActorLocation(), playerRef->GetActorLocation(), FColor::Red);
+	EntRef->GetWorld()->LineTraceSingleByChannel(hit, EntRef->GetActorLocation(), PlayerRef->GetActorLocation(), traceChannel, queryParams);
+	DrawDebugLine(EntRef->GetWorld(), EntRef->GetActorLocation(), PlayerRef->GetActorLocation(), FColor::Red);
 
 	return hit.Distance;
 }

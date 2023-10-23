@@ -15,7 +15,8 @@ void UEntHandAttack::OnExitState()
 {
 }
 
-void UEntHandAttack::TickState()
+void UEntHandAttack::TickState(float DeltaTime)
 {
+	Super::TickState(DeltaTime);
 	EntRef->CheckForHit();
 }

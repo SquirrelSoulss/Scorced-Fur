@@ -7,7 +7,7 @@ void UEntStateBase::OnEnterState(AActor* stateOwner)
 {
 	Super::OnEnterState(stateOwner);
 	EntRef = Cast<AEntClass>(stateOwner);
-	playerRef = EntRef->playerRef;
+	PlayerRef = EntRef->playerRef;
 }
 
 void UEntStateBase::OnExitState()
@@ -15,7 +15,7 @@ void UEntStateBase::OnExitState()
 	Super::OnExitState();
 }
 
-void UEntStateBase::TickState()
+void UEntStateBase::TickState(float DeltaTime)
 {
-	Super::TickState();
+	Super::TickState(DeltaTime);
 }

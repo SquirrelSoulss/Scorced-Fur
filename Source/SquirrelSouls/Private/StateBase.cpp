@@ -11,6 +11,6 @@ void UStateBase::OnExitState()
 {
 }
 
-void UStateBase::TickState()
+void UStateBase::TickState(float DeltaTime)
 {
 }

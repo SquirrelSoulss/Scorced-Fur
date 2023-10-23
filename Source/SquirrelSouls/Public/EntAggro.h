@@ -36,7 +36,7 @@ private:
 public:
 	virtual void OnEnterState(AActor* stateOwner) override;
 	virtual void OnExitState() override;
-	virtual void TickState() override;
+	virtual void TickState(float DeltaTime) override;
 
 	UPROPERTY()
 	TEnumAsByte<ECollisionChannel> traceChannel = ECC_Pawn;
@@ -44,16 +44,18 @@ public:
 
 	FTimerHandle TimerHandle_ChooseAttack;
 	float ChilloutPeriod;
+	bool IsAttacking;
+	float RotationSpeed = 2.f;
+	float MovementSpeed = 50.f;
+
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 	TArray<FEntAttackTypeData> AvailableAttacks;
 
 	UFUNCTION()
+	void RotateToPlayer(float DeltaTime);
 	void InitializeAttackArray();
-	UFUNCTION()
 	void ChooseAttack();
-	UFUNCTION()
 	float GetDistance();
-	UFUNCTION()
 	FEntAttackTypeData ChooseAttackLogic(float distance);
 };

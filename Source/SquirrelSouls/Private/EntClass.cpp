@@ -80,6 +80,11 @@ void AEntClass::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
+	if (stateManager) 
+	{
+		FActorComponentTickFunction* ThisTickFunction = &stateManager->PrimaryComponentTick;
+		stateManager->TickComponent(DeltaTime, LEVELTICK_ViewportsOnly, ThisTickFunction);
+	}
 }
 
 // Called to bind functionality to input

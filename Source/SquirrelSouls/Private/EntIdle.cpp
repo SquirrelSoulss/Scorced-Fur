@@ -25,7 +25,7 @@ void UEntIdle::OnExitState()
 	GetWorld()->GetTimerManager().ClearTimer(TimerHandle_UpdateDestination);
 }
 
-void UEntIdle::TickState()
+void UEntIdle::TickState(float DeltaTime)
 {
 }
 
