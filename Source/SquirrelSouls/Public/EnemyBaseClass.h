@@ -21,6 +21,8 @@ public:
 	float health = 30;
 	UPROPERTY(BlueprintReadOnly, Category = "Life")
 	bool dead = false ;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "BoolChanges")
+	bool shouldTrack = true;
 
 public:
 	// Sets default values for this character's properties

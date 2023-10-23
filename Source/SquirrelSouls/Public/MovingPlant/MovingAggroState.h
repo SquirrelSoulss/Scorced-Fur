@@ -3,14 +3,14 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "StateBase.h"
-#include "MovingPlantStateBase.generated.h"
+#include "MovingPlant/MovingPlantBase.h"
+#include "MovingAggroState.generated.h"
 
 /**
  * 
  */
 UCLASS()
-class SQUIRRELSOULS_API UMovingPlantStateBase : public UStateBase
+class SQUIRRELSOULS_API UMovingAggroState : public UMovingPlantBase
 {
 	GENERATED_BODY()
 	

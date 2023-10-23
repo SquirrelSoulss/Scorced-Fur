@@ -34,4 +34,6 @@ public:
 	void GetPatrolPoint();
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Patrol")
 	FVector randomPoint;
+
+	void SensedPlayer(APawn* player);
 };
