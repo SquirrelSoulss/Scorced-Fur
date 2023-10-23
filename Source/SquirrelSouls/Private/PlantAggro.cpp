@@ -27,7 +27,7 @@ void UPlantAggro::OnExitState()
 	thisPlant->GetWorld()->GetTimerManager().ClearAllTimersForObject(this);
 }
 
-void UPlantAggro::TickState()
+void UPlantAggro::TickState(float DeltaTime)
 {
 	FHitResult hit;
 

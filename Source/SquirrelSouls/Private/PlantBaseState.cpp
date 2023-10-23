@@ -16,9 +16,9 @@ void UPlantBaseState::OnExitState()
 	Super::OnExitState();
 }
 
-void UPlantBaseState::TickState()
+void UPlantBaseState::TickState(float DeltaTime)
 {
-	Super::TickState();
+	Super::TickState(DeltaTime);
 }
 
 void UPlantBaseState::FixRotation(FVector actorLocation, FVector targetLocation)

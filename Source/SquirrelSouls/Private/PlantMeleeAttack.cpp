@@ -19,7 +19,7 @@ void UPlantMeleeAttack::OnExitState()
 	thisPlant->changeState = false;
 }
 
-void UPlantMeleeAttack::TickState()
+void UPlantMeleeAttack::TickState(float DeltaTime)
 {
 	FVector playerLocation = mainCharacter->GetActorLocation();
 	FVector plantLocation = thisPlant->GetActorLocation();

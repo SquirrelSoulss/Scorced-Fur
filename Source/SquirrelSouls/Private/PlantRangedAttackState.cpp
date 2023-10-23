@@ -21,7 +21,7 @@ void UPlantRangedAttackState::OnExitState()
 	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Blue, TEXT("Exit ranged"));
 }
 
-void UPlantRangedAttackState::TickState()
+void UPlantRangedAttackState::TickState(float DeltaTime)
 {
 	FVector playerLocation = mainCharacter->GetActorLocation();
 	FVector plantLocation = thisPlant->GetActorLocation();
