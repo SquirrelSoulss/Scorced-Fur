@@ -74,9 +74,10 @@ void UEntAggro::ChooseAttack()
 
 		FEntAttackTypeData ChosenAttack = ChooseAttackLogic(PlayerDistance);
 
-		if (ChosenAttack.StateName.IsEmpty())
+		if (ChosenAttack.StateName.IsEmpty()) 
+		{
 			IsAttacking = false;
-
+		}
 		else
 		{
 			IsAttacking = true;
