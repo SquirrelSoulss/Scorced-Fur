@@ -18,7 +18,6 @@ AEntClass::AEntClass()
 void AEntClass::BeginPlay()
 {
 	Super::BeginPlay();
-
 }
 
 void AEntClass::StartFight_Implementation(APawn* _player)
@@ -29,14 +28,9 @@ void AEntClass::StartFight_Implementation(APawn* _player)
 		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Blue, TEXT("playyer is null"));
 		return;
 	}
-	playerRef = player;
+	PlayerRef = player;
 
-	SetUpFight();
 	this->stateManager->SwitchStateByKey("Aggro");
-}
-
-void AEntClass::SetUpFight_Implementation()
-{
 }
 
 void AEntClass::MoveToPlayer_Implementation()
@@ -61,10 +55,6 @@ void AEntClass::StartJumpAttack_Implementation()
 {
 }
 
-void AEntClass::ChooseAttack_Implementation(float Distance)
-{
-}
-
 void AEntClass::CheckForHit_Implementation()
 {
 }
@@ -74,6 +64,20 @@ void AEntClass::SwitchState(FString StateKey)
 	stateManager->SwitchStateByKey(StateKey);
 }
 
+void AEntClass::RotateToPlayer(float DeltaTime)
+{
+	FVector PlayerPos = PlayerRef->GetActorLocation();
+	FVector EntPos = GetActorLocation();
+
+	//FVector NewPos = FMath::VInterpTo(EntPos, PlayerPos, DeltaTime, MovementSpeed);
+	//EntRef->SetActorLocation(NewPos);
+
+	FVector DirToPlayer = (PlayerPos - EntPos).GetSafeNormal();
+	FRotator RotToPlayer = DirToPlayer.Rotation();
+
+	FRotator CurrentRot = GetActorRotation();
+	FRotator NewRot = FMath::RInterpTo(CurrentRot, RotToPlayer, DeltaTime, RotationSpeed);
+}
 
 // Called every frame
 void AEntClass::Tick(float DeltaTime)
@@ -85,6 +89,9 @@ void AEntClass::Tick(float DeltaTime)
 		FActorComponentTickFunction* ThisTickFunction = &stateManager->PrimaryComponentTick;
 		stateManager->TickComponent(DeltaTime, LEVELTICK_ViewportsOnly, ThisTickFunction);
 	}
+	
+	/*if (!IsAttacking)
+		RotateToPlayer(DeltaTime);*/
 }
 
 // Called to bind functionality to input

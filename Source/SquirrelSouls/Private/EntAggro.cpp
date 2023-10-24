@@ -37,25 +37,6 @@ void UEntAggro::TickState(float DeltaTime)
 {
 	Super::TickState(DeltaTime);
 
-	if (!IsAttacking)
-		RotateToPlayer(DeltaTime);
-}
-
-void UEntAggro::RotateToPlayer(float DeltaTime)
-{
-	
-	FVector PlayerPos = PlayerRef->GetActorLocation();
-	FVector EntPos = EntRef->GetActorLocation();
-
-	//FVector NewPos = FMath::VInterpTo(EntPos, PlayerPos, DeltaTime, MovementSpeed);
-	//EntRef->SetActorLocation(NewPos);
-
-	FVector DirToPlayer = (PlayerPos - EntPos).GetSafeNormal();
-	FRotator RotToPlayer = DirToPlayer.Rotation();
-
-	FRotator CurrentRot = EntRef->GetActorRotation();
-	FRotator NewRot = FMath::RInterpTo(CurrentRot, RotToPlayer, DeltaTime, RotationSpeed);
-
 }
 
 void UEntAggro::InitializeAttackArray()

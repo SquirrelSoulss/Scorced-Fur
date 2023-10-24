@@ -19,7 +19,7 @@ public:
 	AEntClass();
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "PlayerRef")
-	AActor* playerRef = nullptr; // change to player class later
+	AActor* PlayerRef = nullptr; // change to player class later
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "CheckForHit")
 	bool IsAttacking = false;
@@ -39,10 +39,6 @@ public:
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "SensedPlayer")
 	void StartFight(APawn* player);
 	virtual void StartFight_Implementation(APawn* player);
-
-	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "SensedPlayer")
-	void SetUpFight();
-	virtual void SetUpFight_Implementation();
 
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Move")
 	void MoveToPlayer();
@@ -76,6 +72,13 @@ public:
 
 	UFUNCTION(BlueprintCallable, Category = "SwitchState")
 	void SwitchState(FString StateKey);
+
+
+	UPROPERTY()
+	float RotationSpeed = 1.5f;
+
+	UFUNCTION()
+	void RotateToPlayer(float DeltaTime);
 
 
 public:

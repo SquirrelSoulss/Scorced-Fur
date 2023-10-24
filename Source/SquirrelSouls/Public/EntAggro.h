@@ -53,7 +53,6 @@ public:
 	TArray<FEntAttackTypeData> AvailableAttacks;
 
 	UFUNCTION()
-	void RotateToPlayer(float DeltaTime);
 	void InitializeAttackArray();
 	void ChooseAttack();
 	float GetDistance();
