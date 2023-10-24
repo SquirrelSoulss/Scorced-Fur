@@ -14,9 +14,15 @@ class SQUIRRELSOULS_API AEntClass : public ACharacter
 	UPROPERTY(EditAnywhere, Category = "StateMachine")
 	class UStateManagerComponent* stateManager;
 
+	UPROPERTY(EditAnywhere, Category = "CharacterMovement")
+	class UCharacterMovementComponent* CharMoveComp;
+
+
 public:
 	// Sets default values for this character's properties
 	AEntClass();
+
+
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "PlayerRef")
 	AActor* PlayerRef = nullptr; // change to player class later
@@ -76,6 +82,7 @@ public:
 
 	UPROPERTY()
 	float RotationSpeed = 1.5f;
+	float MovementSpeed = 10.f;
 
 	UFUNCTION()
 	void RotateToPlayer(float DeltaTime);

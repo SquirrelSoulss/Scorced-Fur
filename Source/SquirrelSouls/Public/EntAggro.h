@@ -44,10 +44,6 @@ public:
 
 	FTimerHandle TimerHandle_ChooseAttack;
 	float ChilloutPeriod;
-	bool IsAttacking;
-	float RotationSpeed = 2.f;
-	float MovementSpeed = 50.f;
-
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 	TArray<FEntAttackTypeData> AvailableAttacks;

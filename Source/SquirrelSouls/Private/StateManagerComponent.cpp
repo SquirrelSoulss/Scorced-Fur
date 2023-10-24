@@ -98,7 +98,7 @@ void UStateManagerComponent::InitializeStates()
 {
 	for (auto It = AvailableStates.CreateConstIterator(); It; ++It)
 	{
-		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Blue, TEXT("Added THings"));
+		//GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Blue, TEXT("Added THings"));
 		UStateBase* State = NewObject<UStateBase>(this, It->Value);
 		StateMap.Add(It->Key, State);
 	}
