@@ -5,7 +5,7 @@
 #include "EntIdle.h"
 #include "EntAggro.h"
 #include "StateManagerComponent.h"
-#include "GameFramework/CharacterMovementComponent.h"
+#include "AIController.h"
 
 // Sets default values
 AEntClass::AEntClass()
@@ -14,11 +14,7 @@ AEntClass::AEntClass()
 	PrimaryActorTick.bCanEverTick = true;
 	stateManager = CreateDefaultSubobject<UStateManagerComponent>(TEXT("State Manager"));
 	
-	CharMoveComp = GetCharacterMovement();
-	if (CharMoveComp) {
-		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Blue, TEXT("char move is fine"));
-		MovementSpeed = CharMoveComp->MaxWalkSpeed;
-	}
+	
 }
 
 // Called when the game starts or when spawned
@@ -90,11 +86,7 @@ void AEntClass::RotateToPlayer(float DeltaTime)
 	if (!CanMove) return;
 	DirToPlayer *= MovementSpeed;
 	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Yellow, TEXT("CanMove"));
-
-	CharMoveComp->AddInputVector(DirToPlayer);
-	/*FVector NewPos = FMath::VInterpTo(EntPos, PlayerPos, DeltaTime, 0.25f);
-	SetActorLocation(NewPos);*/
-
+	//AAIController::MoveToActor(PlayerRef, 350.f);
 }
 
 // Called every frame

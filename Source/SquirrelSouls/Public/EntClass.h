@@ -14,10 +14,6 @@ class SQUIRRELSOULS_API AEntClass : public ACharacter
 	UPROPERTY(EditAnywhere, Category = "StateMachine")
 	class UStateManagerComponent* stateManager;
 
-	UPROPERTY(EditAnywhere, Category = "CharacterMovement")
-	class UCharacterMovementComponent* CharMoveComp;
-
-
 public:
 	// Sets default values for this character's properties
 	AEntClass();
@@ -65,12 +61,6 @@ public:
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "AttackTypes")
 	void StartJumpAttack();
 	virtual void StartJumpAttack_Implementation();
-
-
-
-	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "ChooseAttack")
-	void ChooseAttack(float Distance);
-	virtual void ChooseAttack_Implementation(float Distance);
 
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "CheckForHit")
 	void CheckForHit();
