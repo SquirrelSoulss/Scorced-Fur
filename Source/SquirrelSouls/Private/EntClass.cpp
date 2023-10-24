@@ -13,16 +13,12 @@ AEntClass::AEntClass()
 	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 	stateManager = CreateDefaultSubobject<UStateManagerComponent>(TEXT("State Manager"));
-	
-	
 }
 
 // Called when the game starts or when spawned
 void AEntClass::BeginPlay()
 {
 	Super::BeginPlay();
-
-	
 }
 
 void AEntClass::StartFight_Implementation(APawn* _player)
@@ -81,11 +77,13 @@ void AEntClass::RotateToPlayer(float DeltaTime)
 
 	FRotator EntRot = GetActorRotation();
 	FRotator NewRot = FMath::RInterpTo(EntRot, RotToPlayer, DeltaTime, RotationSpeed);
+
+	IsRotatingInPlace = !FMath::IsNearlyEqual(NewRot.Yaw, EntRot.Yaw, 0.25f);
+
 	SetActorRotation(FRotator(EntRot.Pitch, NewRot.Yaw, EntRot.Roll));
 
 	if (!CanMove) return;
 	DirToPlayer *= MovementSpeed;
-	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Yellow, TEXT("CanMove"));
 	//AAIController::MoveToActor(PlayerRef, 350.f);
 }
 

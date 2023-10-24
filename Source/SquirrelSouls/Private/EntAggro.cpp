@@ -26,6 +26,9 @@ void UEntAggro::OnEnterState(AActor* stateOwner)
 
 	InitializeAttackArray();
 	GetWorld()->GetTimerManager().SetTimer(TimerHandle_ChooseAttack, this, &UEntAggro::ChooseAttack, ChilloutPeriod, true);
+
+	EntRef->MoveToPlayer();
+
 }
 
 void UEntAggro::OnExitState()
@@ -36,15 +39,16 @@ void UEntAggro::OnExitState()
 void UEntAggro::TickState(float DeltaTime)
 {
 	Super::TickState(DeltaTime);
-
 }
 
 void UEntAggro::InitializeAttackArray()
 {
 	//Add attacks here
-	AvailableAttacks.Add({ "HandAttack", 500.f, 0.75f });
-	AvailableAttacks.Add({ "StompAttack", 350.f, 0.75f });
-	AvailableAttacks.Add({ "JumpAttack", 800.f, 0.3f });
+	AvailableAttacks.Add({ "None", 1500.f, 0.1f });
+
+	AvailableAttacks.Add({ "HandAttack", 500.f, 0.8f });
+	AvailableAttacks.Add({ "StompAttack", 400.f, 0.75f });
+	AvailableAttacks.Add({ "JumpAttack", 1000.f, 0.1f });
 }
 
 void UEntAggro::ChooseAttack()
@@ -55,9 +59,13 @@ void UEntAggro::ChooseAttack()
 
 		FEntAttackTypeData ChosenAttack = ChooseAttackLogic(PlayerDistance);
 
-		if (!ChosenAttack.StateName.IsEmpty()) 
+		if (ChosenAttack.StateName != "None")
 		{
 			EntRef->SwitchState(ChosenAttack.StateName);
+		}
+		else
+		{
+			EntRef->MoveToPlayer();
 		}
 	}
 }
