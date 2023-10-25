@@ -18,6 +18,7 @@ void UPlantAggro::OnEnterState(AActor* stateOwner)
 		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Blue, TEXT("Plant Aggro state should not be availabe to this class"));
 	}
 	thisPlant->sensesPlayer = true; // senses player connected to animation blueprint, used to change into hostile idle
+	thisPlant->shouldTrack = true;
 
 	float randTime = FMath::RandRange(3, 6);
 	thisPlant->GetWorld()->GetTimerManager().SetTimer(timerHandle, this, &UPlantAggro::RangedAttack, randTime, false); // randomize the amount of time before the call
@@ -33,7 +34,7 @@ void UPlantAggro::TickState()
 	playerLocation = mainCharacter->GetActorLocation();
 	plantLocation = thisPlant->GetActorLocation();
 
-	FixRotation(plantLocation, playerLocation);
+	//FixRotation(plantLocation, playerLocation);
 
 	if (ShootRay(plantLocation, playerLocation) == false || DistanceToPlayer() >= AggroRange) // or player is to far away
 	{

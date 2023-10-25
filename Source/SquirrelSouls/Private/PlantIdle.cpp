@@ -8,10 +8,12 @@ void UPlantIdle::OnEnterState(AActor* stateOwner)
 {
 	Super::OnEnterState(stateOwner);
 	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Blue, TEXT("Idle"));
+	thisPlant->shouldTrack = false;
 }
 
 void UPlantIdle::OnExitState()
 {
+	
 }
 
 void UPlantIdle::TickState()

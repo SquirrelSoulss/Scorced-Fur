@@ -23,10 +23,6 @@ void UPlantRangedAttackState::OnExitState()
 
 void UPlantRangedAttackState::TickState()
 {
-	playerLocation = mainCharacter->GetActorLocation();
-	plantLocation = thisPlant->GetActorLocation();
-	FixRotation(plantLocation, playerLocation);
-
 	if (thisPlant->changeState == true) {
 		thisPlant->stateManager->SwitchStateByKey("Aggro");
 	}

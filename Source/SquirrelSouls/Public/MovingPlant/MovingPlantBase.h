@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "MovingPlantClass.h"
 #include "PlantBaseState.h"
+#include "AIController.h"
 #include "MovingPlantBase.generated.h"
 
 /**
@@ -17,6 +18,8 @@ class SQUIRRELSOULS_API UMovingPlantBase : public UPlantBaseState
 protected:
 	UPROPERTY()
 	AMovingPlantClass* mPlant = nullptr;
+	AAIController* aiController = nullptr;
+	FTimerHandle timerHandle;
 public:
 	virtual void OnEnterState(AActor* stateOwner) override;
 	virtual void OnExitState() override;

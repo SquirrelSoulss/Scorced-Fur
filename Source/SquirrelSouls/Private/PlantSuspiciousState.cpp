@@ -9,6 +9,8 @@ void UPlantSuspiciousState::OnEnterState(AActor* stateOwner)
 	Super::OnEnterState(stateOwner);
 	thisPlant->GetWorld()->GetTimerManager().SetTimer(timerHandle, this, &UPlantSuspiciousState::SwitchToIdle, 3, false); //
 	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Blue, TEXT("Sus"));
+	thisPlant->shouldTrack = false;
+
 }
 
 void UPlantSuspiciousState::OnExitState()

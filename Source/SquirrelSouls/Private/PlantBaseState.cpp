@@ -35,16 +35,8 @@ void UPlantBaseState::Damaged(float damage)
 
 }
 
-void UPlantBaseState::FixRotation(FVector actorLocation, FVector targetLocation) // used to make the enemy face player
-{
-	if (!thisPlant->shouldTrack)
-		return;
-	FRotator targetRot = UKismetMathLibrary::FindLookAtRotation(actorLocation, targetLocation);
-	FRotator newRotation = FMath::RInterpTo(thisPlant->GetActorRotation(), targetRot, thisPlant->GetWorld()->GetTimeSeconds(), 5);
-	FRotator doneRotation = FRotator(0, newRotation.Yaw, 0);
-	//thisPlant->SetActorRotation(doneRotation);
-	thisPlant->targetBoneRotation = doneRotation;
-}
+
+
 
 bool UPlantBaseState::ShootRay(FVector origin, FVector end)
 {

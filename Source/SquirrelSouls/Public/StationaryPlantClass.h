@@ -20,6 +20,7 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "BoolChanges") //move to StationaryPlantplantClass
 		FRotator targetBoneRotation;
 	
+	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "BoolChanges")
 	bool rangedAttackCall = false;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "BoolChanges")

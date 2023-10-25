@@ -13,7 +13,7 @@ class SQUIRRELSOULS_API AEnemyBaseClass : public ACharacter//, public IIDamageRe
 {
 	GENERATED_BODY()
 public:
-	UPROPERTY(EditAnywhere, Category = "StateMachine")
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "StateMachine")
 	class UStateManagerComponent* stateManager;
 	UPROPERTY(EditAnywhere, Category = "AI")
 	class UPawnSensingComponent* pawnSenser;
@@ -37,7 +37,8 @@ public:
 	void PlayerSpotted();
 	virtual void PlayerSpotted_Implementation();
 	//virtual void TakeDamage_Implementation(float damageTaken) override;
-
+	
+	FRotator FixRotation(FVector actorLocation, FVector targetLocation, float deltaTime, float turnSpeed = 2.f);
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;

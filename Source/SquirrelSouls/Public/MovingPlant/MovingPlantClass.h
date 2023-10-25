@@ -27,13 +27,14 @@ public:
 	class UBoxComponent* patrolArea;
 	virtual void Tick(float DeltaTime) override;
 	AMovingPlantClass();
-
+	UFUNCTION(BlueprintImplementableEvent, Category = "Patrol")
+	void CallGetPatrolPoint();
 	UFUNCTION(BlueprintCallable, Category = "AggroSphere")
 	void PlayerOverlapp(APlayerCharacter* player);
-	UFUNCTION(BlueprintImplementableEvent, Category = "Patrol Box")
-	void GetPatrolPoint();
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Patrol")
 	FVector randomPoint;
 
 	void SensedPlayer(APawn* player);
+	UFUNCTION(BlueprintCallable, Category = "Patrol")
+	FVector GetPatrolPoint(FVector patrolPoint);
 };

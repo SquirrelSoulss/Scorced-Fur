@@ -8,6 +8,8 @@ void UPlantDeathState::OnEnterState(AActor* stateOwner)
 {
 	Super::OnEnterState(stateOwner);
 	thisPlant->dead = true;
+	thisPlant->shouldTrack = false;
+
 }
 
 void UPlantDeathState::OnExitState()

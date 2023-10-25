@@ -6,6 +6,7 @@
 #include "SquirrelSouls/PlayerCharacter.h"
 #include "StateManagerComponent.h"
 #include "IDamageRecievers.h"
+#include <Kismet/KismetMathLibrary.h>
 
 // Sets default values
 AEnemyBaseClass::AEnemyBaseClass()
@@ -31,7 +32,9 @@ void AEnemyBaseClass::BeginPlay()
 void AEnemyBaseClass::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
+	if (shouldTrack && mainCharacter != nullptr) {
 
+	}
 }
 
 // Called to bind functionality to input
@@ -59,6 +62,13 @@ void AEnemyBaseClass::PlayerSpotted_Implementation()
 {
 	
 	
+}
+
+FRotator AEnemyBaseClass::FixRotation(FVector actorLocation, FVector targetLocation, float deltaTime, float turnSpeed)
+{
+	FRotator targetRot = UKismetMathLibrary::FindLookAtRotation(actorLocation, targetLocation);
+	FRotator newRotation = FMath::RInterpTo(GetActorRotation(), targetRot, deltaTime, turnSpeed);
+	return newRotation;
 }
 
 //void AEnemyBaseClass::TakeDamage(float damageTaken)

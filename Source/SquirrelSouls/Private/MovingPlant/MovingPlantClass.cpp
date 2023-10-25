@@ -45,16 +45,17 @@ void AMovingPlantClass::PlayerOverlapp(APlayerCharacter* player)
 
 void AMovingPlantClass::SensedPlayer(APawn* player)
 {
-	
 	if (stateManager->CurrentState->IsA(UMovingIdleState::StaticClass())) {
 		stateManager->SwitchStateByKey("sus"); // ändra, ska nog göra 
 	}
 }
 
-//FVector AMovingPlantClass::GetPatrolPoint(FVector patrolPoint)
-//{
-//	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Blue, TEXT("Called It"));// error invalid state
-//	return patrolPoint;
-//}
+FVector AMovingPlantClass::GetPatrolPoint(FVector patrolPoint)
+{
+	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Blue, TEXT("Patrolpoint given"));// error invalid state
+	randomPoint = patrolPoint;
+
+	return patrolPoint;
+}
 
 
