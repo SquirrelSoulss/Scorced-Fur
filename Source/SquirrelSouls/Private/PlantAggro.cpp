@@ -36,7 +36,7 @@ void UPlantAggro::TickState()
 
 	//FixRotation(plantLocation, playerLocation);
 
-	if (ShootRay(plantLocation, playerLocation) == false || DistanceToPlayer() >= AggroRange) // or player is to far away
+	if (ShootRay(plantLocation, playerLocation, thisPlant) == false || DistanceToPlayer() >= AggroRange) // or player is to far away
 	{
 		thisPlant->stateManager->SwitchStateByKey("Suspicious");
 		return;

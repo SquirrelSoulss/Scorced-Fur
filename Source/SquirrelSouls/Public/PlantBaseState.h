@@ -39,6 +39,6 @@ public:
 	virtual void TickState() override;
 	virtual void Damaged(float damage) override;
 	//void FixRotation(FVector actorLocation, FVector targetLocation);
-	bool ShootRay(FVector origin, FVector end);
+	bool ShootRay(FVector origin, FVector end, AActor* IgnoredActor);
 	float DistanceToPlayer();
 };

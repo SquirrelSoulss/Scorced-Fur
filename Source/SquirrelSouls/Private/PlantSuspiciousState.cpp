@@ -24,7 +24,7 @@ void UPlantSuspiciousState::TickState()
 	Super::TickState();
 	playerLocation = mainCharacter->GetActorLocation();
 	plantLocation = thisPlant->GetActorLocation();
-	if (ShootRay(plantLocation, playerLocation) == true && DistanceToPlayer() < AggroRange) {
+	if (ShootRay(plantLocation, playerLocation,thisPlant) == true && DistanceToPlayer() < AggroRange) {
 		thisPlant->stateManager->SwitchStateByKey("Aggro");
 		return;
 	}

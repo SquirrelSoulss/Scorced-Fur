@@ -38,15 +38,15 @@ void UPlantBaseState::Damaged(float damage)
 
 
 
-bool UPlantBaseState::ShootRay(FVector origin, FVector end)
+bool UPlantBaseState::ShootRay(FVector origin, FVector end, AActor* ignoredActor)
 {
 	FHitResult hit;
 
 	FCollisionQueryParams queryParams;
-	queryParams.AddIgnoredActor(thisPlant);
-	thisPlant->GetWorld()->LineTraceSingleByChannel(hit, origin, end, traceChannel, queryParams);
+	queryParams.AddIgnoredActor(ignoredActor);
+	GetWorld()->LineTraceSingleByChannel(hit, origin, end, traceChannel, queryParams);
 
-	DrawDebugLine(thisPlant->GetWorld(), origin, end, FColor::Red);
+	DrawDebugLine(GetWorld(), origin, end, FColor::Red);
 	
 	if (Cast<APlayerCharacter>(hit.GetActor()) != nullptr) // if we are seeing the player
 	{

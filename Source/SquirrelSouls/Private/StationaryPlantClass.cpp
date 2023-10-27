@@ -30,7 +30,7 @@ void AStationaryPlantClass::Tick(float DeltaTime)
 	if ( mainCharacter != nullptr && shouldTrack) 
 	{
 		FRotator targetRot = UKismetMathLibrary::FindLookAtRotation(GetActorLocation(), mainCharacter->GetActorLocation());
-		FRotator newRotation = FMath::RInterpTo(targetBoneRotation,targetRot, DeltaTime, 2); // can change speed in order to speed up tracking during attacks
+		FRotator newRotation = FMath::RInterpTo(targetBoneRotation,targetRot, DeltaTime, aturnSpeed); // can change speed in order to speed up tracking during attacks
 		targetBoneRotation = FRotator(0,newRotation.Yaw,0); //targetBoneRotation = newRotation;
 	}
 

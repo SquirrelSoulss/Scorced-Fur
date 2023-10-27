@@ -24,6 +24,8 @@ void UMovingIdleState::OnExitState()
 
 void UMovingIdleState::TickState()
 {
+
+	//ShootRay(mPlant->GetActorLocation(), p, mPlant);
 }
 
 void UMovingIdleState::Damaged(float damage)

@@ -3,7 +3,7 @@
 
 #include "MovingPlant/DashBackState.h"
 
-void UDashBackState::OnEnterState(AActor* stateOwner)
+void UDashBackState::OnEnterState(AActor* stateOwner)// play jump animation
 {
 	Super::OnEnterState(stateOwner);
 	mPlant->LaunchCharacter(launchHeight, false, false);
@@ -31,4 +31,5 @@ void UDashBackState::LaunchCharacterBack()
 {
 	FVector direction = (mPlant->GetActorForwardVector() * -1) * launchDistance;
 	mPlant->LaunchCharacter(direction, false, false);
+	// move to strafe
 }

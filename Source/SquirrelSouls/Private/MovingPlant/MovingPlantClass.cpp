@@ -21,7 +21,13 @@ void AMovingPlantClass::PostInitializeComponents()
 
 void AMovingPlantClass::Tick(float DeltaTime)
 {
-	Super::Tick(DeltaTime);
+	Super::Tick(DeltaTime); 
+	if (mainCharacter != nullptr && shouldTrack)
+	{
+		FRotator targetRot = UKismetMathLibrary::FindLookAtRotation(GetActorLocation(), mainCharacter->GetActorLocation());
+		FRotator newRotation = FMath::RInterpTo(GetActorRotation(), targetRot, DeltaTime, aturnSpeed); // can change speed in order to speed up tracking during attacks
+		SetActorRotation(FRotator(0, newRotation.Yaw, 0)); 
+	}
 }
  // initilialise
 AMovingPlantClass::AMovingPlantClass()

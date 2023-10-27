@@ -23,6 +23,13 @@ public:
 	bool dead = false ;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "BoolChanges")
 	bool shouldTrack = true;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "PlantMovement")
+	float maxMovementSpeed = 600.f;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "PlantMovement")
+	float walkSpeed = 300.f;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "PlantMovement")
+	float aturnSpeed = 2.f;
+	
 
 public:
 	// Sets default values for this character's properties
