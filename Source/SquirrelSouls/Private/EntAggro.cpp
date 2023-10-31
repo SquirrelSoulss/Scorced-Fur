@@ -20,8 +20,6 @@ void UEntAggro::OnEnterState(AActor* stateOwner)
 
 	queryParams.AddIgnoredActor(EntRef);
 
-	//EntRef->MoveToPlayer();
-
 	ChilloutPeriod = EntRef->ChilloutPeriod;
 
 	InitializeAttackArray();
@@ -77,6 +75,9 @@ float UEntAggro::GetDistance()
 	EntRef->GetWorld()->LineTraceSingleByChannel(hit, EntRef->GetActorLocation(), PlayerRef->GetActorLocation(), traceChannel, queryParams);
 	DrawDebugLine(EntRef->GetWorld(), EntRef->GetActorLocation(), PlayerRef->GetActorLocation(), FColor::Red);
 
+	FString DistanceString = FString::Printf(TEXT("Distance: %.2f"), hit.Distance);
+	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Yellow, DistanceString);
+
 	return hit.Distance;
 }
 
@@ -116,11 +117,11 @@ FEntAttackTypeData UEntAggro::ChooseAttackLogic(float distance)
 	}
 	else
 	{
-		if (MathStuffRef.RandomBoolWithWeight(0.1f))
+		/*if (MathStuffRef.RandomBoolWithWeight(0.1f))
 		{
 			int RandomAttackIndex = FMath::FRandRange(0.f, AvailableAttacks.Num());
 			return AvailableAttacks[RandomAttackIndex];
-		}
+		}*/
 	}
 
 	return FEntAttackTypeData();

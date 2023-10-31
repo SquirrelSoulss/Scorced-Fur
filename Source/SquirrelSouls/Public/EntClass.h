@@ -20,8 +20,11 @@ public:
 
 
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "PlayerRef")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "References")
 	AActor* PlayerRef = nullptr; // change to player class later
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "References")
+	UAnimInstance* AnimRef = nullptr;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "CheckForHit")
 	bool IsAttacking = false;
@@ -64,6 +67,10 @@ public:
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "AttackTypes")
 	void StartJumpAttack();
 	virtual void StartJumpAttack_Implementation();
+
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "AttackTypes")
+	void StartSpawnAttack();
+	virtual void StartSpawnAttack_Implementation();
 
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "CheckForHit")
 	void CheckForHit();

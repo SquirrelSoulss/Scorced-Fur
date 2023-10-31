@@ -19,6 +19,10 @@ AEntClass::AEntClass()
 void AEntClass::BeginPlay()
 {
 	Super::BeginPlay();
+
+	AnimRef = GetMesh()->GetAnimInstance();
+	if(!AnimRef)
+		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("anim is null"));
 }
 
 void AEntClass::StartFight_Implementation(APawn* _player)
@@ -26,7 +30,7 @@ void AEntClass::StartFight_Implementation(APawn* _player)
 	AActor* player = Cast<AActor>(_player);
 
 	if (player == nullptr) {
-		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Blue, TEXT("playyer is null"));
+		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("playyer is null"));
 		return;
 	}
 	PlayerRef = player;
@@ -53,6 +57,10 @@ void AEntClass::StartStompAttack_Implementation()
 }
 
 void AEntClass::StartJumpAttack_Implementation()
+{
+}
+
+void AEntClass::StartSpawnAttack_Implementation()
 {
 }
 
