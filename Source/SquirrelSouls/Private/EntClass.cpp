@@ -64,6 +64,10 @@ void AEntClass::StartSpawnAttack_Implementation()
 {
 }
 
+void AEntClass::SpawnEnemy_Implementation(AActor* enemyType, FVector destination)
+{
+}
+
 void AEntClass::CheckForHit_Implementation()
 {
 }

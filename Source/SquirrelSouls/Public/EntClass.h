@@ -33,6 +33,9 @@ public:
 	bool CanMove = false;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "CanMove")
+	bool CanSpawn = true;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "CanMove")
 	bool IsRotatingInPlace = false;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "CanMove")
@@ -71,6 +74,10 @@ public:
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "AttackTypes")
 	void StartSpawnAttack();
 	virtual void StartSpawnAttack_Implementation();
+
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "AttackTypes")
+	void SpawnEnemy(AActor* enemyType, FVector destination);
+	virtual void SpawnEnemy_Implementation(AActor* enemyType, FVector destination);
 
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "CheckForHit")
 	void CheckForHit();

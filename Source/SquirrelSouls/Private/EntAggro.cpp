@@ -59,7 +59,11 @@ void UEntAggro::ChooseAttack()
 
 		if (ChosenAttack.StateName != "None")
 		{
-			EntRef->SwitchState(ChosenAttack.StateName);
+			if (ChosenAttack.StateName == "SpawnAttack" && !EntRef->CanSpawn)
+				ChooseAttack();
+
+			else
+				EntRef->SwitchState(ChosenAttack.StateName);
 		}
 		else
 		{

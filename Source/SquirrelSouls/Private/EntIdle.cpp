@@ -20,8 +20,6 @@ void UEntIdle::OnEnterState(AActor* stateOwner)
 void UEntIdle::OnExitState()
 {
 	//sluta invoka
-	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Blue, TEXT("exit idle"));
-
 	GetWorld()->GetTimerManager().ClearTimer(TimerHandle_UpdateDestination);
 }
 
