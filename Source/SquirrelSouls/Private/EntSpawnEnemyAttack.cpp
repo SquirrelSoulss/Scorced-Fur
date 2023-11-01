@@ -12,7 +12,7 @@ void UEntSpawnEnemyAttack::OnEnterState(AActor* stateOwner)
 
 	EntRef->StartSpawnAttack();
 
-	GetWorld()->GetTimerManager().SetTimer(TimerHandle_SpawnEnemy, this, &UEntSpawnEnemyAttack::SpawnEnemy, 3.f, true, 5.f);
+	GetWorld()->GetTimerManager().SetTimer(TimerHandle_SpawnEnemy, this, &UEntSpawnEnemyAttack::SpawnEnemy, SpawnIntervall, true, 5.f);
 }
 
 void UEntSpawnEnemyAttack::OnExitState()
@@ -26,8 +26,6 @@ void UEntSpawnEnemyAttack::TickState(float DeltaTime)
 
 void UEntSpawnEnemyAttack::SpawnEnemy()
 {
-	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, TEXT("moving time"));
-
 	FVector NewDestination;
 	if (GetRandomPoint(EntRef->GetActorLocation(), RandomPointRadius, NewDestination))
 	{
@@ -45,8 +43,6 @@ bool UEntSpawnEnemyAttack::GetRandomPoint(const FVector& Origin, float Radius, F
 		if (NavSystem->GetRandomReachablePointInRadius(Origin, Radius, RandomTargetLocation))
 		{
 			OutLocation = RandomTargetLocation.Location;
-			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, TEXT("found location"));
-
 			return true;
 		}
 	}

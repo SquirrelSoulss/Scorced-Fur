@@ -22,5 +22,5 @@ void UEntP2Aggro::TickState(float DeltaTime)
 
 void UEntP2Aggro::AddAvailableAttacks()
 {
-	AvailableAttacks.Add({ "SpawnAttack", 3000.f, 0.33f });
+	//AvailableAttacks.Add({ "SpawnAttack", 3000.f, 0.33f });
 }

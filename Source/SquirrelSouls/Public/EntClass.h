@@ -86,14 +86,12 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "SwitchState")
 	void SwitchState(FString StateKey);
 
-
 	UPROPERTY()
 	float RotationSpeed = 1.5f;
 	float MovementSpeed = 10.f;
 
 	UFUNCTION()
 	void RotateToPlayer(float DeltaTime);
-
 
 public:
 	// Called every frame

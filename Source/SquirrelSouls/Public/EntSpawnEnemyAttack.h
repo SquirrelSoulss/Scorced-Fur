@@ -19,8 +19,6 @@ class SQUIRRELSOULS_API UEntSpawnEnemyAttack : public UEntStateBase
 	virtual void TickState(float DeltaTime) override;
 
 private:
-	FVector CurrentLocation;
-
 	FTimerHandle TimerHandle_SpawnEnemy;
 
 public:
@@ -28,7 +26,7 @@ public:
 	float RandomPointRadius = 1000.f;
 
 	UPROPERTY(EditAnywhere)
-	float IdleIntervall = 10.f;
+	float SpawnIntervall = 3.f;
 
 	UFUNCTION()
 	void SpawnEnemy();
