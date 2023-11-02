@@ -52,7 +52,7 @@ void AMovingPlantClass::PlayerOverlapp(APlayerCharacter* player)
 void AMovingPlantClass::SensedPlayer(APawn* player)
 {
 	if (stateManager->CurrentState->IsA(UMovingIdleState::StaticClass())) {
-		stateManager->SwitchStateByKey("sus"); // ändra, ska nog göra 
+		//stateManager->SwitchStateByKey("sus"); // ändra, ska nog göra 
 	}
 }
 

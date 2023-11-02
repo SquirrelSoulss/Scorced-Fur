@@ -8,7 +8,7 @@ void UDashBackState::OnEnterState(AActor* stateOwner)// play jump animation
 	Super::OnEnterState(stateOwner);
 	mPlant->LaunchCharacter(launchHeight, false, false);
 	GetWorld()->GetTimerManager().SetTimer(handle, this, &UDashBackState::LaunchCharacterBack,.05f, false); //
-
+	//mPlant->shouldTrack = false;
 }
 
 void UDashBackState::OnExitState()

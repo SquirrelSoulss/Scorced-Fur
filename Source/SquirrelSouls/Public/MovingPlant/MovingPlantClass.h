@@ -20,13 +20,14 @@ protected:
 	virtual void PostInitializeComponents() override;
 
 public:
-	// Called every frame
 	UPROPERTY(EditAnywhere, Category = "PawnSense")
 	class USphereComponent* aggroSphere;
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "AIMove")
 	class UBoxComponent* patrolArea;
 	virtual void Tick(float DeltaTime) override;
 	AMovingPlantClass();
+	UPROPERTY(EditAnywhere, BlueprintReadonly, Category = "Bool changes")
+	bool attackTrigger = false;
 	UFUNCTION(BlueprintImplementableEvent, Category = "Patrol")
 	void CallGetPatrolPoint();
 	UFUNCTION(BlueprintCallable, Category = "AggroSphere")

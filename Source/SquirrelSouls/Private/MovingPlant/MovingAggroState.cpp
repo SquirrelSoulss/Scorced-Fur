@@ -16,7 +16,7 @@ void UMovingAggroState::OnEnterState(AActor* stateOwner)
 	if (mainCharacter == nullptr) {
 		mainCharacter = UGameplayStatics::GetActorOfClass(GetWorld(), APlayerCharacter::StaticClass());
 	}
-	aiController->MoveToActor(mainCharacter, 50);
+	aiController->MoveToActor(mainCharacter, 50); // set movementspeed to greater
 }
 
 void UMovingAggroState::OnExitState()
@@ -27,10 +27,10 @@ void UMovingAggroState::OnExitState()
 void UMovingAggroState::TickState()
 {
 	Super::TickState();
-	if (FVector::Distance(mPlant->GetActorLocation(), mainCharacter->GetActorLocation()) <= 50.f) //turn into variable
+	if (FVector::Distance(mPlant->GetActorLocation(), mainCharacter->GetActorLocation()) <= 500.f) //turn into variable
 	{
 		//unleash melee attack
-		//mPlant->stateManager->SwitchStateByKey("melee");
+		mPlant->stateManager->SwitchStateByKey("lunge");
 	}
 }
 
