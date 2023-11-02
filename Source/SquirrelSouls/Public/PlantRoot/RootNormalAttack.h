@@ -2,27 +2,19 @@
 
 #pragma once
 
-#include "RootClass.h"
 #include "CoreMinimal.h"
-#include "StateBase.h"
-#include "RootStateBase.generated.h"
+#include "PlantRoot/RootStateBase.h"
+#include "RootNormalAttack.generated.h"
 
 /**
- *
+ * 
  */
 UCLASS()
-class SQUIRRELSOULS_API URootStateBase : public UStateBase
+class SQUIRRELSOULS_API URootNormalAttack : public URootStateBase
 {
 	GENERATED_BODY()
-
-
-public:
 	
-	UPROPERTY()
-	ARootClass* RootRef = nullptr;
-
-	UPROPERTY()
-	AActor* PlayerRef = nullptr;
+public:
 
 	virtual void OnEnterState(AActor* stateOwner) override;
 	virtual void OnExitState() override;

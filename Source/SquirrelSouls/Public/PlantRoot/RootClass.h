@@ -2,6 +2,7 @@
 
 #pragma once
 
+#include "RootAnimInstance.h"
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
 #include "RootClass.generated.h"
@@ -9,32 +10,45 @@
 UCLASS()
 class SQUIRRELSOULS_API ARootClass : public AActor
 {
-    GENERATED_BODY()
+	GENERATED_BODY()
 
-    UPROPERTY(EditAnywhere, Category = "StateMachine")
-    class UStateManagerComponent* stateManager;
+	UPROPERTY(EditAnywhere, Category = "StateMachine")
+	class UStateManagerComponent* stateManager;
 
 public:
-    // Sets default values for this actor's properties
-    ARootClass();
+	// Sets default values for this actor's properties
+	ARootClass();
 
-    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "References")
-    AActor* PlayerRef = nullptr; // change to player class later
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "References")
+	AActor* PlayerRef = nullptr; // change to player class later
 
-    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "References")
-    UAnimInstance* AnimRef = nullptr;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "References")
+	URootAnimInstance* AnimRef = nullptr;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "AttackVariables")
+	bool CanHit = false;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "AttackVariables")
+	bool CanBeParried = false;
 
 protected:
-    // Called when the game starts or when spawned
-    virtual void BeginPlay() override;
+
+	virtual void BeginPlay() override;
 
 public:
-    // Called every frame
-    virtual void Tick(float DeltaTime) override;
 
+	virtual void Tick(float DeltaTime) override;
 
-    UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
-    void NormalAttack();
-    virtual void NormalAttack_Implementation();
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "CheckHit")
+	void CheckIfHit();
+	virtual void CheckIfHit_Implementation();
+
+	UFUNCTION(BlueprintCallable, Category = "Attack")
+	void PlayerInRadius();
+
+	UFUNCTION(BlueprintCallable, Category = "States")
+	void SwitchState(FString key);
+
+	UFUNCTION(BlueprintCallable, Category = "DoDamage")
+	void DoDamageToPlayer(float Damage);
 };
