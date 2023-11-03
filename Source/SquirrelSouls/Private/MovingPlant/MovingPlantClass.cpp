@@ -15,7 +15,7 @@ void AMovingPlantClass::BeginPlay()
 
 void AMovingPlantClass::PostInitializeComponents()
 {
-	Super::PostInitializeComponents();
+	AEnemyBaseClass::PostInitializeComponents();
 	pawnSenser->OnSeePawn.AddDynamic(this, &AMovingPlantClass::SensedPlayer);
 }
 
@@ -51,10 +51,8 @@ void AMovingPlantClass::PlayerOverlapp(APlayerCharacter* player)
 
 void AMovingPlantClass::SensedPlayer(APawn* player)
 {
-	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Blue, TEXT("sensed"));
-	
 	if (stateManager->CurrentState->IsA(UMovingIdleState::StaticClass())) {
-		stateManager->SwitchStateByKey("sus"); // ändra, ska nog göra
+		stateManager->SwitchStateByKey("decide"); 
 		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Blue, TEXT("Innercircle"));
 	}
 }

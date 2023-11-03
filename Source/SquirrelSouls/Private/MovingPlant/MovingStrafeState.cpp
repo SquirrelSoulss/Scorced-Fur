@@ -22,6 +22,7 @@ void UMovingStrafeState::OnExitState()
 	GetWorld()->GetTimerManager().ClearAllTimersForObject(this);
 	mPlant->GetCharacterMovement()->MaxWalkSpeed = mPlant->maxMovementSpeed;
 	aiController->ClearFocus(EAIFocusPriority::Gameplay);
+	depth = 0;
 }
 
 void UMovingStrafeState::TickState()
@@ -35,19 +36,27 @@ void UMovingStrafeState::Damaged(float damage)
 
 void UMovingStrafeState::Strafe()
 {
+	if (depth >= 2) 
+	{
+		ChangeToLeapAttack();
+		return;
+	}
 	float randomDirection = 1;
 	if (FMath::RandRange(0,2) == 1)
 		randomDirection = -1;
 	
 	FVector destination = mPlant->GetActorLocation() + (mPlant->GetActorForwardVector() * 50.f) + 
-		mPlant->GetActorRightVector() * (randomDirection * 300) ;
+		mPlant->GetActorRightVector() * (randomDirection * 350) ;
+
 	aiController->MoveToLocation(destination);
 
-	GetWorld()->GetTimerManager().SetTimer(timerHandle, this, &UMovingStrafeState::ChangeToLeapAttack, 3.f, false);
+	depth++;
+	GetWorld()->GetTimerManager().SetTimer(timerHandle, this, &UMovingStrafeState::Strafe, 3.f, false);
+
 }
 
 void UMovingStrafeState::ChangeToLeapAttack()
 {
 	// decide
-	mPlant->stateManager->SwitchStateByKey("sus");
+	mPlant->stateManager->SwitchStateByKey("decide");
 }

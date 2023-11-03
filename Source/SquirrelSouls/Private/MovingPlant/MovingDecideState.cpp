@@ -4,6 +4,7 @@
 #include "Math/UnrealMathUtility.h"
 #include "SquirrelSouls/Public/StateManagerComponent.h"
 #include "MovingPlant/MovingDecideState.h"
+#include "MovingPlant/MovingStrafeState.h"
 
 void UMovingDecideState::OnEnterState(AActor* stateOwner)
 {
@@ -11,12 +12,18 @@ void UMovingDecideState::OnEnterState(AActor* stateOwner)
 	//youve seen the player decide on wether you should leap backwards, strafe or run towards player
 	//leap backwards if player is close and presses the attack button (do this every thrid or so)
 	//50/50 between strafe and lunge attack, if player gets close attack
+	mPlant->shouldTrack = true;
 
+	if (mPlant->stateManager->StateHistory[0]->IsA(UMovingStrafeState::StaticClass())) {
+		//then we should attack one way or another
+		ChooseBetweenAttacks();
+		return;
+	}
 	if (FMath::RandRange(0, 7) > 4) {
 		mPlant->stateManager->SwitchStateByKey("strafe");
 		return;
 	}
-	mPlant->stateManager->SwitchStateByKey("lunge");
+	mPlant->stateManager->SwitchStateByKey("sprint");
 }
 
 void UMovingDecideState::OnExitState()
@@ -37,4 +44,9 @@ void UMovingDecideState::SubscribedAttack()
 {
 	// fråga om spelaren ha klickat på attack, har den det, kör en random på typ 3
 
+}
+
+void UMovingDecideState::ChooseBetweenAttacks()
+{
+	mPlant->stateManager->SwitchStateByKey("sprint");
 }

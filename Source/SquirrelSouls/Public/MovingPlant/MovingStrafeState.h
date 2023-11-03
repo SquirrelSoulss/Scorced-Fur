@@ -20,5 +20,6 @@ public:
 	virtual void Damaged(float damage) override;
 	void Strafe();
 	void ChangeToLeapAttack();
+	int32 depth;
 
 };

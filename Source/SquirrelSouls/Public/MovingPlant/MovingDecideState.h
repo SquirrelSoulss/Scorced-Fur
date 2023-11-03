@@ -19,4 +19,5 @@ public:
 	virtual void TickState() override;
 	virtual void Damaged(float damage) override;
 	void SubscribedAttack();
+	void ChooseBetweenAttacks();
 };
