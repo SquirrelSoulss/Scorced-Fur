@@ -5,6 +5,7 @@
 #include "EntIdle.h"
 #include "EntAggro.h"
 #include "StateManagerComponent.h"
+#include "AIController.h"
 
 // Sets default values
 AEntClass::AEntClass()
@@ -14,40 +15,88 @@ AEntClass::AEntClass()
 	stateManager = CreateDefaultSubobject<UStateManagerComponent>(TEXT("State Manager"));
 }
 
-void AEntClass::StartFight_Implementation(APawn* player)
-{
-	if (player != NULL) {
-		playerRef = player;
-	}
-	SetUpFight();
-
-	//stateManager->SwitchStateByKey("Aggro");
-	
-	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Blue, TEXT("start fight"));
-
-}
-
-void AEntClass::SetUpFight_Implementation()
-{
-}
-
-void AEntClass::MoveToPlayer_Implementation()
-{
-	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Blue, TEXT("moving to player"));
-
-}
-
-void AEntClass::MoveToRandomPoint_Implementation(FVector destination)
-{
-	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Blue, TEXT("moving to point"));
-
-}
-
 // Called when the game starts or when spawned
 void AEntClass::BeginPlay()
 {
 	Super::BeginPlay();
 
+	AnimRef = GetMesh()->GetAnimInstance();
+	if(!AnimRef)
+		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("anim is null"));
+}
+
+void AEntClass::StartFight_Implementation(APawn* _player)
+{
+	AActor* player = Cast<AActor>(_player);
+
+	if (player == nullptr) {
+		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("playyer is null"));
+		return;
+	}
+	PlayerRef = player;
+
+	this->stateManager->SwitchStateByKey("Aggro");
+}
+
+void AEntClass::MoveToPlayer_Implementation()
+{
+	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Yellow, TEXT("moving to player"));
+
+}
+
+void AEntClass::MoveToRandomPoint_Implementation(FVector destination)
+{
+}
+
+void AEntClass::StartHandAttack_Implementation()
+{
+}
+
+void AEntClass::StartStompAttack_Implementation()
+{
+}
+
+void AEntClass::StartJumpAttack_Implementation()
+{
+}
+
+void AEntClass::StartSpawnAttack_Implementation()
+{
+}
+
+void AEntClass::SpawnEnemy_Implementation(AActor* enemyType, FVector destination)
+{
+}
+
+void AEntClass::CheckForHit_Implementation()
+{
+}
+
+void AEntClass::SwitchState(FString StateKey)
+{
+	stateManager->SwitchStateByKey(StateKey);
+}
+
+void AEntClass::RotateToPlayer(float DeltaTime)
+{
+	if (PlayerRef == nullptr) return;
+
+	FVector PlayerPos = PlayerRef->GetActorLocation();
+	FVector EntPos = GetActorLocation();
+
+	FVector DirToPlayer = (PlayerPos - EntPos).GetSafeNormal();
+	FRotator RotToPlayer = DirToPlayer.Rotation();
+
+	FRotator EntRot = GetActorRotation();
+	FRotator NewRot = FMath::RInterpTo(EntRot, RotToPlayer, DeltaTime, RotationSpeed);
+
+	IsRotatingInPlace = !FMath::IsNearlyEqual(NewRot.Yaw, EntRot.Yaw, 0.25f);
+
+	SetActorRotation(FRotator(EntRot.Pitch, NewRot.Yaw, EntRot.Roll));
+
+	if (!CanMove) return;
+	DirToPlayer *= MovementSpeed;
+	//AAIController::MoveToActor(PlayerRef, 350.f);
 }
 
 // Called every frame
@@ -55,6 +104,14 @@ void AEntClass::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
+	if (stateManager)
+	{
+		FActorComponentTickFunction* ThisTickFunction = &stateManager->PrimaryComponentTick;
+		stateManager->TickComponent(DeltaTime, LEVELTICK_ViewportsOnly, ThisTickFunction);
+	}
+
+	if (!IsAttacking)
+		RotateToPlayer(DeltaTime);
 }
 
 // Called to bind functionality to input

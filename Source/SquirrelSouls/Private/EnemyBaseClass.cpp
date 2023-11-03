@@ -42,7 +42,7 @@ void AEnemyBaseClass::SetupPlayerInputComponent(UInputComponent* PlayerInputComp
 
 void AEnemyBaseClass::OnSeePawn(APawn* player)
 {
-	APawn* Player = Cast<APawn>(player); //should cast to the main character blueprint
+	AActor* Player = Cast<AActor>(player); //should cast to the main character blueprint
 	{
 		if (Player == nullptr)
 			return;

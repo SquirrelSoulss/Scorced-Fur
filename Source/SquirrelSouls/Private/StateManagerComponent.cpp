@@ -31,6 +31,7 @@ void UStateManagerComponent::TickComponent(float DeltaTime, ELevelTick TickType,
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 	if (bCanTickState == true)
 	{
+
 		CurrentState->TickState(); // provides tick/update to the states that uses it
 	}
 	// ...
@@ -73,6 +74,7 @@ void UStateManagerComponent::SwitchStateByKey(FString StateKey)
 
 		if (CurrentState)
 		{
+
 			CurrentState->OnEnterState(GetOwner()); // enter the new state
 			bCanTickState = true;
 		}
@@ -96,7 +98,7 @@ void UStateManagerComponent::InitializeStates()
 {
 	for (auto It = AvailableStates.CreateConstIterator(); It; ++It)
 	{
-		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Blue, TEXT("Added THings"));
+		//GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Blue, TEXT("Added THings"));
 		UStateBase* State = NewObject<UStateBase>(this, It->Value);
 		StateMap.Add(It->Key, State);
 	}

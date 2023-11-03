@@ -21,7 +21,6 @@ void UPlantBaseState::OnExitState() //to be called when state exits
 
 void UPlantBaseState::TickState() // to be called when tick is called
 {
-	Super::TickState();
 }
 
 void UPlantBaseState::FixRotation(FVector actorLocation, FVector targetLocation) // used to make the enemy face player
