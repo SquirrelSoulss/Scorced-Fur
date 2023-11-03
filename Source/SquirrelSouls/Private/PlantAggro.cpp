@@ -9,17 +9,17 @@
 
 void UPlantAggro::OnEnterState(AActor* stateOwner)
 {
-	Super::OnEnterState(stateOwner);
+	Super::OnEnterState(stateOwner); //calls baseclass OnEnterState first in order to get some baseline information
 	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Blue, TEXT("Entered Aggro"));
 
 	if (thisPlant == nullptr) 
 	{
 		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Blue, TEXT("Plant Aggro state should not be availabe to this class"));
 	}
-	thisPlant->sensesPlayer = true;
+	thisPlant->sensesPlayer = true; // senses player connected to animation blueprint, used to change into hostile idle
 
 	float randTime = FMath::RandRange(3, 6);
-	thisPlant->GetWorld()->GetTimerManager().SetTimer(timerHandle, this, &UPlantAggro::DecideAttack, randTime, false); // randomize the amount of time before the call
+	thisPlant->GetWorld()->GetTimerManager().SetTimer(timerHandle, this, &UPlantAggro::RangedAttack, randTime, false); // randomize the amount of time before the call
 }
 
 void UPlantAggro::OnExitState()
@@ -42,24 +42,18 @@ void UPlantAggro::TickState(float DeltaTime)
 	thisPlant->GetWorld()->LineTraceSingleByChannel(hit, plantLocation, playerLocation, traceChannel, queryParams);
 	DrawDebugLine(thisPlant->GetWorld(), plantLocation, playerLocation, FColor::Red);
 
-	/*if (Cast<MainCharacterBP>(hit.GetActor())) 
-	{
-
-	}*/
-}
-
-void UPlantAggro::DecideAttack()
-{
-	// talk to logic brain of who is attacking, all calculations of what to do
 	FVector dist = thisPlant->GetActorLocation() - mainCharacter->GetActorLocation();
 
 	float distance = dist.Length();
 	if (distance <= 400) {
 		thisPlant->stateManager->SwitchStateByKey("MeleeAttack");
 	}
-	else {
-		thisPlant->stateManager->SwitchStateByKey("RangedAttack");
-	}
+}
+
+void UPlantAggro::RangedAttack()
+{
+	thisPlant->stateManager->SwitchStateByKey("RangedAttack");
+	
 }
 
 

@@ -4,24 +4,26 @@
 #include "PlantBaseState.h"
 #include <Kismet/KismetMathLibrary.h>
 
-void UPlantBaseState::OnEnterState(AActor* stateOwner)
+void UPlantBaseState::OnEnterState(AActor* stateOwner) // every state who inherits from plantbase will do this when onenter is called
 {
 	Super::OnEnterState(stateOwner);
-	thisPlant = Cast<AStationaryPlantClass>(stateOwner);
-	mainCharacter = thisPlant->mainCharacter;
+	if(thisPlant == nullptr)
+		thisPlant = Cast<AStationaryPlantClass>(stateOwner); // gives the states paccess to the plants functionality
+
+	if(mainCharacter == nullptr)
+		mainCharacter = thisPlant->mainCharacter; // gives the states player information
 }
 
-void UPlantBaseState::OnExitState()
+void UPlantBaseState::OnExitState() //to be called when state exits
 {
 	Super::OnExitState();
 }
 
-void UPlantBaseState::TickState(float DeltaTime)
+void UPlantBaseState::TickState() // to be called when tick is called
 {
-	Super::TickState(DeltaTime);
 }
 
-void UPlantBaseState::FixRotation(FVector actorLocation, FVector targetLocation)
+void UPlantBaseState::FixRotation(FVector actorLocation, FVector targetLocation) // used to make the enemy face player
 {
 	if (!thisPlant->shouldTrack)
 		return;

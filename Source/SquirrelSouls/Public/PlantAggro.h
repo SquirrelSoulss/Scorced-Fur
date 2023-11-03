@@ -22,6 +22,6 @@ private:
 public:
 	virtual void OnEnterState(AActor* stateOwner) override;
 	virtual void OnExitState() override;
-	virtual void TickState(float DeltaTime) override;
-	void DecideAttack();
+	virtual void TickState() override;
+	void RangedAttack();
 };

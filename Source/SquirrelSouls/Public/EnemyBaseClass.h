@@ -8,7 +8,7 @@
 #include "EnemyBaseClass.generated.h"
 
 UCLASS()
-class SQUIRRELSOULS_API AEnemyBaseClass : public ACharacter, public IIDamageRecievers
+class SQUIRRELSOULS_API AEnemyBaseClass : public ACharacter//, public IIDamageRecievers
 {
 	GENERATED_BODY()
 public:
@@ -33,7 +33,7 @@ public:
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "SensedPlayer")
 	void PlayerSpotted();
 	virtual void PlayerSpotted_Implementation();
-	//virtual void TakeDamage(float damageTaken) override; part of an interface should be changed
+	//virtual void TakeDamage_Implementation(float damageTaken) override;
 
 protected:
 	// Called when the game starts or when spawned

@@ -5,18 +5,18 @@
 #include "StateManagerComponent.h"
 #include "StationaryPlantClass.h"
 
-void UPlantMeleeAttack::OnEnterState(AActor* stateOwner)
+void UPlantMeleeAttack::OnEnterState(AActor* stateOwner) 
 {
 	Super::OnEnterState(stateOwner);
-	thisPlant->meleeAttackTrigger = true;
-	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Blue, TEXT("Entered Melee"));
+	thisPlant->meleeAttackTrigger = true; // used to trigger melee attack animation
+	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Blue, TEXT("Entered MeleeState"));
 }
 
 void UPlantMeleeAttack::OnExitState()
 {
-	thisPlant->meleeAttackTrigger = false;
-	thisPlant->shouldTrack = true;
-	thisPlant->changeState = false;
+	thisPlant->meleeAttackTrigger = false; // reset value
+	thisPlant->shouldTrack = true; // should track is wether or not the plant should rotate towards the player, gets turned off midway through melee attack
+	thisPlant->changeState = false; // reset value off change state 
 }
 
 void UPlantMeleeAttack::TickState(float DeltaTime)
@@ -25,7 +25,7 @@ void UPlantMeleeAttack::TickState(float DeltaTime)
 	FVector plantLocation = thisPlant->GetActorLocation();
 	FixRotation(plantLocation, playerLocation);
 
-	if (thisPlant->changeState == true) {
-		thisPlant->stateManager->SwitchStateByKey("Aggro");
+	if (thisPlant->changeState == true) { // chenge state gets set to true at the end of the animation 
+		thisPlant->stateManager->SwitchStateByKey("Aggro"); //wich makes the plant go back to aggro state in order to decide what to do next
 	}
 }
