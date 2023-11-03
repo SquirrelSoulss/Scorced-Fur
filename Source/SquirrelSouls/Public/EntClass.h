@@ -4,10 +4,11 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
+#include "IDamageRecievers.h"
 #include "EntClass.generated.h"
 
 UCLASS()
-class SQUIRRELSOULS_API AEntClass : public ACharacter
+class SQUIRRELSOULS_API AEntClass : public ACharacter, public IIDamageRecievers
 {
 	GENERATED_BODY()
 
@@ -100,5 +101,6 @@ public:
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
+	virtual void TakeDamage_Implementation(float damage) override;
 
 };

@@ -29,7 +29,7 @@ void UPlantAggro::OnExitState()
 	thisPlant->GetWorld()->GetTimerManager().ClearAllTimersForObject(this);
 }
 
-void UPlantAggro::TickState(float DeltaTime)
+void UPlantAggro::TickState()
 {
 	playerLocation = mainCharacter->GetActorLocation();
 	plantLocation = thisPlant->GetActorLocation();

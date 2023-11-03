@@ -16,7 +16,7 @@ void UEntP2Aggro::OnExitState()
 {
 }
 
-void UEntP2Aggro::TickState(float DeltaTime)
+void UEntP2Aggro::TickState()
 {
 }
 

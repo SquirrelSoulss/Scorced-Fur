@@ -15,7 +15,6 @@ void UEntStompAttack::OnExitState()
 {
 }
 
-void UEntStompAttack::TickState(float DeltaTime)
+void UEntStompAttack::TickState()
 {
-	Super::TickState(DeltaTime);
 }

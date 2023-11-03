@@ -21,7 +21,7 @@ void UPlantRangedAttackState::OnExitState()
 	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Blue, TEXT("Exit ranged"));
 }
 
-void UPlantRangedAttackState::TickState(float DeltaTime)
+void UPlantRangedAttackState::TickState()
 {
 	if (thisPlant->changeState == true) {
 		thisPlant->stateManager->SwitchStateByKey("Aggro");

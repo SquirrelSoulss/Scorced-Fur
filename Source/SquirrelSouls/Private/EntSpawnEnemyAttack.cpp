@@ -20,7 +20,7 @@ void UEntSpawnEnemyAttack::OnExitState()
 	GetWorld()->GetTimerManager().ClearTimer(TimerHandle_SpawnEnemy);
 }
 
-void UEntSpawnEnemyAttack::TickState(float DeltaTime)
+void UEntSpawnEnemyAttack::TickState()
 {
 }
 

@@ -15,7 +15,6 @@ void UEntStateBase::OnExitState()
 	Super::OnExitState();
 }
 
-void UEntStateBase::TickState(float DeltaTime)
+void UEntStateBase::TickState()
 {
-	Super::TickState(DeltaTime);
 }

@@ -14,7 +14,7 @@ void URootStateBase::OnExitState()
 {
 }
 
-void URootStateBase::TickState(float DeltaTime)
+void URootStateBase::TickState()
 {
-	Super::TickState(DeltaTime);
+	Super::TickState();
 }

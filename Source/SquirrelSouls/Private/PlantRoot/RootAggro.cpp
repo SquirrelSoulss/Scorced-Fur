@@ -12,7 +12,7 @@ void URootAggro::OnExitState()
 {
 }
 
-void URootAggro::TickState(float DeltaTime)
+void URootAggro::TickState()
 {
-	Super::TickState(DeltaTime);
+	Super::TickState();
 }

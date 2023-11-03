@@ -16,5 +16,5 @@ class SQUIRRELSOULS_API UPlantIdle : public UPlantBaseState
 public:
 	virtual void OnEnterState(AActor* stateOwner) override;
 	virtual void OnExitState() override;
-	virtual void TickState(float DeltaTime) override;
+	virtual void TickState() override;
 };

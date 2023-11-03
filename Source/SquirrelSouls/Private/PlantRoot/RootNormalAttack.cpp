@@ -14,9 +14,9 @@ void URootNormalAttack::OnExitState()
 {
 }
 
-void URootNormalAttack::TickState(float DeltaTime)
+void URootNormalAttack::TickState()
 {
-	Super::TickState(DeltaTime);
+	Super::TickState();
 
-	RootRef->CheckIfHit();
+	//RootRef->CheckIfHit();
 }

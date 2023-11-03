@@ -16,6 +16,6 @@ void UPlantIdle::OnExitState()
 	
 }
 
-void UPlantIdle::TickState(float DeltaTime)
+void UPlantIdle::TickState()
 {
 }

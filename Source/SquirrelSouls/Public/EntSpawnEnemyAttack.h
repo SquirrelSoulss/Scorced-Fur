@@ -16,7 +16,7 @@ class SQUIRRELSOULS_API UEntSpawnEnemyAttack : public UEntStateBase
 
 	virtual void OnEnterState(AActor* stateOwner) override;
 	virtual void OnExitState() override;
-	virtual void TickState(float DeltaTime) override;
+	virtual void TickState() override;
 
 private:
 	FTimerHandle TimerHandle_SpawnEnemy;

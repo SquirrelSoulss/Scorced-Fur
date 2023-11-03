@@ -121,4 +121,10 @@ void AEntClass::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 
 }
 
+void AEntClass::TakeDamage_Implementation(float damage)
+{
+	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("hej"));
+
+}
+
 

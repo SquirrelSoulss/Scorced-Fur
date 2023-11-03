@@ -14,6 +14,6 @@ void URootSwipeAttack::OnExitState()
 {
 }
 
-void URootSwipeAttack::TickState(float DeltaTime)
+void URootSwipeAttack::TickState()
 {
 }

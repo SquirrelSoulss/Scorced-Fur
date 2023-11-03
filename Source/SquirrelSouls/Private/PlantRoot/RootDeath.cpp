@@ -14,6 +14,6 @@ void URootDeath::OnExitState()
 {
 }
 
-void URootDeath::TickState(float DeltaTime)
+void URootDeath::TickState()
 {
 }

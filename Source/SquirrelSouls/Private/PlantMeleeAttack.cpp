@@ -19,7 +19,7 @@ void UPlantMeleeAttack::OnExitState()
 	thisPlant->changeState = false; // reset value off change state 
 }
 
-void UPlantMeleeAttack::TickState(float DeltaTime)
+void UPlantMeleeAttack::TickState()
 {
 
 	if (thisPlant->changeState == true) { // chenge state gets set to true at the end of the animation 

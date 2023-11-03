@@ -17,7 +17,7 @@ class SQUIRRELSOULS_API UEntJumpAttack : public UEntStateBase
 public:
 	virtual void OnEnterState(AActor* stateOwner) override;
 	virtual void OnExitState() override;
-	virtual void TickState(float DeltaTime) override;
+	virtual void TickState() override;
 
 
 };

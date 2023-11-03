@@ -17,9 +17,8 @@ void UEntJumpAttack::OnExitState()
 {
 }
 
-void UEntJumpAttack::TickState(float DeltaTime)
+void UEntJumpAttack::TickState()
 {
-	Super::TickState(DeltaTime);
 }
 
 

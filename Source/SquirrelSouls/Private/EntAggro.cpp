@@ -34,9 +34,8 @@ void UEntAggro::OnExitState()
 	GetWorld()->GetTimerManager().ClearTimer(TimerHandle_ChooseAttack);
 }
 
-void UEntAggro::TickState(float DeltaTime)
+void UEntAggro::TickState()
 {
-	Super::TickState(DeltaTime);
 }
 
 void UEntAggro::InitializeAttackArray()
