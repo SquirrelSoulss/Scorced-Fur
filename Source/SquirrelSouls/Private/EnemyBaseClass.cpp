@@ -20,7 +20,7 @@ AEnemyBaseClass::AEnemyBaseClass()
 void AEnemyBaseClass::PostInitializeComponents()
 {
 	Super::PostInitializeComponents();
-	pawnSenser->OnSeePawn.AddDynamic(this, &AEnemyBaseClass::OnSeePawn);
+	//pawnSenser->OnSeePawn.AddDynamic(this, &AEnemyBaseClass::OnSeePawn);
 }
 // Called when the game starts or when spawned
 void AEnemyBaseClass::BeginPlay()

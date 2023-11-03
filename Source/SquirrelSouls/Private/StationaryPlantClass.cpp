@@ -6,6 +6,8 @@
 #include "Perception\PawnSensingComponent.h"
 #include "PlantIdle.h"
 #include <Kismet/KismetMathLibrary.h>
+#include "SquirrelSouls/PlayerCharacter.h"
+
 
 void AStationaryPlantClass::BeginPlay()
 {
@@ -48,7 +50,7 @@ void AStationaryPlantClass::OnSePawn(APawn* player)
 		if (Player == nullptr)
 			return;
 	}
-	if(mainCharacter == nullptr)
+	if(mainCharacter == nullptr && Cast<APlayerCharacter>(player) != NULL)
 		mainCharacter = player;
 
 	if (stateManager->CurrentState->IsA(UPlantIdle::StaticClass())) {

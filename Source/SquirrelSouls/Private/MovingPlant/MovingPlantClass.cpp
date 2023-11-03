@@ -51,8 +51,11 @@ void AMovingPlantClass::PlayerOverlapp(APlayerCharacter* player)
 
 void AMovingPlantClass::SensedPlayer(APawn* player)
 {
+	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Blue, TEXT("sensed"));
+	
 	if (stateManager->CurrentState->IsA(UMovingIdleState::StaticClass())) {
-		//stateManager->SwitchStateByKey("sus"); // ändra, ska nog göra 
+		stateManager->SwitchStateByKey("sus"); // ändra, ska nog göra
+		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Blue, TEXT("Innercircle"));
 	}
 }
 

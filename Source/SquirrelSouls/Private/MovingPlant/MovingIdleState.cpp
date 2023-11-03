@@ -11,6 +11,7 @@
 void UMovingIdleState::OnEnterState(AActor* stateOwner)
 {
 	Super::OnEnterState(stateOwner);
+	mPlant->shouldTrack = false;
 	mPlant->CallGetPatrolPoint();
 	IsReachablePoint(mPlant->randomPoint, 1);
 

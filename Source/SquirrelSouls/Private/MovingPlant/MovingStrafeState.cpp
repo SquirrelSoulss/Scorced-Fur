@@ -48,5 +48,6 @@ void UMovingStrafeState::Strafe()
 
 void UMovingStrafeState::ChangeToLeapAttack()
 {
+	// decide
 	mPlant->stateManager->SwitchStateByKey("sus");
 }
