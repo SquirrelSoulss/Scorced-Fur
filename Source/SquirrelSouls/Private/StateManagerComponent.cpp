@@ -81,6 +81,7 @@ void UStateManagerComponent::SwitchStateByKey(FString StateKey)
 		else
 		{
 			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Blue, TEXT("Invalid state added in Available states"));// error invalid state
+			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Blue, TEXT("Invalid state added in Available states"));// error invalid state
 		}
 	}
 }
@@ -92,6 +93,11 @@ void UStateManagerComponent::SwitchState(UStateBase* NewState)
 void UStateManagerComponent::InitStateManager()
 {
 	SwitchStateByKey(InitialState);
+}
+
+void UStateManagerComponent::PlayerOverlapped()
+{
+	CurrentState->PlayerOverlapping();
 }
 
 void UStateManagerComponent::InitializeStates()

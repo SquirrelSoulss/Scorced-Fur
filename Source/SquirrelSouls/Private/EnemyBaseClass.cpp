@@ -3,8 +3,10 @@
 
 #include "EnemyBaseClass.h"
 #include "Perception\PawnSensingComponent.h"
+#include "SquirrelSouls/PlayerCharacter.h"
 #include "StateManagerComponent.h"
 #include "IDamageRecievers.h"
+#include <Kismet/KismetMathLibrary.h>
 
 // Sets default values
 AEnemyBaseClass::AEnemyBaseClass()
@@ -18,7 +20,7 @@ AEnemyBaseClass::AEnemyBaseClass()
 void AEnemyBaseClass::PostInitializeComponents()
 {
 	Super::PostInitializeComponents();
-	pawnSenser->OnSeePawn.AddDynamic(this, &AEnemyBaseClass::OnSeePawn);
+	//pawnSenser->OnSeePawn.AddDynamic(this, &AEnemyBaseClass::OnSeePawn);
 }
 // Called when the game starts or when spawned
 void AEnemyBaseClass::BeginPlay()
@@ -30,7 +32,9 @@ void AEnemyBaseClass::BeginPlay()
 void AEnemyBaseClass::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
+	if (shouldTrack && mainCharacter != nullptr) {
 
+	}
 }
 
 // Called to bind functionality to input
@@ -42,12 +46,17 @@ void AEnemyBaseClass::SetupPlayerInputComponent(UInputComponent* PlayerInputComp
 
 void AEnemyBaseClass::OnSeePawn(APawn* player)
 {
-	AActor* Player = Cast<AActor>(player); //should cast to the main character blueprint
+
+
+	APawn* Player = Cast<APlayerCharacter>(player); //should cast to the main character blueprint
+
 	{
 		if (Player == nullptr)
 			return;
+
+		mainCharacter = player;
 	}
-	mainCharacter = player;
+	
 	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Blue, TEXT("Aggo"));
 	//stateManager->SwitchStateByKey("Aggro");
 }
@@ -56,6 +65,13 @@ void AEnemyBaseClass::PlayerSpotted_Implementation()
 {
 	
 	
+}
+
+FRotator AEnemyBaseClass::FixRotation(FVector actorLocation, FVector targetLocation, float deltaTime, float turnSpeed)
+{
+	FRotator targetRot = UKismetMathLibrary::FindLookAtRotation(actorLocation, targetLocation);
+	FRotator newRotation = FMath::RInterpTo(GetActorRotation(), targetRot, deltaTime, turnSpeed);
+	return newRotation;
 }
 
 //void AEnemyBaseClass::TakeDamage(float damageTaken)

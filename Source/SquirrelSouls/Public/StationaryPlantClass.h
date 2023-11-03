@@ -19,8 +19,8 @@ public:
 	virtual void PlayerSpotted_Implementation();
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "BoolChanges") //move to StationaryPlantplantClass
 		FRotator targetBoneRotation;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "BoolChanges")
-	bool shouldTrack = true;
+	
+	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "BoolChanges")
 	bool rangedAttackCall = false;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "BoolChanges")

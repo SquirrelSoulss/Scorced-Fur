@@ -5,6 +5,7 @@
 #include "StationaryPlantClass.h"
 #include "StateManagerComponent.h"
 #include "Kismet/KismetMathLibrary.h"
+#include "SquirrelSouls/PlayerCharacter.h"
 #include "Math/UnrealMathUtility.h"
 
 void UPlantAggro::OnEnterState(AActor* stateOwner)
@@ -17,6 +18,7 @@ void UPlantAggro::OnEnterState(AActor* stateOwner)
 		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Blue, TEXT("Plant Aggro state should not be availabe to this class"));
 	}
 	thisPlant->sensesPlayer = true; // senses player connected to animation blueprint, used to change into hostile idle
+	thisPlant->shouldTrack = true;
 
 	float randTime = FMath::RandRange(3, 6);
 	thisPlant->GetWorld()->GetTimerManager().SetTimer(timerHandle, this, &UPlantAggro::RangedAttack, randTime, false); // randomize the amount of time before the call
@@ -29,23 +31,18 @@ void UPlantAggro::OnExitState()
 
 void UPlantAggro::TickState(float DeltaTime)
 {
-	FHitResult hit;
+	playerLocation = mainCharacter->GetActorLocation();
+	plantLocation = thisPlant->GetActorLocation();
 
-	FVector playerLocation = mainCharacter->GetActorLocation();
-	FVector plantLocation = thisPlant->GetActorLocation();
+	//FixRotation(plantLocation, playerLocation);
 
-	FixRotation(plantLocation, playerLocation);
+	if (ShootRay(plantLocation, playerLocation, thisPlant) == false || DistanceToPlayer() >= AggroRange) // or player is to far away
+	{
+		thisPlant->stateManager->SwitchStateByKey("Suspicious");
+		return;
+	}
 
-	FCollisionQueryParams queryParams;
-	queryParams.AddIgnoredActor(thisPlant);
-
-	thisPlant->GetWorld()->LineTraceSingleByChannel(hit, plantLocation, playerLocation, traceChannel, queryParams);
-	DrawDebugLine(thisPlant->GetWorld(), plantLocation, playerLocation, FColor::Red);
-
-	FVector dist = thisPlant->GetActorLocation() - mainCharacter->GetActorLocation();
-
-	float distance = dist.Length();
-	if (distance <= 400) {
+	if (DistanceToPlayer() <= 400) {
 		thisPlant->stateManager->SwitchStateByKey("MeleeAttack");
 	}
 }
@@ -53,7 +50,6 @@ void UPlantAggro::TickState(float DeltaTime)
 void UPlantAggro::RangedAttack()
 {
 	thisPlant->stateManager->SwitchStateByKey("RangedAttack");
-	
 }
 
 

@@ -7,12 +7,13 @@
 #include "IDamageRecievers.h"
 #include "EnemyBaseClass.generated.h"
 
+
 UCLASS()
 class SQUIRRELSOULS_API AEnemyBaseClass : public ACharacter//, public IIDamageRecievers
 {
 	GENERATED_BODY()
 public:
-	UPROPERTY(EditAnywhere, Category = "StateMachine")
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "StateMachine")
 	class UStateManagerComponent* stateManager;
 	UPROPERTY(EditAnywhere, Category = "AI")
 	class UPawnSensingComponent* pawnSenser;
@@ -20,6 +21,15 @@ public:
 	float health = 30;
 	UPROPERTY(BlueprintReadOnly, Category = "Life")
 	bool dead = false ;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "BoolChanges")
+	bool shouldTrack = true;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "PlantMovement")
+	float maxMovementSpeed = 600.f;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "PlantMovement")
+	float walkSpeed = 300.f;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "PlantMovement")
+	float aturnSpeed = 2.f;
+	
 
 public:
 	// Sets default values for this character's properties
@@ -34,7 +44,8 @@ public:
 	void PlayerSpotted();
 	virtual void PlayerSpotted_Implementation();
 	//virtual void TakeDamage_Implementation(float damageTaken) override;
-
+	
+	FRotator FixRotation(FVector actorLocation, FVector targetLocation, float deltaTime, float turnSpeed = 2.f);
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;

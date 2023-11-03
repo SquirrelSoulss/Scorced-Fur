@@ -21,9 +21,6 @@ void UPlantMeleeAttack::OnExitState()
 
 void UPlantMeleeAttack::TickState(float DeltaTime)
 {
-	FVector playerLocation = mainCharacter->GetActorLocation();
-	FVector plantLocation = thisPlant->GetActorLocation();
-	FixRotation(plantLocation, playerLocation);
 
 	if (thisPlant->changeState == true) { // chenge state gets set to true at the end of the animation 
 		thisPlant->stateManager->SwitchStateByKey("Aggro"); //wich makes the plant go back to aggro state in order to decide what to do next

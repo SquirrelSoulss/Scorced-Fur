@@ -23,10 +23,6 @@ void UPlantRangedAttackState::OnExitState()
 
 void UPlantRangedAttackState::TickState(float DeltaTime)
 {
-	FVector playerLocation = mainCharacter->GetActorLocation();
-	FVector plantLocation = thisPlant->GetActorLocation();
-	FixRotation(plantLocation, playerLocation);
-
 	if (thisPlant->changeState == true) {
 		thisPlant->stateManager->SwitchStateByKey("Aggro");
 	}

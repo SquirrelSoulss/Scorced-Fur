@@ -14,3 +14,11 @@ void UStateBase::OnExitState()
 void UStateBase::TickState(float DeltaTime)
 {
 }
+
+void UStateBase::PlayerOverlapping()
+{
+}
+
+void UStateBase::Damaged(float damage)
+{
+}

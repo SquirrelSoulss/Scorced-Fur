@@ -3,6 +3,9 @@
 
 #include "PlantBaseState.h"
 #include <Kismet/KismetMathLibrary.h>
+#include "SquirrelSouls/PlayerCharacter.h"
+#include "Engine/EngineTypes.h"
+#include "StateManagerComponent.h"
 
 void UPlantBaseState::OnEnterState(AActor* stateOwner) // every state who inherits from plantbase will do this when onenter is called
 {
@@ -23,13 +26,36 @@ void UPlantBaseState::TickState() // to be called when tick is called
 {
 }
 
-void UPlantBaseState::FixRotation(FVector actorLocation, FVector targetLocation) // used to make the enemy face player
+void UPlantBaseState::Damaged(float damage)
 {
-	if (!thisPlant->shouldTrack)
-		return;
-	FRotator targetRot = UKismetMathLibrary::FindLookAtRotation(actorLocation, targetLocation);
-	FRotator newRotation = FMath::RInterpTo(thisPlant->GetActorRotation(), targetRot, thisPlant->GetWorld()->GetTimeSeconds(), 5);
-	FRotator doneRotation = FRotator(0, newRotation.Yaw, 0);
-	//thisPlant->SetActorRotation(doneRotation);
-	thisPlant->targetBoneRotation = doneRotation;
+	Super::Damaged(damage);
+	thisPlant->stateManager->SwitchStateByKey("hurt");
+	//add a bool or call to the baseclass blueprint to play the hurt animation
+
+}
+
+
+
+
+bool UPlantBaseState::ShootRay(FVector origin, FVector end, AActor* ignoredActor)
+{
+	FHitResult hit;
+
+	FCollisionQueryParams queryParams;
+	queryParams.AddIgnoredActor(ignoredActor);
+	GetWorld()->LineTraceSingleByChannel(hit, origin, end, traceChannel, queryParams);
+
+	DrawDebugLine(GetWorld(), origin, end, FColor::Red);
+	
+	if (Cast<APlayerCharacter>(hit.GetActor()) != nullptr) // if we are seeing the player
+	{
+		return true;
+	}
+	
+	return false;
+}
+
+float UPlantBaseState::DistanceToPlayer()
+{
+	return FVector::Distance(plantLocation, playerLocation);
 }

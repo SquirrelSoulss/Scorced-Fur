@@ -6,15 +6,14 @@
 
 void UPlantIdle::OnEnterState(AActor* stateOwner)
 {
-	thisPlant = Cast<AStationaryPlantClass>(stateOwner);
-	if (thisPlant != nullptr) 
-	{
-		thisPlant->sensesPlayer = false;
-	}
+	Super::OnEnterState(stateOwner);
+	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Blue, TEXT("Idle"));
+	thisPlant->shouldTrack = false;
 }
 
 void UPlantIdle::OnExitState()
 {
+	
 }
 
 void UPlantIdle::TickState(float DeltaTime)
