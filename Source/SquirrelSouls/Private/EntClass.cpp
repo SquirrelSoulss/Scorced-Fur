@@ -112,6 +112,8 @@ void AEntClass::Tick(float DeltaTime)
 
 	if (!IsAttacking)
 		RotateToPlayer(DeltaTime);
+	else
+		CheckForHit();
 }
 
 // Called to bind functionality to input
@@ -123,8 +125,6 @@ void AEntClass::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 
 void AEntClass::TakeDamage_Implementation(float damage)
 {
-	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("hej"));
-
 }
 
 

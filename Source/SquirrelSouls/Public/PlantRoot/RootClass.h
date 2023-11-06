@@ -3,12 +3,13 @@
 #pragma once
 
 #include "RootAnimInstance.h"
+#include "IDamageRecievers.h"
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
 #include "RootClass.generated.h"
 
 UCLASS()
-class SQUIRRELSOULS_API ARootClass : public AActor
+class SQUIRRELSOULS_API ARootClass : public AActor, public IIDamageRecievers
 {
 	GENERATED_BODY()
 
@@ -26,6 +27,9 @@ public:
 	URootAnimInstance* AnimRef = nullptr;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "AttackVariables")
+	bool PlayerIsInRadius = false;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "AttackVariables")
 	bool CanHit = false;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "AttackVariables")
@@ -35,6 +39,12 @@ protected:
 
 	virtual void BeginPlay() override;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "AttackVariables")
+	float Health = 3000.f;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "AttackVariables")
+	float MaxHealth = 3000.f;
+
 public:
 
 	virtual void Tick(float DeltaTime) override;
@@ -42,6 +52,10 @@ public:
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "CheckHit")
 	void CheckIfHit();
 	virtual void CheckIfHit_Implementation();
+
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "CheckHit")
+	void UpdateHealthBar(float DamageTaken);
+	virtual void UpdateHealthBar_Implementation(float DamageTaken);
 
 	UFUNCTION(BlueprintCallable, Category = "Attack")
 	void PlayerInRadius();
@@ -51,4 +65,7 @@ public:
 
 	UFUNCTION(BlueprintCallable, Category = "DoDamage")
 	void DoDamageToPlayer(float Damage);
+
+	virtual void TakeDamage_Implementation(float damage) override;
+
 };

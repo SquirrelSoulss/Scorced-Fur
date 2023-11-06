@@ -19,6 +19,8 @@ void ARootClass::BeginPlay()
 {
 	Super::BeginPlay();
 
+	Health = MaxHealth;
+
 	//Find skeletal mesh and get the ABP class
 	AnimRef = Cast<URootAnimInstance>(FindComponentByClass<USkeletalMeshComponent>()->GetAnimInstance());
 	if (!AnimRef)
@@ -32,6 +34,10 @@ void ARootClass::Tick(float DeltaTime)
 }
 
 void ARootClass::CheckIfHit_Implementation()
+{
+}
+
+void ARootClass::UpdateHealthBar_Implementation(float currentHealth)
 {
 }
 
@@ -52,4 +58,12 @@ void ARootClass::SwitchState(FString key)
 
 void ARootClass::DoDamageToPlayer(float Damage)
 {
+}
+
+void ARootClass::TakeDamage_Implementation(float damage)
+{
+	Health -= damage;
+	Health = FMath::Clamp(Health, 0, MaxHealth);
+
+	UpdateHealthBar(damage);
 }
