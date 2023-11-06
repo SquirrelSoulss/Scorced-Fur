@@ -40,8 +40,6 @@ void AEntClass::StartFight_Implementation(APawn* _player)
 
 void AEntClass::MoveToPlayer_Implementation()
 {
-	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Yellow, TEXT("moving to player"));
-
 }
 
 void AEntClass::MoveToRandomPoint_Implementation(FVector destination)
@@ -110,7 +108,7 @@ void AEntClass::Tick(float DeltaTime)
 		stateManager->TickComponent(DeltaTime, LEVELTICK_ViewportsOnly, ThisTickFunction);
 	}
 
-	if (!IsAttacking)
+	if (!IsAttacking && !IsDead)
 		RotateToPlayer(DeltaTime);
 	else
 		CheckForHit();
@@ -125,15 +123,6 @@ void AEntClass::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 
 void AEntClass::TakeDamage_Implementation(float damage)
 {
-	Health -= damage;
-	Health = FMath::Clamp(Health, 0, MaxHealth);
-
-	UpdateHealthBar(damage);
-
-	if (Health <= 0)
-	{
-		SwitchState("Death");
-	}
 }
 
 
