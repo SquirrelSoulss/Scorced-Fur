@@ -35,6 +35,9 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "AttackVariables")
 	bool CanBeParried = false;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "AttackVariables")
+	bool ShouldRotate = false;
+
 protected:
 
 	virtual void BeginPlay() override;

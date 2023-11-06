@@ -8,6 +8,8 @@ void URootSwipeAttack::OnEnterState(AActor* stateOwner)
 	Super::OnEnterState(stateOwner);
 
 	RootRef->AnimRef->IsSwipeAttack = true;
+	RootRef->ShouldRotate = true;
+
 }
 
 void URootSwipeAttack::OnExitState()

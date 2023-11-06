@@ -9,6 +9,7 @@ void URootAggro::OnEnterState(AActor* stateOwner)
 
 	if (RootRef->PlayerIsInRadius)
 		RootRef->PlayerInRadius();
+	RootRef->ShouldRotate = true;
 }
 
 void URootAggro::OnExitState()

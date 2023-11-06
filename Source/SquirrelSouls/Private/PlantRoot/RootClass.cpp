@@ -14,7 +14,6 @@ ARootClass::ARootClass()
 	stateManager = CreateDefaultSubobject<UStateManagerComponent>(TEXT("State Manager"));
 }
 
-// Called when the game starts or when spawned
 void ARootClass::BeginPlay()
 {
 	Super::BeginPlay();
@@ -27,10 +26,18 @@ void ARootClass::BeginPlay()
 		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("anim is null"));
 }
 
-// Called every frame
 void ARootClass::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
+
+	if (PlayerRef != nullptr && ShouldRotate)
+	{
+		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Rotating"));
+
+		FRotator targetRot = UKismetMathLibrary::FindLookAtRotation(GetActorLocation(), PlayerRef->GetActorLocation());
+		FRotator newRotation = FMath::RInterpTo(GetActorRotation(), targetRot, DeltaTime, 2.f); // can change speed in order to speed up tracking during attacks
+		SetActorRotation(FRotator(0, newRotation.Yaw, 0));
+	}
 }
 
 void ARootClass::CheckIfHit_Implementation()
@@ -66,4 +73,9 @@ void ARootClass::TakeDamage_Implementation(float damage)
 	Health = FMath::Clamp(Health, 0, MaxHealth);
 
 	UpdateHealthBar(damage);
+
+	if (Health <= 0)
+	{
+		SwitchState("Death");
+	}
 }

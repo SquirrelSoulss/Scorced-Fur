@@ -8,6 +8,8 @@ void URootNormalAttack::OnEnterState(AActor* stateOwner)
 	Super::OnEnterState(stateOwner);
 
 	RootRef->AnimRef->IsNormalAttack = true;
+	RootRef->ShouldRotate = true;
+
 }
 
 void URootNormalAttack::OnExitState()
