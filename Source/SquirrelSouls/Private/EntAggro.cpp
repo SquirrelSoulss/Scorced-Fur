@@ -9,7 +9,6 @@
 #include "AIController.h"
 #include "Misc/App.h"
 
-
 void UEntAggro::OnEnterState(AActor* stateOwner)
 {
 	Super::OnEnterState(stateOwner);
@@ -46,9 +45,6 @@ void UEntAggro::InitializeAttackArray()
 	AvailableAttacks.Add({ "HandAttack", 500.f, 0.8f });
 	AvailableAttacks.Add({ "StompAttack", 400.f, 0.75f });
 	AvailableAttacks.Add({ "JumpAttack", 1000.f, 0.1f });
-
-	AvailableAttacks.Add({ "SpawnAttack", 3000.f, 0.33f });
-
 }
 
 void UEntAggro::ChooseAttack()
@@ -86,7 +82,7 @@ float UEntAggro::GetDistance()
 FEntAttackTypeData UEntAggro::ChooseAttackLogic(float distance)
 {
 	//Debug set attack
-	return AvailableAttacks[4];
+	//return AvailableAttacks[4];
 
 	TArray<FEntAttackTypeData> ValidAttacks;
 

@@ -19,8 +19,6 @@ public:
 	// Sets default values for this character's properties
 	AEntClass();
 
-
-
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "References")
 	AActor* PlayerRef = nullptr; // change to player class later
 
@@ -77,8 +75,8 @@ public:
 	virtual void StartSpawnAttack_Implementation();
 
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "AttackTypes")
-	void SpawnEnemy(AActor* enemyType, FVector destination);
-	virtual void SpawnEnemy_Implementation(AActor* enemyType, FVector destination);
+	void SpawnEnemy(FVector destination);
+	virtual void SpawnEnemy_Implementation(FVector destination);
 
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "CheckForHit")
 	void CheckForHit();

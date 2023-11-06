@@ -64,7 +64,7 @@ void AEntClass::StartSpawnAttack_Implementation()
 {
 }
 
-void AEntClass::SpawnEnemy_Implementation(AActor* enemyType, FVector destination)
+void AEntClass::SpawnEnemy_Implementation(FVector destination)
 {
 }
 
@@ -125,6 +125,15 @@ void AEntClass::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 
 void AEntClass::TakeDamage_Implementation(float damage)
 {
+	Health -= damage;
+	Health = FMath::Clamp(Health, 0, MaxHealth);
+
+	UpdateHealthBar(damage);
+
+	if (Health <= 0)
+	{
+		SwitchState("Death");
+	}
 }
 
 

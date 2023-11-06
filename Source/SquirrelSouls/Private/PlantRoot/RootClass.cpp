@@ -32,8 +32,6 @@ void ARootClass::Tick(float DeltaTime)
 
 	if (PlayerRef != nullptr && ShouldRotate)
 	{
-		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Rotating"));
-
 		FRotator targetRot = UKismetMathLibrary::FindLookAtRotation(GetActorLocation(), PlayerRef->GetActorLocation());
 		FRotator newRotation = FMath::RInterpTo(GetActorRotation(), targetRot, DeltaTime, 2.f); // can change speed in order to speed up tracking during attacks
 		SetActorRotation(FRotator(0, newRotation.Yaw, 0));

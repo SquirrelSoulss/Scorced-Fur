@@ -37,7 +37,7 @@ void UEntSpawnEnemyAttack::SpawnEnemy()
 	if (GetRandomPoint(OriginOffset, RandomPointRadius, NewDestination))
 	{
 		if (EntRef->CanSpawn)
-			EntRef->SpawnEnemy(nullptr, NewDestination);
+			EntRef->SpawnEnemy(NewDestination);
 	}
 }
 
