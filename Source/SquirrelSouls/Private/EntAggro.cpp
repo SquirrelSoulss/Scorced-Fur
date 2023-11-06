@@ -61,11 +61,7 @@ void UEntAggro::ChooseAttack()
 
 		if (ChosenAttack.StateName != "None")
 		{
-			if (ChosenAttack.StateName == "SpawnAttack" && !EntRef->CanSpawn)
-				ChooseAttack();
-
-			else
-				EntRef->SwitchState(ChosenAttack.StateName);
+			EntRef->SwitchState(ChosenAttack.StateName);
 		}
 		else
 		{
@@ -98,7 +94,10 @@ FEntAttackTypeData UEntAggro::ChooseAttackLogic(float distance)
 	{
 		if (distance <= AttackData.AttackRange)
 		{
-			ValidAttacks.Add(AttackData);
+			if (AttackData.StateName == "SpawnAttack" && !EntRef->CanSpawn)
+				continue;
+			else
+				ValidAttacks.Add(AttackData);
 		}
 	}
 
