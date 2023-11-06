@@ -27,7 +27,14 @@ void UEntSpawnEnemyAttack::TickState()
 void UEntSpawnEnemyAttack::SpawnEnemy()
 {
 	FVector NewDestination;
-	if (GetRandomPoint(EntRef->GetActorLocation(), RandomPointRadius, NewDestination))
+	FVector OriginOffset = EntRef->GetActorLocation() + (EntRef->GetActorForwardVector() * 350.f);
+
+	FString VectorAsString = OriginOffset.ToString();
+
+	FString DebugMessage = "Vector: " + VectorAsString;
+
+	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, DebugMessage, false);
+	if (GetRandomPoint(OriginOffset, RandomPointRadius, NewDestination))
 	{
 		if (EntRef->CanSpawn)
 			EntRef->SpawnEnemy(nullptr, NewDestination);
