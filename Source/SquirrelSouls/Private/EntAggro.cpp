@@ -20,8 +20,9 @@ void UEntAggro::OnEnterState(AActor* stateOwner)
 	queryParams.AddIgnoredActor(EntRef);
 
 	ChilloutPeriod = EntRef->ChilloutPeriod;
+	if (AvailableAttacks.Num() <= 0)
+		InitializeAttackArray();
 
-	InitializeAttackArray();
 	GetWorld()->GetTimerManager().SetTimer(TimerHandle_ChooseAttack, this, &UEntAggro::ChooseAttack, ChilloutPeriod, true);
 
 	EntRef->MoveToPlayer();

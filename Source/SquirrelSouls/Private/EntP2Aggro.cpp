@@ -9,7 +9,9 @@ void UEntP2Aggro::OnEnterState(AActor* stateOwner)
 
 	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Emerald, TEXT("Aggro P2"));
 
-	AddAvailableAttacks();
+	if (!HasInitialized)
+		InitializePhase2();
+
 	EntRef->ChilloutPeriod = 1.f;
 }
 
@@ -21,7 +23,9 @@ void UEntP2Aggro::TickState()
 {
 }
 
-void UEntP2Aggro::AddAvailableAttacks()
+void UEntP2Aggro::InitializePhase2()
 {
+	HasInitialized = true;
+
 	AvailableAttacks.Add({ "SpawnAttack", 3000.f, 0.33f });
 }
