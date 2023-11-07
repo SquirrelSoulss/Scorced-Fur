@@ -10,6 +10,7 @@ void UEntP2Aggro::OnEnterState(AActor* stateOwner)
 	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Emerald, TEXT("Aggro P2"));
 
 	AddAvailableAttacks();
+	EntRef->ChilloutPeriod = 1.f;
 }
 
 void UEntP2Aggro::OnExitState()
