@@ -21,7 +21,7 @@ void AEntClass::BeginPlay()
 	Super::BeginPlay();
 
 	AnimRef = GetMesh()->GetAnimInstance();
-	if(!AnimRef)
+	if (!AnimRef)
 		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("anim is null"));
 }
 
@@ -102,15 +102,16 @@ void AEntClass::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
-	if (stateManager)
-	{
-		FActorComponentTickFunction* ThisTickFunction = &stateManager->PrimaryComponentTick;
-		stateManager->TickComponent(DeltaTime, LEVELTICK_ViewportsOnly, ThisTickFunction);
-	}
+	//if (stateManager)
+	//{
+	//	FActorComponentTickFunction* ThisTickFunction = &stateManager->PrimaryComponentTick;
+	//	stateManager->TickComponent(DeltaTime, LEVELTICK_ViewportsOnly, ThisTickFunction);
+	//}
 
 	if (!IsAttacking && !IsDead)
 		RotateToPlayer(DeltaTime);
-	else
+
+	else if (IsAttacking && !IsDead)
 		CheckForHit();
 }
 
