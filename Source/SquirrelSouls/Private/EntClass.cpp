@@ -62,6 +62,10 @@ void AEntClass::StartSpawnAttack_Implementation()
 {
 }
 
+void AEntClass::StartFireHandAttack_Implementation()
+{
+}
+
 void AEntClass::SpawnEnemy_Implementation(FVector destination)
 {
 }

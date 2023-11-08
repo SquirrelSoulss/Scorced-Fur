@@ -11,8 +11,6 @@ void UEntP2Aggro::OnEnterState(AActor* stateOwner)
 
 	if (!HasInitialized)
 		InitializePhase2();
-
-	EntRef->ChilloutPeriod = 1.f;
 }
 
 void UEntP2Aggro::OnExitState()
@@ -27,5 +25,6 @@ void UEntP2Aggro::InitializePhase2()
 {
 	HasInitialized = true;
 
-	AvailableAttacks.Add({ "SpawnAttack", 3000.f, 0.33f });
+	AvailableAttacks.Add({ "SpawnAttack", 10000.f, 0.3f });
+	AvailableAttacks.Add({ "FireHandAttack", 700.f, 0.7f });
 }
