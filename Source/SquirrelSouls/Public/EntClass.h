@@ -46,6 +46,9 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "CanMove")
 	float ChilloutPeriod = 2.f;
 
+	UPROPERTY(EditAnywhere)
+	TArray<FString> ComboArray;
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;

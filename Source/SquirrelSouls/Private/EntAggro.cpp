@@ -43,9 +43,10 @@ void UEntAggro::InitializeAttackArray()
 	//Add attacks here
 	AvailableAttacks.Add({ "None", 1500.f, 0.1f });
 
-	AvailableAttacks.Add({ "HandAttack", 500.f, 0.8f });
-	AvailableAttacks.Add({ "StompAttack", 400.f, 0.75f });
+	AvailableAttacks.Add({ "HandAttack", 500.f, 0.6f });
+	AvailableAttacks.Add({ "StompAttack", 400.f, 0.5f });
 	AvailableAttacks.Add({ "JumpAttack", 1000.f, 0.1f });
+	AvailableAttacks.Add({ "ComboAttack", 500.f, 0.25f });
 }
 
 void UEntAggro::ChooseAttack()
