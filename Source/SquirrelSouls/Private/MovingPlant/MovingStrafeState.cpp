@@ -6,6 +6,7 @@
 #include "Math/UnrealMathUtility.h"
 #include "SquirrelSouls/Public/StateManagerComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
+#include <Kismet/KismetMathLibrary.h>
 
 void UMovingStrafeState::OnEnterState(AActor* stateOwner)
 {
@@ -13,6 +14,7 @@ void UMovingStrafeState::OnEnterState(AActor* stateOwner)
 	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Blue, TEXT("Strafe"));
 	mPlant->GetCharacterMovement()->MaxWalkSpeed = mPlant->walkSpeed - 100;
 	aiController->SetFocus(mainCharacter);
+	mPlant->shouldTrack = true;
 	Strafe();
 }
 
@@ -27,6 +29,7 @@ void UMovingStrafeState::OnExitState()
 
 void UMovingStrafeState::TickState()
 {
+	
 }
 
 void UMovingStrafeState::Damaged(float damage)
@@ -51,7 +54,7 @@ void UMovingStrafeState::Strafe()
 	aiController->MoveToLocation(destination);
 
 	depth++;
-	GetWorld()->GetTimerManager().SetTimer(timerHandle, this, &UMovingStrafeState::Strafe, 3.f, false);
+	GetWorld()->GetTimerManager().SetTimer(timerHandle, this, &UMovingStrafeState::Strafe, 2.f, false);
 
 }
 

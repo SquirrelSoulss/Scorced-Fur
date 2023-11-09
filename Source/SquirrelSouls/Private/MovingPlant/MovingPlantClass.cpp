@@ -7,6 +7,8 @@
 #include "MovingPlant/MovingIdleState.h"
 #include "SquirrelSouls/Public/StateManagerComponent.h"
 #include <Kismet/KismetMathLibrary.h>
+#include "GameFramework/CharacterMovementComponent.h"
+
 
 void AMovingPlantClass::BeginPlay()
 {
@@ -63,6 +65,11 @@ FVector AMovingPlantClass::GetPatrolPoint(FVector patrolPoint)
 	randomPoint = patrolPoint;
 
 	return patrolPoint;
+}
+
+void AMovingPlantClass::ChangeMovementSpeed(float speed)
+{
+	GetCharacterMovement()->MaxWalkSpeed = speed;
 }
 
 

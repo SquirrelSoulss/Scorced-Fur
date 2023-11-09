@@ -21,6 +21,10 @@ protected:
 	AAIController* aiController = nullptr;
 	FTimerHandle timerHandle;
 public:
+	UPROPERTY(BlueprintReadOnly, EditDefaultsOnly)
+	bool canBeStaggered = true;
+	UPROPERTY(BlueprintReadOnly, EditDefaultsOnly)
+	bool handlesDamageSeparately = false;
 	virtual void OnEnterState(AActor* stateOwner) override;
 	virtual void OnExitState() override;
 	virtual void TickState() override;

@@ -2,19 +2,26 @@
 
 
 #include "MovingPlant/MovingLungeState.h"
+#include "GameFramework/CharacterMovementComponent.h"
 #include "SquirrelSouls/Public/StateManagerComponent.h"
+
 
 void UMovingLungeState::OnEnterState(AActor* stateOwner)
 {
 	Super::OnEnterState(stateOwner);
-	mPlant->shouldTrack = true;
+	mPlant->shouldTrack = false;
 	mPlant->attackTrigger = true;
-	mPlant->LaunchCharacter(FVector(0, 0, 500), false, false); //launches upward
-	GetWorld()->GetTimerManager().SetTimer(timerHandle, this, &UMovingLungeState::LaunchTowardsPlayer, 0.1f, false);
+
+	originalGravityscale = mPlant->GetCharacterMovement()->GravityScale;
+	mPlant->GetCharacterMovement()->GravityScale = gravityDuringJump;
+	
+	mPlant->LaunchCharacter(launchHeight, false, false); //launches upward
+	GetWorld()->GetTimerManager().SetTimer(timerHandle, this, &UMovingLungeState::LaunchTowardsPlayer, transitionToForwardLaunch, false);
 }
 
 void UMovingLungeState::OnExitState()
 {
+	mPlant->GetCharacterMovement()->GravityScale = originalGravityscale;
 	Super::OnExitState();
 	GetWorld()->GetTimerManager().ClearAllTimersForObject(this);
 	mPlant->attackTrigger = false;
@@ -35,9 +42,9 @@ void UMovingLungeState::LaunchTowardsPlayer()
 	mPlant->aturnSpeed = 10.f;
 	FVector direction = (mainCharacter->GetActorLocation() - mPlant->GetActorLocation()); // maybe send them to a slight right 
 	direction.Normalize();
-	direction *= 1000.f;
+	direction *= launchDistance;
 	mPlant->LaunchCharacter(FVector(direction.X, direction.Y, 0), false, false);
-	GetWorld()->GetTimerManager().SetTimer(timerHandle, this, &UMovingLungeState::ChangeToStrafe, 2.f, false);
+	GetWorld()->GetTimerManager().SetTimer(timerHandle, this, &UMovingLungeState::ChangeToStrafe, transitionTime, false);
 }
 
 void UMovingLungeState::ChangeToStrafe()
