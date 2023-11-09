@@ -18,4 +18,6 @@ public:
 	virtual void OnExitState() override;
 	virtual void TickState() override;
 	virtual void Damaged(float damage) override;
+	void ChangeToLunge();
+	bool canTriggerLunge = true;
 };

@@ -21,4 +21,4 @@ void UStateBase::PlayerOverlapping()
 
 void UStateBase::Damaged(float damage)
 {
-}
+}	

@@ -37,7 +37,8 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "BoolChanges")
 	bool sensesPlayer = false;
-
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "BoolChanges")
+	bool takenDamage = false;
 	UPROPERTY(EditAnywhere, BluePrintReadWrite, Category = "MainCharacter") // switch to the class that is the main character
 	AActor* mainCharacter = nullptr;
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "SensedPlayer")

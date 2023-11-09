@@ -19,4 +19,7 @@ public:
 	virtual void TickState() override;
 	virtual void Damaged(float damage) override;
 	void SubscribedAttack();
+	void ChooseBetweenAttacks();
+	UPROPERTY(BlueprintReadOnly, EditDefaultsOnly)
+	float requiredDistance = 120.0f;
 };

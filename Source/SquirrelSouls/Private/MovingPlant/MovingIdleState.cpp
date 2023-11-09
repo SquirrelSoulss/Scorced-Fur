@@ -14,8 +14,8 @@ void UMovingIdleState::OnEnterState(AActor* stateOwner)
 	mPlant->shouldTrack = false;
 	mPlant->CallGetPatrolPoint();
 	IsReachablePoint(mPlant->randomPoint, 1);
-
-	GetWorld()->GetTimerManager().SetTimer(timerHandle, this, &UMovingIdleState::StartAiMoveTo, 5.f, false); //Make random time
+	mPlant->ChangeMovementSpeed(mPlant->walkSpeed);
+	GetWorld()->GetTimerManager().SetTimer(timerHandle, this, &UMovingIdleState::StartAiMoveTo, FMath::RandRange(2, 5), true); 
 }
 
 void UMovingIdleState::OnExitState()
@@ -54,4 +54,7 @@ void UMovingIdleState::StartAiMoveTo()
 {
 	//randomize if this actualy happens
 	aiController->MoveToLocation(mPlant->randomPoint, 50.f);
+	mPlant->CallGetPatrolPoint();
+	IsReachablePoint(mPlant->randomPoint, 1);
+	
 }

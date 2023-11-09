@@ -34,8 +34,10 @@ public:
 	void PlayerOverlapp(APlayerCharacter* player);
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Patrol")
 	FVector randomPoint;
-
+	UFUNCTION()
 	void SensedPlayer(APawn* player);
 	UFUNCTION(BlueprintCallable, Category = "Patrol")
 	FVector GetPatrolPoint(FVector patrolPoint);
+
+	void ChangeMovementSpeed(float speed);
 };
