@@ -1,9 +1,8 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
-
+#include "MovingPlant/MovingDecideState.h"
 #include "Math/UnrealMathUtility.h"
 #include "SquirrelSouls/Public/StateManagerComponent.h"
-#include "MovingPlant/MovingDecideState.h"
 #include "MovingPlant/MovingStrafeState.h"
 
 void UMovingDecideState::OnEnterState(AActor* stateOwner)
@@ -14,7 +13,9 @@ void UMovingDecideState::OnEnterState(AActor* stateOwner)
 	//50/50 between strafe and lunge attack, if player gets close attack
 	//tricky could be used when the fight has been going on for a while
 	mPlant->shouldTrack = true;
-	if(FVector::Distance(mPlant->GetActorLocation(), mainCharacter->GetActorLocation()) <= 500.f))
+	if (FVector::Distance(mPlant->GetActorLocation(), mainCharacter->GetActorLocation()) <= 500.f){
+
+	}
 	if (mPlant->stateManager->StateHistory[0]->IsA(UMovingStrafeState::StaticClass())) {
 		//then we should attack one way or another
 		ChooseBetweenAttacks();
