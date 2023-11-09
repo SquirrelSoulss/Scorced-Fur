@@ -69,6 +69,6 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "DoDamage")
 	void DoDamageToPlayer(float Damage);
 
-	virtual void TakeDamage_Implementation(float damage) override;
+	virtual void TakeDamage_Implementation(float Damage, float Poise, bool FireDamage, float KnockbackValue, FVector KnockbackSource) override;
 
 };

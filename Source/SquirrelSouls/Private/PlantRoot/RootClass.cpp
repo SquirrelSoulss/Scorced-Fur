@@ -65,12 +65,12 @@ void ARootClass::DoDamageToPlayer(float Damage)
 {
 }
 
-void ARootClass::TakeDamage_Implementation(float damage)
+void ARootClass::TakeDamage_Implementation(float Damage, float Poise, bool FireDamage, float KnockbackValue, FVector KnockbackSource)
 {
-	Health -= damage;
+	Health -= Damage;
 	Health = FMath::Clamp(Health, 0, MaxHealth);
 
-	UpdateHealthBar(damage);
+	UpdateHealthBar(Damage);
 
 	if (Health <= 0)
 	{
