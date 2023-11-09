@@ -60,12 +60,12 @@ void UStateManagerComponent::SwitchStateByKey(FString StateKey)
 				{
 					if (StateHistory.Num() < StateHistoryLenght)
 					{
-						StateHistory.Push(CurrentState);
+						StateHistory.Insert(CurrentState,0);
 					}
 					else
 					{
-						StateHistory.RemoveAt(0);
-						StateHistory.Push(CurrentState);
+						StateHistory.RemoveAt(StateHistoryLenght-1);
+						StateHistory.Insert(CurrentState,0);
 					}
 				}
 				CurrentState = NewState; // set the new state

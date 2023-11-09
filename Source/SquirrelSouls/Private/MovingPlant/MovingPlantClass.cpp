@@ -7,6 +7,8 @@
 #include "MovingPlant/MovingIdleState.h"
 #include "SquirrelSouls/Public/StateManagerComponent.h"
 #include <Kismet/KismetMathLibrary.h>
+#include "GameFramework/CharacterMovementComponent.h"
+
 
 void AMovingPlantClass::BeginPlay()
 {
@@ -15,7 +17,7 @@ void AMovingPlantClass::BeginPlay()
 
 void AMovingPlantClass::PostInitializeComponents()
 {
-	Super::PostInitializeComponents();
+	AEnemyBaseClass::PostInitializeComponents();
 	pawnSenser->OnSeePawn.AddDynamic(this, &AMovingPlantClass::SensedPlayer);
 }
 
@@ -51,10 +53,8 @@ void AMovingPlantClass::PlayerOverlapp(APlayerCharacter* player)
 
 void AMovingPlantClass::SensedPlayer(APawn* player)
 {
-	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Blue, TEXT("sensed"));
-	
 	if (stateManager->CurrentState->IsA(UMovingIdleState::StaticClass())) {
-		stateManager->SwitchStateByKey("sus"); // ändra, ska nog göra
+		stateManager->SwitchStateByKey("decide"); 
 		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Blue, TEXT("Innercircle"));
 	}
 }
@@ -65,6 +65,11 @@ FVector AMovingPlantClass::GetPatrolPoint(FVector patrolPoint)
 	randomPoint = patrolPoint;
 
 	return patrolPoint;
+}
+
+void AMovingPlantClass::ChangeMovementSpeed(float speed)
+{
+	GetCharacterMovement()->MaxWalkSpeed = speed;
 }
 
 

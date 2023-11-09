@@ -28,7 +28,15 @@ void UMovingPlantBase::TickState()
 
 void UMovingPlantBase::Damaged(float damage)
 {
-	//Super::Damaged(damage);
-	//deal damager equal to damage
-	mPlant->stateManager->SwitchStateByKey("hurt");
+	if (handlesDamageSeparately)
+	{
+		return;
+	}
+	mPlant->health -= damage;
+	// flash effect for damage
+	if(mPlant->health <= 0)
+		//death
+	
+	if(canBeStaggered)
+		mPlant->stateManager->SwitchStateByKey("hurt");
 }

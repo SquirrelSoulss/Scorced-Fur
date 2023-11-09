@@ -39,7 +39,7 @@ public:
 	TArray<UStateBase*> StateHistory;
 
 	UPROPERTY(BlueprintReadOnly, EditDefaultsOnly, Category = "State Machine Debug", meta = (ClampMin = "0", ClampMax = "10", UIMin = "0", UIMax = "10"))
-	int32 StateHistoryLenght;
+	int32 StateHistoryLenght = 10;
 	UPROPERTY(BlueprintReadOnly, Category = "State Machine")
 	UStateBase* CurrentState;
 
