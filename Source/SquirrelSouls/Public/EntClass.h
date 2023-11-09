@@ -81,8 +81,8 @@ public:
 	virtual void StartSpawnAttack_Implementation();
 
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "AttackTypes")
-	void StartFireHandAttack();
-	virtual void StartFireHandAttack_Implementation();
+	void StartFireSlamAttack();
+	virtual void StartFireSlamAttack_Implementation();
 
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "AttackTypes")
 	void SpawnEnemy(FVector destination);

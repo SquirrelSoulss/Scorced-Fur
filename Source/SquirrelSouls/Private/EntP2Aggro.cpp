@@ -26,5 +26,5 @@ void UEntP2Aggro::InitializePhase2()
 	HasInitialized = true;
 
 	AvailableAttacks.Add({ "SpawnAttack", 10000.f, 0.1f });
-	AvailableAttacks.Add({ "FireHandAttack", 700.f, 1.f });
+	AvailableAttacks.Add({ "FireSlamAttack", 700.f, 0.25f });
 }

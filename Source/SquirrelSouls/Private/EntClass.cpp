@@ -62,7 +62,7 @@ void AEntClass::StartSpawnAttack_Implementation()
 {
 }
 
-void AEntClass::StartFireHandAttack_Implementation()
+void AEntClass::StartFireSlamAttack_Implementation()
 {
 }
 
@@ -123,7 +123,6 @@ void AEntClass::Tick(float DeltaTime)
 void AEntClass::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
-
 }
 
 void AEntClass::TakeDamage_Implementation(float damage)
