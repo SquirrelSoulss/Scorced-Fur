@@ -47,12 +47,15 @@ public:
 	float ChilloutPeriod = 2.f;
 
 	UPROPERTY(EditAnywhere)
-	TArray<FString> ComboArray;
+	TArray<FString> ChosenCombo;
+
+	TArray<FString> Combo2HandStomp{ "HandAttack", "HandAttack", "StompAttack" };
+	TArray<FString> Combo4Hand{ "HandAttack", "HandAttack", "HandAttack","HandAttack" };
+	TArray<FString> ComboHand2Stomp{ "HandAttack", "StompAttack", "StompAttack" };
 
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
-
 
 public:
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "SensedPlayer")
@@ -68,12 +71,12 @@ public:
 	virtual void MoveToRandomPoint_Implementation(FVector destination);
 
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "AttackTypes")
-	void StartHandAttack();
-	virtual void StartHandAttack_Implementation();
+	void StartHandAttack(bool combo = false);
+	virtual void StartHandAttack_Implementation(bool combo = false);
 
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "AttackTypes")
-	void StartStompAttack();
-	virtual void StartStompAttack_Implementation();
+	void StartStompAttack(bool combo = false);
+	virtual void StartStompAttack_Implementation(bool combo = false);
 
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "AttackTypes")
 	void StartJumpAttack();
@@ -103,7 +106,9 @@ public:
 	float MovementSpeed = 10.f;
 
 	UFUNCTION()
+	void InitializeCombos();
 	void RotateToPlayer(float DeltaTime);
+
 
 public:
 	// Called every frame

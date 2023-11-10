@@ -46,11 +46,11 @@ void AEntClass::MoveToRandomPoint_Implementation(FVector destination)
 {
 }
 
-void AEntClass::StartHandAttack_Implementation()
+void AEntClass::StartHandAttack_Implementation(bool combo)
 {
 }
 
-void AEntClass::StartStompAttack_Implementation()
+void AEntClass::StartStompAttack_Implementation(bool combo)
 {
 }
 
@@ -77,6 +77,11 @@ void AEntClass::CheckForHit_Implementation()
 void AEntClass::SwitchState(FString StateKey)
 {
 	stateManager->SwitchStateByKey(StateKey);
+}
+
+void AEntClass::InitializeCombos()
+{
+
 }
 
 void AEntClass::RotateToPlayer(float DeltaTime)

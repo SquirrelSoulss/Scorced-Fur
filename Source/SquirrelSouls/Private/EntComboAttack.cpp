@@ -6,6 +6,8 @@
 void UEntComboAttack::OnEnterState(AActor* stateOwner)
 {
 	Super::OnEnterState(stateOwner);
+
+	
 }
 
 void UEntComboAttack::OnExitState()
