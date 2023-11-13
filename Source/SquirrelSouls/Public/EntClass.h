@@ -7,6 +7,16 @@
 #include "IDamageRecievers.h"
 #include "EntClass.generated.h"
 
+USTRUCT(BlueprintType)
+struct FAvailableCombos
+{
+
+	GENERATED_BODY()
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combo")
+	TArray<FString> ComboArray;
+};
+
 UCLASS()
 class SQUIRRELSOULS_API AEntClass : public ACharacter, public IIDamageRecievers
 {
@@ -22,7 +32,7 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "References")
 	AActor* PlayerRef = nullptr; // change to player class later
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "References")
+	UPROPERTY(EditAnywhere, Category = "References")
 	UAnimInstance* AnimRef = nullptr;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "CheckForHit")
@@ -31,25 +41,47 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "CanMove")
 	bool CanMove = false;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "CanMove")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Attacks")
 	bool CanSpawn = true;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "CanMove")
 	bool IsRotatingInPlace = false;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "CanMove")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Death")
 	bool IsDead = false;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "CanMove")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Attacks")
 	bool IsFireDamage = false;
-
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "CanMove")
 	float ChilloutPeriod = 2.f;
+
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combo")
+	bool IsCombo = false;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combo")
+	bool IsFireCombo = false;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combo")
+	TArray<FAvailableCombos> AvailableCombos;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combo")
+	TArray<FString> ChosenCombo;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combo")
+	TArray<FString> Combo2HandStomp{ "HandAttack", "HandAttack", "StompAttack" };
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combo")
+	TArray<FString> Combo2HandFire{ "HandAttack", "HandAttack", "FireHandAttack" };
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combo")
+	TArray<FString> ComboHand2Stomp{ "HandAttack", "StompAttack", "StompAttack" };
+
+
 
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
-
 
 public:
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "SensedPlayer")
@@ -57,20 +89,16 @@ public:
 	virtual void StartFight_Implementation(APawn* player);
 
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Move")
-	void MoveToPlayer();
-	virtual void MoveToPlayer_Implementation();
-
-	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Move")
 	void MoveToRandomPoint(FVector destination);
 	virtual void MoveToRandomPoint_Implementation(FVector destination);
 
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "AttackTypes")
-	void StartHandAttack();
-	virtual void StartHandAttack_Implementation();
+	void StartHandAttack(bool combo = false, bool fire = false);
+	virtual void StartHandAttack_Implementation(bool combo = false, bool fire = false);
 
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "AttackTypes")
-	void StartStompAttack();
-	virtual void StartStompAttack_Implementation();
+	void StartStompAttack(bool combo = false);
+	virtual void StartStompAttack_Implementation(bool combo = false);
 
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "AttackTypes")
 	void StartJumpAttack();
@@ -88,9 +116,17 @@ public:
 	void SpawnEnemy(FVector destination);
 	virtual void SpawnEnemy_Implementation(FVector destination);
 
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Combo")
+	void StartCombo();
+	virtual void StartCombo_Implementation();
+
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "CheckForHit")
 	void CheckForHit();
 	virtual void CheckForHit_Implementation();
+
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Death")
+	void Died();
+	virtual void Died_Implementation();
 
 	UFUNCTION(BlueprintCallable, Category = "SwitchState")
 	void SwitchState(FString StateKey);
@@ -100,7 +136,9 @@ public:
 	float MovementSpeed = 10.f;
 
 	UFUNCTION()
+	void InitializeCombos();
 	void RotateToPlayer(float DeltaTime);
+
 
 public:
 	// Called every frame

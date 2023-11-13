@@ -10,6 +10,7 @@ void UEntDeath::OnEnterState(AActor* stateOwner)
 	EntRef->CanMove = false;
 	EntRef->IsAttacking = false;
 	EntRef->IsDead = true;
+	EntRef->Died();
 	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Emerald, TEXT("dead"));
 }
 

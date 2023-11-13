@@ -5,12 +5,8 @@
 
 void UEntP2Aggro::OnEnterState(AActor* stateOwner)
 {
-	Super::OnEnterState(stateOwner);
-
 	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Emerald, TEXT("Aggro P2"));
-
-	if (!HasInitialized)
-		InitializePhase2();
+	InitializePhase2();
 }
 
 void UEntP2Aggro::OnExitState()

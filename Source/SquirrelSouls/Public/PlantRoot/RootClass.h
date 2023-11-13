@@ -48,6 +48,9 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "AttackVariables")
 	float MaxHealth = 3000.f;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "AttackVariables")
+	float DamageToDo = 15.f;
+
 public:
 
 	virtual void Tick(float DeltaTime) override;
@@ -68,6 +71,7 @@ public:
 
 	UFUNCTION(BlueprintCallable, Category = "DoDamage")
 	void DoDamageToPlayer(float Damage);
+
 
 	virtual void TakeDamage_Implementation(float Damage, float Poise, bool FireDamage, float KnockbackValue, FVector KnockbackSource) override;
 
