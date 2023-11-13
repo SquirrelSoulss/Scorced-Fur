@@ -7,7 +7,7 @@ void UEntComboAttack::OnEnterState(AActor* stateOwner)
 {
 	Super::OnEnterState(stateOwner);
 
-	
+	EntRef->IsCombo = true;
 }
 
 void UEntComboAttack::OnExitState()
@@ -16,4 +16,9 @@ void UEntComboAttack::OnExitState()
 
 void UEntComboAttack::TickState()
 {
+}
+
+void UEntComboAttack::InitializeAttacks()
+{
+
 }

@@ -15,6 +15,10 @@ AEntClass::AEntClass()
 	stateManager = CreateDefaultSubobject<UStateManagerComponent>(TEXT("State Manager"));
 }
 
+void AEntClass::StartCombo_Implementation(TArray<FString> chosenCombo)
+{
+}
+
 // Called when the game starts or when spawned
 void AEntClass::BeginPlay()
 {
@@ -46,7 +50,7 @@ void AEntClass::MoveToRandomPoint_Implementation(FVector destination)
 {
 }
 
-void AEntClass::StartHandAttack_Implementation(bool combo)
+void AEntClass::StartHandAttack_Implementation(bool combo, bool fire)
 {
 }
 

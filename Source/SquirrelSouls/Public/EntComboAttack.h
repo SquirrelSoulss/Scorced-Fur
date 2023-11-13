@@ -19,4 +19,5 @@ public:
 	virtual void OnExitState() override;
 	virtual void TickState() override;
 
+	void InitializeAttacks();
 };

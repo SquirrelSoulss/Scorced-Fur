@@ -31,27 +31,42 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "CanMove")
 	bool CanMove = false;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "CanMove")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Attacks")
 	bool CanSpawn = true;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "CanMove")
 	bool IsRotatingInPlace = false;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "CanMove")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Death")
 	bool IsDead = false;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "CanMove")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Attacks")
 	bool IsFireDamage = false;
-
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "CanMove")
 	float ChilloutPeriod = 2.f;
 
-	UPROPERTY(EditAnywhere)
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combo")
+	bool IsCombo = false;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combo")
+	bool IsFireCombo = false;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combo")
 	TArray<FString> ChosenCombo;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combo")
 	TArray<FString> Combo2HandStomp{ "HandAttack", "HandAttack", "StompAttack" };
-	TArray<FString> Combo4Hand{ "HandAttack", "HandAttack", "HandAttack","HandAttack" };
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combo")
+	TArray<FString> Combo2HandFire{ "HandAttack", "HandAttack", "FireHandAttack" };
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combo")
 	TArray<FString> ComboHand2Stomp{ "HandAttack", "StompAttack", "StompAttack" };
+
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Combo")
+	void StartCombo(TArray<FString> chosenCombo);
+	virtual void StartCombo_Implementation(TArray<FString> chosenCombo);
 
 protected:
 	// Called when the game starts or when spawned
@@ -71,8 +86,8 @@ public:
 	virtual void MoveToRandomPoint_Implementation(FVector destination);
 
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "AttackTypes")
-	void StartHandAttack(bool combo = false);
-	virtual void StartHandAttack_Implementation(bool combo = false);
+	void StartHandAttack(bool combo = false, bool fire = false);
+	virtual void StartHandAttack_Implementation(bool combo = false, bool fire = false);
 
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "AttackTypes")
 	void StartStompAttack(bool combo = false);
