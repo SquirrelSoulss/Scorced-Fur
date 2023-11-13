@@ -15,7 +15,6 @@ AEntClass::AEntClass()
 	stateManager = CreateDefaultSubobject<UStateManagerComponent>(TEXT("State Manager"));
 }
 
-
 // Called when the game starts or when spawned
 void AEntClass::BeginPlay()
 {

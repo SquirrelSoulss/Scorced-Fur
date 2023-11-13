@@ -20,7 +20,7 @@ void UEntAggro::OnEnterState(AActor* stateOwner)
 	queryParams.AddIgnoredActor(EntRef);
 
 	ChilloutPeriod = EntRef->ChilloutPeriod;
-	if (AvailableAttacks.Num() <= 0)
+	if (EntRef->AvailableAttacks.Num() <= 0)
 		InitializeAttackArray();
 
 	GetWorld()->GetTimerManager().SetTimer(TimerHandle_ChooseAttack, this, &UEntAggro::ChooseAttack, ChilloutPeriod, true);
@@ -46,12 +46,20 @@ void UEntAggro::TickState()
 void UEntAggro::InitializeAttackArray()
 {
 	//Add attacks here
-	AvailableAttacks.Add({ "None", 1500.f, 0.1f });
 
-	AvailableAttacks.Add({ "HandAttack", 500.f, 0.6f });
-	AvailableAttacks.Add({ "StompAttack", 400.f, 0.5f });
-	AvailableAttacks.Add({ "JumpAttack", 1000.f, 0.1f });
-	AvailableAttacks.Add({ "ComboAttack", 500.f, 0.25f });
+	EntRef->AvailableAttacks.Add({ "None", 1500.f, 0.1f });
+	EntRef->AvailableAttacks.Add({ "HandAttack", 500.f, 0.6f });
+	EntRef->AvailableAttacks.Add({"StompAttack", 400.f, 0.5f});
+	EntRef->AvailableAttacks.Add({"JumpAttack", 1500.f, 0.1f});
+	EntRef->AvailableAttacks.Add({"ComboAttack", 500.f, 0.4f});
+
+	FAvailableCombos Combo2HandStomp;
+	TArray newCombo = { ("HandAttack", "HandAttack", "StompAttack") };
+	EntRef->AvailableCombos.Add(Combo2HandStomp);
+
+	FAvailableCombos ComboHand2Stomp;
+	ComboHand2Stomp.ComboArray = { "HandAttack", "StompAttack", "StompAttack" };
+	EntRef->AvailableCombos.Add(ComboHand2Stomp);
 }
 
 void UEntAggro::ChooseAttack()
@@ -81,20 +89,17 @@ float UEntAggro::GetDistance()
 	EntRef->GetWorld()->LineTraceSingleByChannel(hit, EntRef->GetActorLocation(), PlayerRef->GetActorLocation(), traceChannel, queryParams);
 	DrawDebugLine(EntRef->GetWorld(), EntRef->GetActorLocation(), PlayerRef->GetActorLocation(), FColor::Red);
 
-	FString DistanceString = FString::Printf(TEXT("Distance: %.2f"), hit.Distance);
-	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Yellow, DistanceString);
-
 	return hit.Distance;
 }
 
 FEntAttackTypeData UEntAggro::ChooseAttackLogic(float distance)
 {
 	//Debug set attack
-	//return AvailableAttacks[4];
+	return EntRef->AvailableAttacks[4];
 
 	TArray<FEntAttackTypeData> ValidAttacks;
 
-	for (const FEntAttackTypeData& AttackData : AvailableAttacks)
+	for (const FEntAttackTypeData& AttackData : EntRef->AvailableAttacks)
 	{
 		if (distance <= AttackData.AttackRange)
 		{
@@ -125,7 +130,7 @@ FEntAttackTypeData UEntAggro::ChooseAttackLogic(float distance)
 		}
 	}
 
-	return AvailableAttacks[0];
+	return EntRef->AvailableAttacks[0];
 }
 
 
