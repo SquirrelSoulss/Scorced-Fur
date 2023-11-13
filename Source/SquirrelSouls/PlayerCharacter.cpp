@@ -2,6 +2,7 @@
 
 
 #include "PlayerCharacter.h"
+#include "IDamageRecievers.h"
 
 // Sets default values
 APlayerCharacter::APlayerCharacter()
@@ -30,5 +31,9 @@ void APlayerCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCom
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
 
+}
+
+void APlayerCharacter::TakeDamage_Implementation(float DamageTaken, float Poise, bool FireDamage, float KnockbackValue, FVector KnockbackSource)
+{
 }
 

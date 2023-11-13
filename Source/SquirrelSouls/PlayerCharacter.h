@@ -3,11 +3,12 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "IDamageRecievers.h"
 #include "GameFramework/Character.h"
 #include "PlayerCharacter.generated.h"
 
 UCLASS()
-class SQUIRRELSOULS_API APlayerCharacter : public ACharacter
+class SQUIRRELSOULS_API APlayerCharacter : public ACharacter, public IIDamageRecievers
 {
 	GENERATED_BODY()
 
@@ -25,5 +26,7 @@ public:
 
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
+
+	virtual void TakeDamage_Implementation(float DamageTaken, float Poise, bool FireDamage, float KnockbackValue, FVector KnockbackSource);
 
 };
