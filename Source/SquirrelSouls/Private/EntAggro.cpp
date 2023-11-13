@@ -25,13 +25,18 @@ void UEntAggro::OnEnterState(AActor* stateOwner)
 
 	GetWorld()->GetTimerManager().SetTimer(TimerHandle_ChooseAttack, this, &UEntAggro::ChooseAttack, ChilloutPeriod, true);
 
-	EntRef->MoveToPlayer();
+	if (!EntAIController)
+	{
+		EntAIController = Cast<AAIController>(EntRef->Controller);
+	}
 
+	EntAIController->MoveToActor(PlayerRef, 350.f);
 }
 
 void UEntAggro::OnExitState()
 {
 	GetWorld()->GetTimerManager().ClearTimer(TimerHandle_ChooseAttack);
+	EntAIController->StopMovement();
 }
 
 void UEntAggro::TickState()
@@ -51,7 +56,7 @@ void UEntAggro::InitializeAttackArray()
 
 void UEntAggro::ChooseAttack()
 {
-	if (EntRef && PlayerRef && !EntRef->IsAttacking)
+	if (!EntRef->IsAttacking)
 	{
 		float PlayerDistance = GetDistance();
 
@@ -60,10 +65,11 @@ void UEntAggro::ChooseAttack()
 		if (ChosenAttack.StateName != "None")
 		{
 			EntRef->SwitchState(ChosenAttack.StateName);
+			EntAIController->StopMovement();
 		}
 		else
 		{
-			EntRef->MoveToPlayer();
+			EntAIController->MoveToActor(PlayerRef, 350.f);
 		}
 	}
 }
@@ -117,14 +123,6 @@ FEntAttackTypeData UEntAggro::ChooseAttackLogic(float distance)
 				return AttackData;
 			}
 		}
-	}
-	else
-	{
-		/*if (MathStuffRef.RandomBoolWithWeight(0.1f))
-		{
-			int RandomAttackIndex = FMath::FRandRange(0.f, AvailableAttacks.Num());
-			return AvailableAttacks[RandomAttackIndex];
-		}*/
 	}
 
 	return AvailableAttacks[0];

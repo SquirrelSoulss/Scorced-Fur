@@ -15,9 +15,6 @@ AEntClass::AEntClass()
 	stateManager = CreateDefaultSubobject<UStateManagerComponent>(TEXT("State Manager"));
 }
 
-void AEntClass::StartCombo_Implementation(TArray<FString> chosenCombo)
-{
-}
 
 // Called when the game starts or when spawned
 void AEntClass::BeginPlay()
@@ -40,10 +37,6 @@ void AEntClass::StartFight_Implementation(APawn* _player)
 	PlayerRef = player;
 
 	this->stateManager->SwitchStateByKey("Aggro");
-}
-
-void AEntClass::MoveToPlayer_Implementation()
-{
 }
 
 void AEntClass::MoveToRandomPoint_Implementation(FVector destination)
@@ -74,7 +67,15 @@ void AEntClass::SpawnEnemy_Implementation(FVector destination)
 {
 }
 
+void AEntClass::StartCombo_Implementation()
+{
+}
+
 void AEntClass::CheckForHit_Implementation()
+{
+}
+
+void AEntClass::Died_Implementation()
 {
 }
 
@@ -104,22 +105,12 @@ void AEntClass::RotateToPlayer(float DeltaTime)
 	IsRotatingInPlace = !FMath::IsNearlyEqual(NewRot.Yaw, EntRot.Yaw, 0.25f);
 
 	SetActorRotation(FRotator(EntRot.Pitch, NewRot.Yaw, EntRot.Roll));
-
-	if (!CanMove) return;
-	DirToPlayer *= MovementSpeed;
-	//AAIController::MoveToActor(PlayerRef, 350.f);
 }
 
 // Called every frame
 void AEntClass::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
-	//if (stateManager)
-	//{
-	//	FActorComponentTickFunction* ThisTickFunction = &stateManager->PrimaryComponentTick;
-	//	stateManager->TickComponent(DeltaTime, LEVELTICK_ViewportsOnly, ThisTickFunction);
-	//}
 
 	if (!IsAttacking && !IsDead)
 		RotateToPlayer(DeltaTime);

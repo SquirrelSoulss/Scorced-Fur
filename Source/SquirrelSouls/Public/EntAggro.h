@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "EntStateBase.h"
 #include "MathFunctions.h"
+#include "AIController.h"
 #include "EntAggro.generated.h"
 
 /**
@@ -44,6 +45,8 @@ public:
 
 	FTimerHandle TimerHandle_ChooseAttack;
 	float ChilloutPeriod;
+
+	AAIController* EntAIController = nullptr;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 	TArray<FEntAttackTypeData> AvailableAttacks;

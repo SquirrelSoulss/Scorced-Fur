@@ -14,13 +14,13 @@ void UEntIdle::OnEnterState(AActor* stateOwner)
 	EntRef = Cast<AEntClass>(stateOwner);
 
 	//Basically invoke repeating
-	GetWorld()->GetTimerManager().SetTimer(TimerHandle_UpdateDestination, this, &UEntIdle::MoveToPoint, IdleIntervall, true);
+	//GetWorld()->GetTimerManager().SetTimer(TimerHandle_UpdateDestination, this, &UEntIdle::MoveToPoint, IdleIntervall, true);
 }
 
 void UEntIdle::OnExitState()
 {
 	//sluta invoka
-	GetWorld()->GetTimerManager().ClearTimer(TimerHandle_UpdateDestination);
+	//GetWorld()->GetTimerManager().ClearTimer(TimerHandle_UpdateDestination);
 }
 
 void UEntIdle::TickState()

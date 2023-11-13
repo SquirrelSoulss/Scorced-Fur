@@ -7,6 +7,16 @@
 #include "IDamageRecievers.h"
 #include "EntClass.generated.h"
 
+USTRUCT(BlueprintType)
+struct FAvailableCombos
+{
+
+	GENERATED_BODY()
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combo")
+	TArray<FString> ComboArray;
+};
+
 UCLASS()
 class SQUIRRELSOULS_API AEntClass : public ACharacter, public IIDamageRecievers
 {
@@ -22,7 +32,7 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "References")
 	AActor* PlayerRef = nullptr; // change to player class later
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "References")
+	UPROPERTY(EditAnywhere, Category = "References")
 	UAnimInstance* AnimRef = nullptr;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "CheckForHit")
@@ -53,6 +63,9 @@ public:
 	bool IsFireCombo = false;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combo")
+	TArray<FAvailableCombos> AvailableCombos;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combo")
 	TArray<FString> ChosenCombo;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combo")
@@ -64,9 +77,7 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combo")
 	TArray<FString> ComboHand2Stomp{ "HandAttack", "StompAttack", "StompAttack" };
 
-	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Combo")
-	void StartCombo(TArray<FString> chosenCombo);
-	virtual void StartCombo_Implementation(TArray<FString> chosenCombo);
+
 
 protected:
 	// Called when the game starts or when spawned
@@ -76,10 +87,6 @@ public:
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "SensedPlayer")
 	void StartFight(APawn* player);
 	virtual void StartFight_Implementation(APawn* player);
-
-	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Move")
-	void MoveToPlayer();
-	virtual void MoveToPlayer_Implementation();
 
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Move")
 	void MoveToRandomPoint(FVector destination);
@@ -109,9 +116,17 @@ public:
 	void SpawnEnemy(FVector destination);
 	virtual void SpawnEnemy_Implementation(FVector destination);
 
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Combo")
+	void StartCombo();
+	virtual void StartCombo_Implementation();
+
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "CheckForHit")
 	void CheckForHit();
 	virtual void CheckForHit_Implementation();
+
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Death")
+	void Died();
+	virtual void Died_Implementation();
 
 	UFUNCTION(BlueprintCallable, Category = "SwitchState")
 	void SwitchState(FString StateKey);
