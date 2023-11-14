@@ -19,6 +19,8 @@ void UMovingPlantBase::OnExitState()
 {
 	Super::OnExitState();
 	aiController->StopMovement();
+	mPlant->shouldDamage = false;
+	mPlant->ResetHurtBox();
 }
 
 void UMovingPlantBase::TickState()
