@@ -17,7 +17,6 @@ void UMovingPlantBase::OnEnterState(AActor* stateOwner)
 
 void UMovingPlantBase::OnExitState()
 {
-	Super::OnExitState();
 	aiController->StopMovement();
 	mPlant->shouldDamage = false;
 	mPlant->ResetHurtBox();
@@ -25,7 +24,7 @@ void UMovingPlantBase::OnExitState()
 
 void UMovingPlantBase::TickState()
 {
-	Super::TickState();
+	
 }
 
 void UMovingPlantBase::Damaged(float damage)
