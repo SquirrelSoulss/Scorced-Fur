@@ -9,12 +9,15 @@
 /**
  * 
  */
-UCLASS()
+UCLASS(Blueprintable)
 class SQUIRRELSOULS_API UGOAPAction : public UObject
 {
 	GENERATED_BODY()
-private:
-	TMap<FString, bool> preconditions;
+public:
+
+	UPROPERTY(BlueprintReadOnly, EditDefaultsOnly, Category = "GOAP")
+	TMap<FString, bool> preconditions ;
+	UPROPERTY(BlueprintReadOnly, EditDefaultsOnly, Category = "GOAP")
 	TMap<FString, bool> effects;
 
 	bool inRange = false;
