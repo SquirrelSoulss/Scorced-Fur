@@ -30,7 +30,7 @@ void AEntClass::StartFight_Implementation(APawn* _player)
 	AActor* player = Cast<AActor>(_player);
 
 	if (player == nullptr) {
-		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("playyer is null"));
+		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("player is null"));
 		return;
 	}
 	PlayerRef = player;

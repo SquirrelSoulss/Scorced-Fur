@@ -9,6 +9,7 @@ void URootNormalAttack::OnEnterState(AActor* stateOwner)
 
 	RootRef->AnimRef->IsNormalAttack = true;
 	RootRef->ShouldRotate = true;
+	RootRef->PlayerInRadiusCooldown = false;
 
 }
 
@@ -18,7 +19,4 @@ void URootNormalAttack::OnExitState()
 
 void URootNormalAttack::TickState()
 {
-	Super::TickState();
-
-	//RootRef->CheckIfHit();
 }

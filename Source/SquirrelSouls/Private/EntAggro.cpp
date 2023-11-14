@@ -47,19 +47,23 @@ void UEntAggro::InitializeAttackArray()
 {
 	//Add attacks here
 
-	EntRef->AvailableAttacks.Add({ "None", 1500.f, 0.1f });
-	EntRef->AvailableAttacks.Add({ "HandAttack", 500.f, 0.6f });
-	EntRef->AvailableAttacks.Add({"StompAttack", 400.f, 0.5f});
-	EntRef->AvailableAttacks.Add({"JumpAttack", 1500.f, 0.1f});
-	EntRef->AvailableAttacks.Add({"ComboAttack", 500.f, 0.4f});
+	EntRef->AvailableAttacks.Add({ "None", 1500.f, 0.05f });
+	EntRef->AvailableAttacks.Add({ "HandAttack", 350.f, 0.4f });
+	EntRef->AvailableAttacks.Add({ "StompAttack", 400.f, 0.35f });
+	EntRef->AvailableAttacks.Add({ "JumpAttack", 1500.f, 0.1f });
+	EntRef->AvailableAttacks.Add({ "ComboAttack", 500.f, 0.8f });
 
-	FAvailableCombos Combo2HandStomp;
-	TArray newCombo = { ("HandAttack", "HandAttack", "StompAttack") };
-	EntRef->AvailableCombos.Add(Combo2HandStomp);
+	FAvailableCombos newCombo;
+	newCombo.isFire = false;
 
-	FAvailableCombos ComboHand2Stomp;
-	ComboHand2Stomp.ComboArray = { "HandAttack", "StompAttack", "StompAttack" };
-	EntRef->AvailableCombos.Add(ComboHand2Stomp);
+	newCombo.ComboArray = { "HandAttack", "HandAttack", "StompAttack" };
+	EntRef->AvailableCombos.Add(newCombo);
+
+	newCombo.ComboArray = { "HandAttack", "StompAttack", "StompAttack" };
+	EntRef->AvailableCombos.Add(newCombo);
+
+	newCombo.ComboArray = { "StompAttack", "HandAttack" };
+	EntRef->AvailableCombos.Add(newCombo);
 }
 
 void UEntAggro::ChooseAttack()
@@ -87,7 +91,6 @@ float UEntAggro::GetDistance()
 	FHitResult hit;
 
 	EntRef->GetWorld()->LineTraceSingleByChannel(hit, EntRef->GetActorLocation(), PlayerRef->GetActorLocation(), traceChannel, queryParams);
-	DrawDebugLine(EntRef->GetWorld(), EntRef->GetActorLocation(), PlayerRef->GetActorLocation(), FColor::Red);
 
 	return hit.Distance;
 }

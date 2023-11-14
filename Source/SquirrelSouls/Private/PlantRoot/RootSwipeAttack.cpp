@@ -9,7 +9,7 @@ void URootSwipeAttack::OnEnterState(AActor* stateOwner)
 
 	RootRef->AnimRef->IsSwipeAttack = true;
 	RootRef->ShouldRotate = true;
-
+	RootRef->PlayerInRadiusCooldown = false;
 }
 
 void URootSwipeAttack::OnExitState()
