@@ -8,9 +8,23 @@
 #include "EntClass.generated.h"
 
 USTRUCT(BlueprintType)
+struct FEntAttackTypeData
+{
+	GENERATED_BODY()
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	FString StateName;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	float AttackRange;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	float Weight;
+};
+
+USTRUCT(BlueprintType)
 struct FAvailableCombos
 {
-
 	GENERATED_BODY()
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combo")
@@ -55,6 +69,8 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "CanMove")
 	float ChilloutPeriod = 2.f;
 
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	TArray<FEntAttackTypeData> AvailableAttacks;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combo")
 	bool IsCombo = false;
@@ -69,15 +85,7 @@ public:
 	TArray<FString> ChosenCombo;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combo")
-	TArray<FString> Combo2HandStomp{ "HandAttack", "HandAttack", "StompAttack" };
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combo")
 	TArray<FString> Combo2HandFire{ "HandAttack", "HandAttack", "FireHandAttack" };
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combo")
-	TArray<FString> ComboHand2Stomp{ "HandAttack", "StompAttack", "StompAttack" };
-
-
 
 protected:
 	// Called when the game starts or when spawned

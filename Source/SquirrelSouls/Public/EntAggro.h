@@ -11,20 +11,6 @@
 /**
  *
  */
-USTRUCT(BlueprintType)
-struct FEntAttackTypeData
-{
-	GENERATED_USTRUCT_BODY()
-	
-	UPROPERTY(EditAnywhere, BlueprintReadOnly)
-	FString StateName;
-
-	UPROPERTY(EditAnywhere, BlueprintReadOnly)
-	float AttackRange;
-
-	UPROPERTY(EditAnywhere, BlueprintReadOnly)
-	float Weight;
-};
 
 UCLASS()
 class SQUIRRELSOULS_API UEntAggro : public UEntStateBase
@@ -47,9 +33,6 @@ public:
 	float ChilloutPeriod;
 
 	AAIController* EntAIController = nullptr;
-
-	UPROPERTY(EditAnywhere, BlueprintReadOnly)
-	TArray<FEntAttackTypeData> AvailableAttacks;
 
 	UFUNCTION()
 	void InitializeAttackArray();

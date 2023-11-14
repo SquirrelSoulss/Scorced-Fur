@@ -6,8 +6,9 @@
 void UEntComboAttack::OnEnterState(AActor* stateOwner)
 {
 	Super::OnEnterState(stateOwner);
+	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Orange, TEXT("ComboTime"));
 
-	EntRef->IsCombo = true;
+	EntRef->StartCombo();
 }
 
 void UEntComboAttack::OnExitState()
