@@ -4,22 +4,29 @@
 
 #include "CoreMinimal.h"
 #include "EnemyBaseClass.h"
+#include "IDamageRecievers.h"
+#include "PlantProjectile.h"
 #include "StationaryPlantClass.generated.h"
 
 /**
  * 
  */
 UCLASS()
-class SQUIRRELSOULS_API AStationaryPlantClass : public AEnemyBaseClass
+class SQUIRRELSOULS_API AStationaryPlantClass : public AEnemyBaseClass, public IIDamageRecievers
 {
 	GENERATED_BODY()
 
 public:
-	
+	AStationaryPlantClass();
 	virtual void PlayerSpotted_Implementation();
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "BoolChanges") //move to StationaryPlantplantClass
 		FRotator targetBoneRotation;
-	
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = Projectile)
+	TSubclassOf<class APlantProjectile> ProjectileClass;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components")
+	class UArrowComponent* ShootRef;
 	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "BoolChanges")
 	bool rangedAttackCall = false;
@@ -27,6 +34,8 @@ public:
 	bool changeState = false;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "BoolChanges")
 	bool meleeAttackTrigger = false;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "BoolChanges")
+	bool damaged = false;
 
 protected:
 	// Called when the game starts or when spawned
@@ -41,4 +50,6 @@ public:
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 	UFUNCTION()
 	virtual void OnSePawn(APawn* player) ;
+	virtual void TakeDamage_Implementation(float Damage, float Poise, bool FireDamage, float KnockbackValue, FVector KnockbackSource) override;
+	void ShootProjectile();
 };

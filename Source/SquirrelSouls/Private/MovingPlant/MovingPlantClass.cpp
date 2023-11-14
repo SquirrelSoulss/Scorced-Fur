@@ -72,4 +72,10 @@ void AMovingPlantClass::ChangeMovementSpeed(float speed)
 	GetCharacterMovement()->MaxWalkSpeed = speed;
 }
 
+void AMovingPlantClass::TakeDamage_Implementation(float Damage, float Poise, bool FireDamage, float KnockbackValue, FVector KnockbackSource)
+{
+	stateManager->CurrentState->Damaged(Damage);
+
+}
+
 

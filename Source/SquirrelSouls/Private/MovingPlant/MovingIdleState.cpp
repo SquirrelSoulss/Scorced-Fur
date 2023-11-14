@@ -31,6 +31,7 @@ void UMovingIdleState::TickState()
 
 void UMovingIdleState::Damaged(float damage)
 {
+
 	Super::Damaged(damage * 1.5f); // idle state 
 }
 

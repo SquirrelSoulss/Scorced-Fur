@@ -6,6 +6,8 @@
 #include "Perception\PawnSensingComponent.h"
 #include "PlantIdle.h"
 #include <Kismet/KismetMathLibrary.h>
+#include "Components/ArrowComponent.h"
+#include "Engine/EngineTypes.h"
 #include "SquirrelSouls/PlayerCharacter.h"
 
 
@@ -19,6 +21,12 @@ void AStationaryPlantClass::PostInitializeComponents()
 	AEnemyBaseClass::PostInitializeComponents();
 
 	pawnSenser->OnSeePawn.AddDynamic(this, &AStationaryPlantClass::OnSePawn);
+}
+
+AStationaryPlantClass::AStationaryPlantClass()
+{
+	ShootRef = CreateDefaultSubobject<UArrowComponent>(TEXT("ShootRef"));
+	ShootRef->SetupAttachment(GetMesh(), TEXT("Tounge_2"));
 }
 
 void AStationaryPlantClass::PlayerSpotted_Implementation()
@@ -59,6 +67,19 @@ void AStationaryPlantClass::OnSePawn(APawn* player)
 		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Blue, TEXT("Sensed"));
 	}
 		
+}
+
+void AStationaryPlantClass::TakeDamage_Implementation(float Damage, float Poise, bool FireDamage, float KnockbackValue, FVector KnockbackSource)
+{
+	stateManager->CurrentState->Damaged(Damage);
+}
+
+void AStationaryPlantClass::ShootProjectile()
+{
+	APlantProjectile* p = GetWorld()->SpawnActor<APlantProjectile>(ProjectileClass, ShootRef->GetComponentTransform());
+	FVector dir = mainCharacter->GetActorLocation() - GetActorLocation();
+	p->FireInDirection(dir.GetSafeNormal());
+	//mmaybe change this to a object pool type of thing
 }
 
 

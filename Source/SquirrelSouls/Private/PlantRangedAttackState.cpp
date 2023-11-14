@@ -9,7 +9,8 @@ void UPlantRangedAttackState::OnEnterState(AActor* stateOwner)
 {
 	Super::OnEnterState(stateOwner);
 	thisPlant->rangedAttackCall = true;
-	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Blue, TEXT("Entered Ranged"));
+	thisPlant->GetWorld()->GetTimerManager().SetTimer(timerHandle, this, &UPlantRangedAttackState::ShootProjectile, timeToShoot, false);
+
 }
 
 void UPlantRangedAttackState::OnExitState()
@@ -17,8 +18,7 @@ void UPlantRangedAttackState::OnExitState()
 	thisPlant->rangedAttackCall = false;
 	thisPlant->shouldTrack = true;
 	thisPlant->changeState = false;
-
-	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Blue, TEXT("Exit ranged"));
+	GetWorld()->GetTimerManager().ClearAllTimersForObject(this);
 }
 
 void UPlantRangedAttackState::TickState()
@@ -26,4 +26,14 @@ void UPlantRangedAttackState::TickState()
 	if (thisPlant->changeState == true) {
 		thisPlant->stateManager->SwitchStateByKey("Aggro");
 	}
+}
+
+void UPlantRangedAttackState::Damaged(float damage)
+{
+	Super::Damaged(damage);
+}
+
+void UPlantRangedAttackState::ShootProjectile()
+{
+	thisPlant->ShootProjectile();
 }

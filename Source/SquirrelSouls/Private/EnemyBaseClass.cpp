@@ -7,6 +7,7 @@
 #include "StateManagerComponent.h"
 #include "IDamageRecievers.h"
 #include <Kismet/KismetMathLibrary.h>
+#include "Kismet/GameplayStatics.h"
 
 // Sets default values
 AEnemyBaseClass::AEnemyBaseClass()
@@ -26,6 +27,7 @@ void AEnemyBaseClass::PostInitializeComponents()
 void AEnemyBaseClass::BeginPlay()
 {
 	Super::BeginPlay();
+	mainCharacter = UGameplayStatics::GetActorOfClass(GetWorld(), APlayerCharacter::StaticClass());
 }
 
 // Called every frame
@@ -57,7 +59,7 @@ void AEnemyBaseClass::OnSeePawn(APawn* player)
 		mainCharacter = player;
 	}
 	
-	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Blue, TEXT("Aggo"));
+	
 	//stateManager->SwitchStateByKey("Aggro");
 }
 
@@ -66,6 +68,8 @@ void AEnemyBaseClass::PlayerSpotted_Implementation()
 	
 	
 }
+
+
 
 FRotator AEnemyBaseClass::FixRotation(FVector actorLocation, FVector targetLocation, float deltaTime, float turnSpeed)
 {

@@ -29,6 +29,14 @@ void UPlantBaseState::TickState() // to be called when tick is called
 void UPlantBaseState::Damaged(float damage)
 {
 	Super::Damaged(damage);
+	thisPlant->health -= damage;
+	thisPlant->UpdateHealtbar(damage);
+
+	if (thisPlant->health <= 0) {
+		thisPlant->stateManager->SwitchStateByKey("dead");
+		return;
+	}
+	
 	thisPlant->stateManager->SwitchStateByKey("hurt");
 	//add a bool or call to the baseclass blueprint to play the hurt animation
 
