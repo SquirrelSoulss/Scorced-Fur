@@ -127,5 +127,3 @@ void AEntClass::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 void AEntClass::TakeDamage_Implementation(float Damage, float Poise, bool FireDamage, float KnockbackValue, FVector KnockbackSource)
 {
 }
-
-
