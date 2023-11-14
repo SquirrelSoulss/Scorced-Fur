@@ -9,8 +9,6 @@ void UEntIdle::OnEnterState(AActor* stateOwner)
 {
 	Super::OnEnterState(stateOwner);
 
-	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Blue, TEXT("Idle"));
-
 	EntRef = Cast<AEntClass>(stateOwner);
 
 	//Basically invoke repeating

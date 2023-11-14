@@ -8,11 +8,9 @@
 void UEntSpawnEnemyAttack::OnEnterState(AActor* stateOwner)
 {
 	Super::OnEnterState(stateOwner);
-	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Orange, TEXT("Spawn Enemy"));
 
 	EntRef->StartSpawnAttack();
-
-	GetWorld()->GetTimerManager().SetTimer(TimerHandle_SpawnEnemy, this, &UEntSpawnEnemyAttack::SpawnEnemy, SpawnIntervall, true, 5.f);
+	GetWorld()->GetTimerManager().SetTimer(TimerHandle_SpawnEnemy, this, &UEntSpawnEnemyAttack::SpawnEnemy, SpawnIntervall, true, 3.f);
 }
 
 void UEntSpawnEnemyAttack::OnExitState()
@@ -29,11 +27,10 @@ void UEntSpawnEnemyAttack::SpawnEnemy()
 	FVector NewDestination;
 	FVector OriginOffset = EntRef->GetActorLocation() + (EntRef->GetActorForwardVector() * 350.f);
 
-	FString VectorAsString = OriginOffset.ToString();
-
+	/*FString VectorAsString = OriginOffset.ToString();
 	FString DebugMessage = "Vector: " + VectorAsString;
+	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, DebugMessage, false);*/
 
-	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, DebugMessage, false);
 	if (GetRandomPoint(OriginOffset, RandomPointRadius, NewDestination))
 	{
 		if (EntRef->CanSpawn)

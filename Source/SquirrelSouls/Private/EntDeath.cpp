@@ -11,13 +11,4 @@ void UEntDeath::OnEnterState(AActor* stateOwner)
 	EntRef->IsAttacking = false;
 	EntRef->IsDead = true;
 	EntRef->Died();
-	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Emerald, TEXT("dead"));
-}
-
-void UEntDeath::OnExitState()
-{
-}
-
-void UEntDeath::TickState()
-{
 }

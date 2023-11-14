@@ -29,6 +29,9 @@ struct FAvailableCombos
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combo")
 	TArray<FString> ComboArray;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combo")
+	bool isFire;
 };
 
 UCLASS()
@@ -83,9 +86,6 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combo")
 	TArray<FString> ChosenCombo;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combo")
-	TArray<FString> Combo2HandFire{ "HandAttack", "HandAttack", "FireHandAttack" };
 
 protected:
 	// Called when the game starts or when spawned

@@ -15,6 +15,5 @@ class SQUIRRELSOULS_API UEntDeath : public UEntStateBase
 	GENERATED_BODY()
 	
 	virtual void OnEnterState(AActor* stateOwner) override;
-	virtual void OnExitState() override;
-	virtual void TickState() override;
+
 };

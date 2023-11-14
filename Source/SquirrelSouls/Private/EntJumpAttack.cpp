@@ -8,8 +8,6 @@ void UEntJumpAttack::OnEnterState(AActor* stateOwner)
 {
 	Super::OnEnterState(stateOwner);
 
-	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, TEXT("Jump"));
-
 	EntRef->StartJumpAttack();
 }
 

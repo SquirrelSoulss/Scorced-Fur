@@ -7,8 +7,6 @@ void URootAggro::OnEnterState(AActor* stateOwner)
 {
 	Super::OnEnterState(stateOwner);
 
-	if (RootRef->PlayerIsInRadius)
-		RootRef->PlayerInRadius();
 	RootRef->ShouldRotate = true;
 }
 
@@ -19,4 +17,10 @@ void URootAggro::OnExitState()
 void URootAggro::TickState()
 {
 	Super::TickState();
+
+	if (RootRef->PlayerIsInRadius && !RootRef->PlayerInRadiusCooldown)
+	{
+		RootRef->PlayerInRadiusCooldown = true;
+		RootRef->PlayerInRadius();
+	}
 }

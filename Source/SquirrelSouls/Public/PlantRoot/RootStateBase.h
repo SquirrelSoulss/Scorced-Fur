@@ -5,6 +5,7 @@
 #include "RootClass.h"
 #include "CoreMinimal.h"
 #include "StateBase.h"
+#include "SquirrelSouls/PlayerCharacter.h"
 #include "RootStateBase.generated.h"
 
 /**
@@ -22,7 +23,7 @@ public:
 	ARootClass* RootRef = nullptr;
 
 	UPROPERTY()
-	AActor* PlayerRef = nullptr;
+	APlayerCharacter* PlayerRef = nullptr;
 
 	virtual void OnEnterState(AActor* stateOwner) override;
 	virtual void OnExitState() override;

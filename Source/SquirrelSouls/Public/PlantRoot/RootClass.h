@@ -6,6 +6,7 @@
 #include "IDamageRecievers.h"
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
+#include "SquirrelSouls/PlayerCharacter.h"
 #include "RootClass.generated.h"
 
 UCLASS()
@@ -21,13 +22,16 @@ public:
 	ARootClass();
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "References")
-	AActor* PlayerRef = nullptr; // change to player class later
+	APlayerCharacter* PlayerRef = nullptr; 
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "References")
 	URootAnimInstance* AnimRef = nullptr;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "AttackVariables")
 	bool PlayerIsInRadius = false;
+
+	UPROPERTY(EditAnywhere, Category = "AttackVariables")
+	bool PlayerInRadiusCooldown = false;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "AttackVariables")
 	bool CanHit = false;
@@ -43,10 +47,10 @@ protected:
 	virtual void BeginPlay() override;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "AttackVariables")
-	float Health = 3000.f;
+	float Health = 75.f;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "AttackVariables")
-	float MaxHealth = 3000.f;
+	float MaxHealth = 75.f;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "AttackVariables")
 	float DamageToDo = 15.f;

@@ -21,7 +21,7 @@ void ARootClass::BeginPlay()
 	Health = MaxHealth;
 
 	//Find skeletal mesh and get the ABP class
-	AnimRef = Cast<URootAnimInstance>(FindComponentByClass<USkeletalMeshComponent>()->GetAnimInstance());
+	//AnimRef = Cast<URootAnimInstance>(FindComponentByClass<USkeletalMeshComponent>()->GetAnimInstance());
 	if (!AnimRef)
 		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("anim is null"));
 }
@@ -29,6 +29,9 @@ void ARootClass::BeginPlay()
 void ARootClass::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
+
+	if (CanHit)
+		CheckIfHit();
 
 	if (PlayerRef != nullptr && ShouldRotate)
 	{

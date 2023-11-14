@@ -19,9 +19,6 @@ class SQUIRRELSOULS_API URootAnimInstance : public UAnimInstance
 
 public:
 	UPROPERTY(BlueprintReadWrite, Category = "StateTriggers")
-	ARootClass* RootRef = nullptr;
-
-	UPROPERTY(BlueprintReadWrite, Category = "StateTriggers")
 	bool IsNormalAttack = false;
 
 	UPROPERTY(BlueprintReadWrite, Category = "StateTriggers")
