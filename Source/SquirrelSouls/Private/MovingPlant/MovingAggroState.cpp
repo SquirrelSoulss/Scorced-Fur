@@ -8,6 +8,7 @@
 #include "NavigationSystem.h"
 #include "NavigationPath.h"
 #include <Kismet/GameplayStatics.h>
+#include "MovingPlant/MovingDecideState.h"
 #include "GameFramework/CharacterMovementComponent.h"
 
 
@@ -19,12 +20,7 @@ void UMovingAggroState::OnEnterState(AActor* stateOwner)
 		mainCharacter = UGameplayStatics::GetActorOfClass(GetWorld(), APlayerCharacter::StaticClass());
 	}
 
-	if (FVector::Distance(mPlant->GetActorLocation(), mainCharacter->GetActorLocation()) <= 500.f) //turn into variable
-	{
-		//unleash melee attack
-		mPlant->stateManager->SwitchStateByKey("lunge");
-		return;
-	}
+	
 	mPlant->ChangeMovementSpeed(mPlant->maxMovementSpeed + 300);
 	aiController->MoveToActor(mainCharacter, 50); // set movementspeed to greater
 }
@@ -41,6 +37,7 @@ void UMovingAggroState::TickState()
 	Super::TickState();
 	if (FVector::Distance(mPlant->GetActorLocation(), mainCharacter->GetActorLocation()) <= 500.f) //turn into variable
 	{
+		
 		if (canTriggerLunge == true) {
 			mPlant->attackTrigger = true;
 			GetWorld()->GetTimerManager().SetTimer(timerHandle, this, &UMovingAggroState::ChangeToLunge, 0.1f, false);

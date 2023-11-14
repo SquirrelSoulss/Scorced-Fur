@@ -29,6 +29,10 @@ void UPlantSuspiciousState::TickState()
 		return;
 	}
 }
+
+void UPlantSuspiciousState::Damaged(float damage)
+{
+}
 		
 
 void UPlantSuspiciousState::SwitchToIdle()

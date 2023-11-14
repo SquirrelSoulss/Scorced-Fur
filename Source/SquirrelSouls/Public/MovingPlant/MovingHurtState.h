@@ -20,6 +20,8 @@ public:
 	virtual void TickState() override;
 	virtual void Damaged(float damage) override;
 	void SwitchToDecide();
+	void SwitchToDodge();
 	UPROPERTY(BlueprintReadOnly, EditDefaultsOnly)
 	float timeBetweenTransition = .2f;
+	bool canDodge = true;
 };

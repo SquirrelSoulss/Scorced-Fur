@@ -7,13 +7,16 @@
 void UMovingHurtState::OnEnterState(AActor* stateOwner)
 {
 	Super::OnEnterState(stateOwner);
-	mPlant->takenDamage = false;
 
 	mPlant->takenDamage = true; //subscribe to attack
-	//mPlant->takenDamage = false;
-
+	
+	if (canDodge == true && FMath::RandRange(0,15) > 9) {
+		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Blue, TEXT("dodge"));
+		GetWorld()->GetTimerManager().SetTimer(timerHandle, this, &UMovingHurtState::SwitchToDodge, 0.2f, false);
+		return;
+	}
 	GetWorld()->GetTimerManager().SetTimer(timerHandle, this, &UMovingHurtState::SwitchToDecide, timeBetweenTransition, false);
-	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Blue, TEXT("ENtered damaged"));// error invalid state
+	
 
 }
 
@@ -33,7 +36,7 @@ void UMovingHurtState::TickState()
 void UMovingHurtState::Damaged(float damage)
 {
 	Super::Damaged(damage);
-	mPlant->takenDamage = false;
+	
 	//mPlant->takenDamage = false;
 
 	//GetWorld()->GetTimerManager().SetTimer(timerHandle, this, &UMovingHurtState::SwitchToDecide, timeBetweenTransition, false);
@@ -43,4 +46,10 @@ void UMovingHurtState::Damaged(float damage)
 void UMovingHurtState::SwitchToDecide()
 {
 	mPlant->stateManager->SwitchStateByKey("decide");
+}
+
+void UMovingHurtState::SwitchToDodge()
+{
+	mPlant->stateManager->SwitchStateByKey("dodge");
+	canDodge = false;
 }

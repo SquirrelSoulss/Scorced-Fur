@@ -4,6 +4,7 @@
 #include "Math/UnrealMathUtility.h"
 #include "SquirrelSouls/Public/StateManagerComponent.h"
 #include "MovingPlant/MovingStrafeState.h"
+#include "MovingPlant/DashBackState.h"
 
 void UMovingDecideState::OnEnterState(AActor* stateOwner)
 {
@@ -14,8 +15,9 @@ void UMovingDecideState::OnEnterState(AActor* stateOwner)
 	//tricky could be used when the fight has been going on for a while
 	mPlant->shouldTrack = true;
 	if (FVector::Distance(mPlant->GetActorLocation(), mainCharacter->GetActorLocation()) <= 500.f){
-
+		mPlant->stateManager->SwitchStateByKey("sprint");
 	}
+	
 	if (mPlant->stateManager->StateHistory[0]->IsA(UMovingStrafeState::StaticClass())) {
 		//then we should attack one way or another
 		ChooseBetweenAttacks();
@@ -51,6 +53,14 @@ void UMovingDecideState::SubscribedAttack()
 
 void UMovingDecideState::ChooseBetweenAttacks()
 {
-	
+	if (mPlant->stateManager->StateHistory[0]->IsA(UDashBackState::StaticClass())
+		&& FMath::RandRange(0, 6) > 3) {
+		mPlant->stateManager->SwitchStateByKey("zigzag");
+		return;
+	}
+	if (FMath::RandRange(0, 6) > 4) {
+		mPlant->stateManager->SwitchStateByKey("zigzag");
+		return;
+	}
 	mPlant->stateManager->SwitchStateByKey("sprint");
 }

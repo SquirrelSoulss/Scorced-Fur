@@ -17,8 +17,10 @@ public:
 	class UStateManagerComponent* stateManager;
 	UPROPERTY(EditAnywhere, Category = "AI")
 	class UPawnSensingComponent* pawnSenser;
-	UPROPERTY(EditAnywhere, Category = "Life")
-	float health = 30;
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Life")
+	float health = 100;
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Life")
+	float maxHealth = 100;
 	UPROPERTY(BlueprintReadOnly, Category = "Life")
 	bool dead = false ;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "BoolChanges")
@@ -29,6 +31,8 @@ public:
 	float walkSpeed = 300.f;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "PlantMovement")
 	float aturnSpeed = 2.f;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combat")
+	bool shouldDamage = false;
 	
 
 public:
@@ -44,8 +48,11 @@ public:
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "SensedPlayer")
 	void PlayerSpotted();
 	virtual void PlayerSpotted_Implementation();
+	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable, Category = "HealthBar")
+	void UpdateHealtbar(float damage);
+	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable, Category = "Damage")
+	void ResetHurtBox();
 	//virtual void TakeDamage_Implementation(float damageTaken) override;
-	
 	FRotator FixRotation(FVector actorLocation, FVector targetLocation, float deltaTime, float turnSpeed = 2.f);
 protected:
 	// Called when the game starts or when spawned

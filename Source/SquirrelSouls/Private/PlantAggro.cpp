@@ -47,6 +47,11 @@ void UPlantAggro::TickState()
 	}
 }
 
+void UPlantAggro::Damaged(float damage)
+{
+	Super::Damaged(damage);
+}
+
 void UPlantAggro::RangedAttack()
 {
 	thisPlant->stateManager->SwitchStateByKey("RangedAttack");

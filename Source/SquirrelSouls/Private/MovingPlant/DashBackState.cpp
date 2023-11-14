@@ -42,5 +42,5 @@ void UDashBackState::LaunchCharacterBack()
 
 void UDashBackState::ChangeState()
 {
-	mPlant->stateManager->SwitchStateByKey("aggro");
+	mPlant->stateManager->SwitchStateByKey("decide");
 }
