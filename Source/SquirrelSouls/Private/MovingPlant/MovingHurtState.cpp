@@ -7,13 +7,25 @@
 void UMovingHurtState::OnEnterState(AActor* stateOwner)
 {
 	Super::OnEnterState(stateOwner);
+
 	mPlant->takenDamage = true; //subscribe to attack
+	
+	if (canDodge == true && FMath::RandRange(0,15) > 9) {
+		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Blue, TEXT("dodge"));
+		GetWorld()->GetTimerManager().SetTimer(timerHandle, this, &UMovingHurtState::SwitchToDodge, 0.2f, false);
+		return;
+	}
+	GetWorld()->GetTimerManager().SetTimer(timerHandle, this, &UMovingHurtState::SwitchToDecide, timeBetweenTransition, false);
+	
+
 }
 
 void UMovingHurtState::OnExitState()
 {
 	Super::OnExitState();
 	GetWorld()->GetTimerManager().ClearAllTimersForObject(this);
+	mPlant->takenDamage = false;
+
 	//unsubscribe from attack
 }
 
@@ -24,12 +36,20 @@ void UMovingHurtState::TickState()
 void UMovingHurtState::Damaged(float damage)
 {
 	Super::Damaged(damage);
-	mPlant->takenDamage = true;
-	GetWorld()->GetTimerManager().SetTimer(timerHandle, this, &UMovingHurtState::SwitchToDecide, 0.2f, false);
+	
+	//mPlant->takenDamage = false;
+
+	//GetWorld()->GetTimerManager().SetTimer(timerHandle, this, &UMovingHurtState::SwitchToDecide, timeBetweenTransition, false);
 
 }
 
 void UMovingHurtState::SwitchToDecide()
 {
 	mPlant->stateManager->SwitchStateByKey("decide");
+}
+
+void UMovingHurtState::SwitchToDodge()
+{
+	mPlant->stateManager->SwitchStateByKey("dodge");
+	canDodge = false;
 }

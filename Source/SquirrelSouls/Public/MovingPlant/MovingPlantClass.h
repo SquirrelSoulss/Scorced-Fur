@@ -5,13 +5,14 @@
 #include "CoreMinimal.h"
 #include "EnemyBaseClass.h"
 #include "SquirrelSouls/PlayerCharacter.h"
+#include "SquirrelSouls/Public/IDamageRecievers.h"
 #include "MovingPlantClass.generated.h"
 
 /**
  * 
  */
 UCLASS()
-class SQUIRRELSOULS_API AMovingPlantClass : public AEnemyBaseClass
+class SQUIRRELSOULS_API AMovingPlantClass : public AEnemyBaseClass, public IIDamageRecievers
 {
 	GENERATED_BODY()
 protected:
@@ -40,4 +41,6 @@ public:
 	FVector GetPatrolPoint(FVector patrolPoint);
 
 	void ChangeMovementSpeed(float speed);
+	virtual void TakeDamage_Implementation(float Damage, float Poise, bool FireDamage, float KnockbackValue, FVector KnockbackSource) override;
+
 };

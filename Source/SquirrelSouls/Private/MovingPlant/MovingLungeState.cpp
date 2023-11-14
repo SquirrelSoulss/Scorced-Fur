@@ -22,6 +22,7 @@ void UMovingLungeState::OnEnterState(AActor* stateOwner)
 void UMovingLungeState::OnExitState()
 {
 	mPlant->GetCharacterMovement()->GravityScale = originalGravityscale;
+	mPlant->ResetHurtBox();
 	Super::OnExitState();
 	GetWorld()->GetTimerManager().ClearAllTimersForObject(this);
 	mPlant->attackTrigger = false;

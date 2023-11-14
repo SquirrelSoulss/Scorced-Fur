@@ -19,3 +19,7 @@ void UPlantIdle::OnExitState()
 void UPlantIdle::TickState()
 {
 }
+
+void UPlantIdle::Damaged(float damage)
+{
+}

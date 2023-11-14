@@ -28,13 +28,14 @@ void UMovingPlantBase::TickState()
 
 void UMovingPlantBase::Damaged(float damage)
 {
-	if (handlesDamageSeparately)
-	{
-		return;
-	}
 	mPlant->health -= damage;
 	// flash effect for damage
-	if(mPlant->health <= 0)
+	mPlant->UpdateHealtbar(damage);
+	if (mPlant->health <= 0) {
+		mPlant->stateManager->SwitchStateByKey("dead");
+		return;
+	}
+
 		//death
 	
 	if(canBeStaggered)

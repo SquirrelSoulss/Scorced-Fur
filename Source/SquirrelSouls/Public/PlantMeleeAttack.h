@@ -17,4 +17,6 @@ public:
 	virtual void OnEnterState(AActor* stateOwner) override;
 	virtual void OnExitState() override;
 	virtual void TickState() override;
+	virtual void Damaged(float damage) override;
+
 };
