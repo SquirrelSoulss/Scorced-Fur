@@ -20,7 +20,6 @@ void UPlantBaseState::OnEnterState(AActor* stateOwner) // every state who inheri
 void UPlantBaseState::OnExitState() //to be called when state exits
 {
 	Super::OnExitState();
-	thisPlant->shouldDamage = false;
 	thisPlant->ResetHurtBox();
 }
 
