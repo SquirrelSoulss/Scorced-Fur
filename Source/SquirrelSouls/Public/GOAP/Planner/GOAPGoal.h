@@ -9,9 +9,12 @@
 /**
  * 
  */
-UCLASS()
+UCLASS(Blueprintable)
 class SQUIRRELSOULS_API UGOAPGoal : public UObject
 {
 	GENERATED_BODY()
-	
+public:
+	UPROPERTY(BlueprintReadOnly, EditDefaultsOnly, Category = "GOAP")
+	TMap<FString, bool> goalState;
+	int32 priority = 1;
 };

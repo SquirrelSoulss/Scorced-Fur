@@ -7,6 +7,11 @@ UGOAPAction::UGOAPAction() {
 	
 }
 
+void UGOAPAction::SetAgent(ACharacter* usedAgent)
+{
+	myAgent = usedAgent;
+}
+
 void UGOAPAction::DoReset()
 {
 	inRange = false;
@@ -24,7 +29,7 @@ bool UGOAPAction::IsDone()
 
 bool UGOAPAction::CheckProceduralPreconditions(AActor* agent)
 {
-	return false;
+	return true;
 }
 
 bool UGOAPAction::Perform()

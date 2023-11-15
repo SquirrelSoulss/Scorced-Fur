@@ -26,15 +26,15 @@ protected:
 public:	
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
-	TArray<UGOAPAction*> Plan(AActor* agent, TSet<UGOAPAction*> availableActions, TMap<FString, bool> worldState, TMap<FString, bool> goal);
-	TSet<UGOAPAction*> useableActions;
+	TArray<UGOAPAction*> Plan(AActor* agent, TArray<UGOAPAction*> availableActions, TMap<FString, bool> worldState, TMap<FString, bool> goal);
+	TArray<UGOAPAction*> useableActions;
 
 private:
-	bool BuildGraph(UGOAPNode* parent, TArray<UGOAPNode*> leaves, TSet<UGOAPAction*> useableActionsC, TMap<FString, bool> goal);
+	bool BuildGraph(UGOAPNode* parent, TArray<UGOAPNode*>& leaves, TArray<UGOAPAction*> useableActionsC, TMap<FString, bool> goal);
 	bool InState(TMap<FString, bool> test, TMap<FString, bool> testedAgainst);
-	TSet<UGOAPAction*> ActionSubset(TSet<UGOAPAction*> actions, UGOAPAction* removeMe);
+	TArray<UGOAPAction*> ActionSubset(TArray<UGOAPAction*> actions, UGOAPAction* removeMe);
 	TMap<FString, bool> PopulateState(TMap<FString, bool> currentState, TMap<FString, bool> stateChange);
-	TSet<UGOAPAction*> subSet;
+	TArray<UGOAPAction*> subSet;
 };
 
 

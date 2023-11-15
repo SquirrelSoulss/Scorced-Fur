@@ -16,8 +16,18 @@ class SQUIRRELSOULS_API ALabourer : public ACharacter, public IIGOAP
 
 public:
 	// Sets default values for this character's properties
+	
 	ALabourer();
-	TArray<TSubclassOf<UGOAPGoal>> goals;
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category ="GOAP");
+	class UGOAPPlanner* plannerComponent;
+	UPROPERTY(BlueprintReadOnly, EditDefaultsOnly, Category = "GOAP")
+	TMap<FString,TSubclassOf<UGOAPGoal>> availableGoals;
+	UPROPERTY(BlueprintReadOnly, EditDefaultsOnly, Category = "GOAP")
+	TMap<FString,TSubclassOf<UGOAPAction>> availableActions;
+	UPROPERTY()
+	TArray<UGOAPAction*>myAvailableActions;
+	UPROPERTY()
+	TArray<UGOAPGoal*> myGoals;
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
@@ -36,4 +46,6 @@ public:
 	virtual void ActionsFinished_Implementation() override;
 	virtual void PlanAborted_Implementation(UGOAPAction* aborter) override;
 	virtual bool MoveAgent_Implementation(UGOAPAction* nextAction) override;
+	void InitialzeActions();
+	void InitializeGoals();
 };

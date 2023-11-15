@@ -9,4 +9,6 @@ void UGOAPNode::InitializeFields(UGOAPNode* inParent, float inRunningcost, TMap<
 	runningCost = inRunningcost;
 	state = inState;
 	action = inAction;
+	GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, TEXT("gjorde ett lv!"));
+
 }

@@ -27,7 +27,9 @@ public:
 	AActor* target;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "GOAP")
 	float cost = 1;
+	ACharacter* myAgent = nullptr;
 
+	void SetAgent(ACharacter* usedAgent);
 	void DoReset();
 	virtual void Reset();
 	virtual bool IsDone();

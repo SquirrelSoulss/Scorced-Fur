@@ -18,7 +18,6 @@ UGOAPPlanner::UGOAPPlanner()
 void UGOAPPlanner::BeginPlay()
 {
 	Super::BeginPlay();
-
 	// ...
 	
 }
@@ -32,7 +31,7 @@ void UGOAPPlanner::TickComponent(float DeltaTime, ELevelTick TickType, FActorCom
 	// ...
 }
 
-TArray<UGOAPAction*> UGOAPPlanner::Plan(AActor* agent, TSet<UGOAPAction*> availableActions, TMap<FString, bool> worldState, TMap<FString, bool> goal)
+TArray<UGOAPAction*> UGOAPPlanner::Plan(AActor* agent, TArray<UGOAPAction*> availableActions, TMap<FString, bool> worldState, TMap<FString, bool> goal)
 {
 	for (UGOAPAction* Action : availableActions) {
 		Action->DoReset();
@@ -44,6 +43,8 @@ TArray<UGOAPAction*> UGOAPPlanner::Plan(AActor* agent, TSet<UGOAPAction*> availa
 	for (UGOAPAction* Action : availableActions) {
 		if (Action->CheckProceduralPreconditions(agent)) {
 			useableActions.Add(Action);
+			
+
 		}
 	}
 
@@ -56,6 +57,8 @@ TArray<UGOAPAction*> UGOAPPlanner::Plan(AActor* agent, TSet<UGOAPAction*> availa
 
 	if (!success) {
 		//no plan
+		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, TEXT("ingen plan!"));
+		
 	}
 	UGOAPNode* cheapest = nullptr;
 	for (UGOAPNode* leaf : leaves) {
@@ -75,15 +78,18 @@ TArray<UGOAPAction*> UGOAPPlanner::Plan(AActor* agent, TSet<UGOAPAction*> availa
 		if (n->action != NULL) {
 			result.Insert(n->action, 0);
 		}
+		n = n->parent;
 	}
-	
+
 	return result;
 }
 
-bool UGOAPPlanner::BuildGraph(UGOAPNode* parent, TArray<UGOAPNode*> leaves, TSet<UGOAPAction*> useableActionsC, TMap<FString, bool> goal)
+bool UGOAPPlanner::BuildGraph(UGOAPNode* parent, TArray<UGOAPNode*>& leaves, TArray<UGOAPAction*> useableActionsC, TMap<FString, bool> goal)
 {
 	bool foundOne = false;
+
 	for (UGOAPAction* action : useableActionsC) {
+
 		if (InState(action->GetPreconditions(), parent->state)) {
 			TMap<FString, bool> currentState = PopulateState(parent->state, action->GetEffects());
 			UGOAPNode* node = NewObject<UGOAPNode>();
@@ -94,14 +100,14 @@ bool UGOAPPlanner::BuildGraph(UGOAPNode* parent, TArray<UGOAPNode*> leaves, TSet
 				foundOne = true;
 			}
 			else {
-				TSet<UGOAPAction*> sub = ActionSubset(useableActionsC, action);
+				TArray<UGOAPAction*> sub = ActionSubset(useableActionsC, action);
 				bool found = BuildGraph(node, leaves, sub, goal);
 				if (found)
 					foundOne = true;
 			}
 		}
 	}
-	return false;
+	return foundOne;
 }
 
 bool UGOAPPlanner::InState(TMap<FString, bool> test, TMap<FString, bool> testedAgainst)
@@ -124,7 +130,7 @@ bool UGOAPPlanner::InState(TMap<FString, bool> test, TMap<FString, bool> testedA
 	return allMatch;
 }
 
-TSet<UGOAPAction*> UGOAPPlanner::ActionSubset(TSet<UGOAPAction*> actions, UGOAPAction* removeMe)
+TArray<UGOAPAction*> UGOAPPlanner::ActionSubset(TArray<UGOAPAction*> actions, UGOAPAction* removeMe)
 {
 	subSet.Empty();
 	for (UGOAPAction* action : actions) {
@@ -161,4 +167,6 @@ TMap<FString, bool> UGOAPPlanner::PopulateState(TMap<FString, bool> currentState
 	}
 	return state;
 }
+
+
 
