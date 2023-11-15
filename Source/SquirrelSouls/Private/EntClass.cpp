@@ -83,11 +83,6 @@ void AEntClass::SwitchState(FString StateKey)
 	stateManager->SwitchStateByKey(StateKey);
 }
 
-void AEntClass::InitializeCombos()
-{
-
-}
-
 void AEntClass::RotateToPlayer(float DeltaTime)
 {
 	if (PlayerRef == nullptr) return;

@@ -144,7 +144,6 @@ public:
 	float MovementSpeed = 10.f;
 
 	UFUNCTION()
-	void InitializeCombos();
 	void RotateToPlayer(float DeltaTime);
 
 
