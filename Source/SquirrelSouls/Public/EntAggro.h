@@ -30,7 +30,6 @@ public:
 	FCollisionQueryParams queryParams;
 
 	FTimerHandle TimerHandle_ChooseAttack;
-	float ChilloutPeriod;
 
 	AAIController* EntAIController = nullptr;
 

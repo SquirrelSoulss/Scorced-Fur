@@ -19,17 +19,16 @@ void UEntAggro::OnEnterState(AActor* stateOwner)
 
 	queryParams.AddIgnoredActor(EntRef);
 
-	ChilloutPeriod = EntRef->ChilloutPeriod;
 	if (EntRef->AvailableAttacks.Num() <= 0)
 		InitializeAttackArray();
 
-	GetWorld()->GetTimerManager().SetTimer(TimerHandle_ChooseAttack, this, &UEntAggro::ChooseAttack, ChilloutPeriod, true);
+	GetWorld()->GetTimerManager().SetTimer(TimerHandle_ChooseAttack, this, &UEntAggro::ChooseAttack, EntRef->ChilloutPeriod, true);
 
 	if (!EntAIController)
 	{
 		EntAIController = Cast<AAIController>(EntRef->Controller);
 	}
-
+	EntRef->CanMove = true;
 	EntAIController->MoveToActor(PlayerRef, 350.f);
 }
 
