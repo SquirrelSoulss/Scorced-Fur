@@ -19,17 +19,16 @@ void UEntAggro::OnEnterState(AActor* stateOwner)
 
 	queryParams.AddIgnoredActor(EntRef);
 
-	ChilloutPeriod = EntRef->ChilloutPeriod;
 	if (EntRef->AvailableAttacks.Num() <= 0)
 		InitializeAttackArray();
 
-	GetWorld()->GetTimerManager().SetTimer(TimerHandle_ChooseAttack, this, &UEntAggro::ChooseAttack, ChilloutPeriod, true);
+	GetWorld()->GetTimerManager().SetTimer(TimerHandle_ChooseAttack, this, &UEntAggro::ChooseAttack, EntRef->ChilloutPeriod, true);
 
 	if (!EntAIController)
 	{
 		EntAIController = Cast<AAIController>(EntRef->Controller);
 	}
-
+	EntRef->CanMove = true;
 	EntAIController->MoveToActor(PlayerRef, 350.f);
 }
 
@@ -51,7 +50,7 @@ void UEntAggro::InitializeAttackArray()
 	EntRef->AvailableAttacks.Add({ "HandAttack", 350.f, 0.4f });
 	EntRef->AvailableAttacks.Add({ "StompAttack", 400.f, 0.35f });
 	EntRef->AvailableAttacks.Add({ "JumpAttack", 1500.f, 0.1f });
-	EntRef->AvailableAttacks.Add({ "ComboAttack", 500.f, 0.8f });
+	//EntRef->AvailableAttacks.Add({ "ComboAttack", 500.f, 0.8f });
 
 	FAvailableCombos newCombo;
 	newCombo.isFire = false;

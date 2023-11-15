@@ -69,6 +69,7 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Attacks")
 	bool IsFireDamage = false;
+
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "CanMove")
 	float ChilloutPeriod = 2.f;
 
