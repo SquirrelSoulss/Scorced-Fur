@@ -6,6 +6,8 @@
 void UEntTransitionP2::OnEnterState(AActor* stateOwner)
 {
 	Super::OnEnterState(stateOwner);
+
+	EntRef->ChilloutPeriod -= 0.5f;
 }
 
 void UEntTransitionP2::OnExitState()
