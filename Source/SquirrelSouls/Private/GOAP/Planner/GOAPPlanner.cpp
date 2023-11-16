@@ -52,7 +52,6 @@ TArray<UGOAPAction*> UGOAPPlanner::Plan(AActor* agent, TArray<UGOAPAction*> avai
 
 	UGOAPNode* start = NewObject<UGOAPNode>();
 	start->InitializeFields(NULL, 0, worldState, NULL);
-
 	bool success = BuildGraph(start, leaves, useableActions, goal);
 
 	if (!success) {
@@ -128,6 +127,22 @@ bool UGOAPPlanner::InState(TMap<FString, bool> test, TMap<FString, bool> testedA
 		}
 	}
 	return allMatch;
+	//for (const auto& testKeyValue : test)
+	//{
+	//	const bool* valueInTest = testedAgainst.Find(testKeyValue.Key);
+	//	if (valueInTest && (*valueInTest == testKeyValue.Value))
+	//	{
+	//		// The key exists in both maps, and the values are the same
+	//		continue;
+	//	}
+	//	else
+	//	{
+	//		// Either the key doesn't exist in the testedAgainst map, or the values are different
+	//		return false;
+	//	}
+	//}
+
+	//return true; // All key-value pairs in 'test' matched in 'testedAgainst'
 }
 
 TArray<UGOAPAction*> UGOAPPlanner::ActionSubset(TArray<UGOAPAction*> actions, UGOAPAction* removeMe)

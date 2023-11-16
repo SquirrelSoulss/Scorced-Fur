@@ -13,7 +13,10 @@ UCLASS()
 class SQUIRRELSOULS_API UAMoveToAStand : public UGOAPAction
 {
 	GENERATED_BODY()
-
-	virtual bool Perform() override;
+public:
+	UAMoveToAStand();
+	virtual bool Perform(float DeltaTime) override;
 	virtual bool IsDone() override;
+	bool dontRunAgain = false;
+	FVector loc;
 };

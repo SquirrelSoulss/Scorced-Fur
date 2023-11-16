@@ -28,6 +28,17 @@ public:
 	TArray<UGOAPAction*>myAvailableActions;
 	UPROPERTY()
 	TArray<UGOAPGoal*> myGoals;
+	UPROPERTY()
+	TArray<UGOAPAction*> currentPlan;
+	bool actionPerformed = false;
+	UPROPERTY()
+	UGOAPGoal* bestGoal;
+	UPROPERTY()
+	UGOAPGoal* currentGoal;
+	UPROPERTY()
+	int32 currentStep = 0;
+	UPROPERTY(BlueprintReadOnly)
+	bool isIdlyWaiting = false;
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
@@ -46,6 +57,9 @@ public:
 	virtual void ActionsFinished_Implementation() override;
 	virtual void PlanAborted_Implementation(UGOAPAction* aborter) override;
 	virtual bool MoveAgent_Implementation(UGOAPAction* nextAction) override;
+
+	UGOAPGoal* GetBestGoal();
 	void InitialzeActions();
 	void InitializeGoals();
+	void FollowPlan(float DeltaTime);
 };

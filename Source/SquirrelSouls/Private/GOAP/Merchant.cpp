@@ -19,16 +19,25 @@ TMap<FString, bool> AMerchant::CreateGoalState_Implementation()
 void AMerchant::BeginPlay()
 {
 	Super::BeginPlay();
-	TArray<UGOAPAction*> p = plannerComponent->Plan(this, myAvailableActions, GetWorldState_Implementation(), myGoals[0]->goalState);
+	bestGoal = GetBestGoal();
+	currentGoal = bestGoal;
+	currentPlan = plannerComponent->Plan(this, myAvailableActions, GetWorldState_Implementation(), bestGoal -> goalState);
 	
-	for (UGOAPAction* a : p) {
-		a->Perform();
-	}
 }
 
 void AMerchant::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
+	bestGoal = GetBestGoal();
+	if (currentGoal == nullptr || bestGoal != currentGoal) {
+		currentGoal = bestGoal;
+		currentPlan = plannerComponent->Plan(this, myAvailableActions, GetWorldState_Implementation(), currentGoal->goalState);
+		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, TEXT("new plan!"));
+
+	}
+	else
+		FollowPlan(DeltaTime);
+	
 }
 
 void AMerchant::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)

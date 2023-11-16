@@ -16,5 +16,8 @@ class SQUIRRELSOULS_API UGOAPGoal : public UObject
 public:
 	UPROPERTY(BlueprintReadOnly, EditDefaultsOnly, Category = "GOAP")
 	TMap<FString, bool> goalState;
-	int32 priority = 1;
+	float priority = 1;
+	virtual float GetPriority();
+	void SetDataProvider(ACharacter* actor);
+	ACharacter* dataProvider = nullptr;
 };

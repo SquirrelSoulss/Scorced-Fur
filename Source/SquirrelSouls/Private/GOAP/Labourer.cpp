@@ -68,10 +68,28 @@ bool ALabourer::MoveAgent_Implementation(UGOAPAction* nextAction)
 	return false;
 }
 
+UGOAPGoal* ALabourer::GetBestGoal()
+{
+	float highestPrio = 0;
+	UGOAPGoal* bestgoal = nullptr;
+	for (UGOAPGoal* goal : myGoals) {
+
+		float prio = goal->GetPriority();
+
+		if (highestPrio < goal->GetPriority()) {
+			highestPrio = goal->GetPriority();
+			bestgoal = goal;
+		}
+
+	}
+	return bestgoal;
+}
+
 void ALabourer::InitialzeActions()
 {
 	for (auto actionIndex = availableActions.CreateConstIterator(); actionIndex; ++actionIndex) {
 		UGOAPAction* action = NewObject<UGOAPAction>(this, actionIndex->Value);
+		action->SetAgent(this);
 		myAvailableActions.Add(action);
 	}
 }
@@ -80,7 +98,23 @@ void ALabourer::InitializeGoals()
 {
 	for (auto goals = availableGoals.CreateConstIterator(); goals; ++goals) {
 		UGOAPGoal* goal = NewObject<UGOAPGoal>(this, goals->Value);
+		goal->SetDataProvider(this);
 		myGoals.Add(goal);
 	}
+}
+
+void ALabourer::FollowPlan(float DeltaTime)
+{
+	if (currentPlan.Num() <= 0)
+		return;
+
+	
+	currentPlan[currentStep]->Perform(DeltaTime);
+	if (currentPlan[currentStep]->IsDone() && currentStep < currentPlan.Num() -1) {
+		currentStep++;
+		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, TEXT("nextstep in plan!"));
+
+	}
+
 }
 

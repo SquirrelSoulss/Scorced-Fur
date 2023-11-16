@@ -3,3 +3,14 @@
 
 #include "GOAP/Planner/GOAPGoal.h"
 
+float UGOAPGoal::GetPriority()
+{
+	return priority;
+}
+
+void UGOAPGoal::SetDataProvider(ACharacter* actor)
+{
+	dataProvider = actor;
+}
+
+

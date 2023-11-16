@@ -15,6 +15,7 @@ class SQUIRRELSOULS_API UAServeCustomer : public UGOAPAction
 	GENERATED_BODY()
 public:
 
-	virtual bool Perform() override;
+	virtual bool Perform(float DeltaTime) override;
 	virtual bool IsDone() override;
+	bool runAgain = true;
 };

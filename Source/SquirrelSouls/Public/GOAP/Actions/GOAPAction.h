@@ -23,19 +23,21 @@ public:
 	bool inRange = false;
 
 public:
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "GOAP")
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "GOAP")
 	AActor* target;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "GOAP")
 	float cost = 1;
 	ACharacter* myAgent = nullptr;
+	bool usesDeltaTime = false;
 
 	void SetAgent(ACharacter* usedAgent);
 	void DoReset();
 	virtual void Reset();
 	virtual bool IsDone();
 	virtual bool CheckProceduralPreconditions(AActor* agent);
-	virtual bool Perform();
+	virtual bool Perform(float DeltaTime);
 	virtual bool RequiresInRange();
+	virtual float GetCost();
 
 	bool IsInRange();
 	void AddPrecondition(FString key, bool value);
