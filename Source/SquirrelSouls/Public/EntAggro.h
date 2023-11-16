@@ -6,6 +6,7 @@
 #include "EntStateBase.h"
 #include "MathFunctions.h"
 #include "AIController.h"
+#include "IEntObserver.h"
 #include "EntAggro.generated.h"
 
 /**
@@ -13,7 +14,7 @@
  */
 
 UCLASS()
-class SQUIRRELSOULS_API UEntAggro : public UEntStateBase
+class SQUIRRELSOULS_API UEntAggro : public UEntStateBase, public IIEntObserver
 {
 	GENERATED_BODY()
 
@@ -38,4 +39,6 @@ public:
 	void ChooseAttack();
 	float GetDistance();
 	FEntAttackTypeData ChooseAttackLogic(float distance);
+
+	virtual void NotifyPlayerTooClose_Implementation() override;
 };

@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
 #include "IDamageRecievers.h"
+#include "IEntObserver.h"
 #include "EntClass.generated.h"
 
 USTRUCT(BlueprintType)
@@ -35,7 +36,7 @@ struct FAvailableCombos
 };
 
 UCLASS()
-class SQUIRRELSOULS_API AEntClass : public ACharacter, public IIDamageRecievers
+class SQUIRRELSOULS_API AEntClass : public ACharacter, public IIDamageRecievers, public IIEntObserver
 {
 	GENERATED_BODY()
 
@@ -156,5 +157,6 @@ public:
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
 	virtual void TakeDamage_Implementation(float Damage, float Poise, bool FireDamage, float KnockbackValue, FVector KnockbackSource) override;
+	virtual void NotifyPlayerTooClose_Implementation() override;
 
 };
