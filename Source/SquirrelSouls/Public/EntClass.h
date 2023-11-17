@@ -94,49 +94,48 @@ protected:
 	virtual void BeginPlay() override;
 
 public:
-	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "SensedPlayer")
-	void StartFight(APawn* player);
-	virtual void StartFight_Implementation(APawn* player);
+	UFUNCTION(BlueprintCallable, Category = "SensedPlayer")
+	virtual void StartFight(APawn* player);
 
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Move")
 	void MoveToRandomPoint(FVector destination);
-	virtual void MoveToRandomPoint_Implementation(FVector destination);
+	virtual void MoveToRandomPoint_Implementation(FVector destination) {};
 
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "AttackTypes")
 	void StartHandAttack(bool combo = false, bool fire = false);
-	virtual void StartHandAttack_Implementation(bool combo = false, bool fire = false);
+	virtual void StartHandAttack_Implementation(bool combo = false, bool fire = false){}
 
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "AttackTypes")
 	void StartStompAttack(bool combo = false);
-	virtual void StartStompAttack_Implementation(bool combo = false);
+	virtual void StartStompAttack_Implementation(bool combo = false) {};
 
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "AttackTypes")
 	void StartJumpAttack();
-	virtual void StartJumpAttack_Implementation();
+	virtual void StartJumpAttack_Implementation() {};
 
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "AttackTypes")
 	void StartSpawnAttack();
-	virtual void StartSpawnAttack_Implementation();
+	virtual void StartSpawnAttack_Implementation() {};
 
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "AttackTypes")
 	void StartFireSlamAttack();
-	virtual void StartFireSlamAttack_Implementation();
+	virtual void StartFireSlamAttack_Implementation() {};
 
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "AttackTypes")
 	void SpawnEnemy(FVector destination);
-	virtual void SpawnEnemy_Implementation(FVector destination);
+	virtual void SpawnEnemy_Implementation(FVector destination) {};
 
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Combo")
 	void StartCombo();
-	virtual void StartCombo_Implementation();
+	virtual void StartCombo_Implementation() {};
 
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "CheckForHit")
 	void CheckForHit();
-	virtual void CheckForHit_Implementation();
+	virtual void CheckForHit_Implementation() {};
 
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Death")
 	void Died();
-	virtual void Died_Implementation();
+	virtual void Died_Implementation() {};
 
 	UFUNCTION(BlueprintCallable, Category = "SwitchState")
 	void SwitchState(FString StateKey);
