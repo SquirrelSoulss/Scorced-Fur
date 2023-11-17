@@ -3,4 +3,10 @@
 
 #include "GOAP/IGOAP.h"
 
+void IIGOAP::PlanFailed(TMap<FString, bool> failedGoal)
+{
+}
 
+void IIGOAP::PlanFound(TMap<FString, bool> goal, TArray<UGOAPAction*> actions)
+{
+}

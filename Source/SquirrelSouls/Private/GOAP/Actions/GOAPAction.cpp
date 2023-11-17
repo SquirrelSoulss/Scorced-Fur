@@ -7,6 +7,11 @@ UGOAPAction::UGOAPAction() {
 	
 }
 
+void UGOAPAction::SetAgent(ACharacter* usedAgent)
+{
+	myAgent = usedAgent;
+}
+
 void UGOAPAction::DoReset()
 {
 	inRange = false;
@@ -24,10 +29,10 @@ bool UGOAPAction::IsDone()
 
 bool UGOAPAction::CheckProceduralPreconditions(AActor* agent)
 {
-	return false;
+	return true;
 }
 
-bool UGOAPAction::Perform()
+bool UGOAPAction::Perform(float DeltaTime)
 {
 	return false;
 }
@@ -35,6 +40,11 @@ bool UGOAPAction::Perform()
 bool UGOAPAction::RequiresInRange()
 {
 	return false;
+}
+
+float UGOAPAction::GetCost()
+{
+	return cost;
 }
 
 bool UGOAPAction::IsInRange()
