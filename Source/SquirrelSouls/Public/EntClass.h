@@ -133,6 +133,10 @@ public:
 	void CheckForHit();
 	virtual void CheckForHit_Implementation() {};
 
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "CheckForHit")
+	void CheckFireTransition();
+	virtual void CheckFireTransition_Implementation() {};
+
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Death")
 	void Died();
 	virtual void Died_Implementation() {};
