@@ -19,6 +19,9 @@ public:
 	virtual void TickState() override;
 	virtual void Damaged(float damage) override;
 	void SwitchToDecideState();
+	void BoolChange();
 	UPROPERTY(BlueprintReadOnly, EditDefaultsOnly)
 	float timeToTransition = 1.f;
+	UPROPERTY(BlueprintReadOnly, EditDefaultsOnly)
+	UAnimMontage* animMontage;
 };

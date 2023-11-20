@@ -23,5 +23,7 @@ public:
 	void SwitchToDodge();
 	UPROPERTY(BlueprintReadOnly, EditDefaultsOnly)
 	float timeBetweenTransition = .2f;
+	UPROPERTY(BlueprintReadOnly, EditDefaultsOnly)
+	UAnimMontage* animMontage;
 	bool canDodge = true;
 };

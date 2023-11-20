@@ -8,7 +8,11 @@
 void UStationaryPlantHurt::OnEnterState(AActor* stateOwner)
 {
 	Super::OnEnterState(stateOwner);
-	thisPlant->damaged = true;
+
+	
+	UAnimInstance* AnimInstance = thisPlant->GetMesh()->GetAnimInstance();
+	AnimInstance->Montage_Play(animMontage, 1.0f);
+	//GetWorld()->GetTimerManager().SetTimer(timerHandle, this, &UStationaryPlantHurt::BoolChange, .1f, false);
 	GetWorld()->GetTimerManager().SetTimer(timerHandle, this, &UStationaryPlantHurt::SwitchToDecideState,timeToTransition, false);
 }
 
@@ -32,4 +36,9 @@ void UStationaryPlantHurt::Damaged(float damage)
 void UStationaryPlantHurt::SwitchToDecideState()
 {
 	thisPlant->stateManager->SwitchStateByKey("Aggro");
+}
+
+void UStationaryPlantHurt::BoolChange()
+{
+	thisPlant->damaged = false;
 }
