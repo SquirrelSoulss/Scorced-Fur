@@ -14,6 +14,8 @@ class SQUIRRELSOULS_API UMovingStrafeState : public UMovingPlantBase
 {
 	GENERATED_BODY()
 public:
+	UPROPERTY(BlueprintReadOnly, EditDefaultsOnly)
+	float timeTonextStrafe = 1.4f;
 	virtual void OnEnterState(AActor* stateOwner) override;
 	virtual void OnExitState() override;
 	virtual void TickState() override;

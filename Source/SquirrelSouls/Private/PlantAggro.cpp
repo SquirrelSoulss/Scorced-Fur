@@ -12,7 +12,7 @@ void UPlantAggro::OnEnterState(AActor* stateOwner)
 {
 	Super::OnEnterState(stateOwner); //calls baseclass OnEnterState first in order to get some baseline information
 	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Blue, TEXT("Entered Aggro"));
-
+	thisPlant->aturnSpeed = 10.f;
 	if (thisPlant == nullptr) 
 	{
 		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Blue, TEXT("Plant Aggro state should not be availabe to this class"));

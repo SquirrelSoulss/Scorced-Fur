@@ -51,6 +51,7 @@ void UStateManagerComponent::SwitchStateByKey(FString StateKey)
 			if (CurrentState->GetClass() == NewState->GetClass() && CurrentState->bCanRepeatState == false) // if the state we entered is the same as current state, check if it can enter itself
 			{
 				return;
+				GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("cant enter again"));
 			}
 			else
 			{

@@ -7,13 +7,12 @@
 void UPlantIdle::OnEnterState(AActor* stateOwner)
 {
 	Super::OnEnterState(stateOwner);
-	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Blue, TEXT("Idle"));
 	thisPlant->shouldTrack = false;
 }
 
 void UPlantIdle::OnExitState()
 {
-	
+	Super::OnExitState();
 }
 
 void UPlantIdle::TickState()
@@ -22,4 +21,7 @@ void UPlantIdle::TickState()
 
 void UPlantIdle::Damaged(float damage)
 {
+	Super::Damaged(damage);
+	
+
 }

@@ -11,8 +11,9 @@
 void UMovingStrafeState::OnEnterState(AActor* stateOwner)
 {
 	Super::OnEnterState(stateOwner);
-	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Blue, TEXT("Strafe"));
 	mPlant->GetCharacterMovement()->MaxWalkSpeed = mPlant->walkSpeed - 100;
+	mPlant->GetCharacterMovement()->bOrientRotationToMovement = false;
+	mPlant->GetCharacterMovement()->bUseControllerDesiredRotation = true;
 	aiController->SetFocus(mainCharacter);
 	mPlant->shouldTrack = true;
 	Strafe();
@@ -23,6 +24,10 @@ void UMovingStrafeState::OnExitState()
 	Super::OnExitState();
 	GetWorld()->GetTimerManager().ClearAllTimersForObject(this);
 	mPlant->GetCharacterMovement()->MaxWalkSpeed = mPlant->maxMovementSpeed;
+	mPlant->GetCharacterMovement()->bOrientRotationToMovement = true;
+	mPlant->GetCharacterMovement()->bUseControllerDesiredRotation = false;
+
+
 	aiController->ClearFocus(EAIFocusPriority::Gameplay);
 	depth = 0;
 }
@@ -39,7 +44,7 @@ void UMovingStrafeState::Damaged(float damage)
 
 void UMovingStrafeState::Strafe()
 {
-	if (depth >= 2) 
+	if (depth >= FMath::RandRange(2, 3))
 	{
 		ChangeToLeapAttack();
 		return;
@@ -54,7 +59,7 @@ void UMovingStrafeState::Strafe()
 	aiController->MoveToLocation(destination);
 
 	depth++;
-	GetWorld()->GetTimerManager().SetTimer(timerHandle, this, &UMovingStrafeState::Strafe, 2.f, false);
+	GetWorld()->GetTimerManager().SetTimer(timerHandle, this, &UMovingStrafeState::Strafe, timeTonextStrafe, false);
 
 }
 

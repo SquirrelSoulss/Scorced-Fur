@@ -11,7 +11,6 @@ void UMovingHurtState::OnEnterState(AActor* stateOwner)
 	mPlant->takenDamage = true; //subscribe to attack
 	
 	if (canDodge == true && FMath::RandRange(0,15) > 9) {
-		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Blue, TEXT("dodge"));
 		GetWorld()->GetTimerManager().SetTimer(timerHandle, this, &UMovingHurtState::SwitchToDodge, 0.2f, false);
 		return;
 	}
