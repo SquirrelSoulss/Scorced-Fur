@@ -67,6 +67,8 @@ void UEntAggro::InitializeAttackArray()
 
 void UEntAggro::ChooseAttack()
 {
+	if (!EntRef || !PlayerRef) return;
+
 	if (!EntRef->IsAttacking)
 	{
 		float PlayerDistance = GetDistance();
