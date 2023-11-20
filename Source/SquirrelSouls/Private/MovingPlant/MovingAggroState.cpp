@@ -55,5 +55,5 @@ void UMovingAggroState::Damaged(float damage)
 
 void UMovingAggroState::ChangeToLunge()
 {
-	mPlant->stateManager->SwitchStateByKey("lunge");
+	mPlant->stateManager->SwitchStateByKey("decide");
 }

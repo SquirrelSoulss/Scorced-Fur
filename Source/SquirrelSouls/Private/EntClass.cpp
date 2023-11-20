@@ -25,7 +25,7 @@ void AEntClass::BeginPlay()
 		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("anim is null"));
 }
 
-void AEntClass::StartFight_Implementation(APawn* _player)
+void AEntClass::StartFight(APawn* _player)
 {
 	AActor* player = Cast<AActor>(_player);
 
@@ -36,46 +36,6 @@ void AEntClass::StartFight_Implementation(APawn* _player)
 	PlayerRef = player;
 
 	this->stateManager->SwitchStateByKey("Aggro");
-}
-
-void AEntClass::MoveToRandomPoint_Implementation(FVector destination)
-{
-}
-
-void AEntClass::StartHandAttack_Implementation(bool combo, bool fire)
-{
-}
-
-void AEntClass::StartStompAttack_Implementation(bool combo)
-{
-}
-
-void AEntClass::StartJumpAttack_Implementation()
-{
-}
-
-void AEntClass::StartSpawnAttack_Implementation()
-{
-}
-
-void AEntClass::StartFireSlamAttack_Implementation()
-{
-}
-
-void AEntClass::SpawnEnemy_Implementation(FVector destination)
-{
-}
-
-void AEntClass::StartCombo_Implementation()
-{
-}
-
-void AEntClass::CheckForHit_Implementation()
-{
-}
-
-void AEntClass::Died_Implementation()
-{
 }
 
 void AEntClass::SwitchState(FString StateKey)
