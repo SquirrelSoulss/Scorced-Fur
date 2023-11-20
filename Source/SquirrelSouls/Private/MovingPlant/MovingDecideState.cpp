@@ -54,7 +54,7 @@ void UMovingDecideState::ChooseBetweenAttacks()
 		mPlant->stateManager->SwitchStateByKey("zigzag");
 		return;
 	}
-	if (FMath::RandRange(0, 6) > 4) {
+	if (FMath::RandRange(0, 6) > 3) {
 		mPlant->stateManager->SwitchStateByKey("zigzag");
 		return;
 	}

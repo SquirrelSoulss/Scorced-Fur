@@ -54,7 +54,6 @@ bool UPlantBaseState::ShootRay(FVector origin, FVector end, AActor* ignoredActor
 	queryParams.AddIgnoredActor(ignoredActor);
 	GetWorld()->LineTraceSingleByChannel(hit, origin, end, traceChannel, queryParams);
 
-	DrawDebugLine(GetWorld(), origin, end, FColor::Red);
 	
 	if (Cast<APlayerCharacter>(hit.GetActor()) != nullptr) // if we are seeing the player
 	{

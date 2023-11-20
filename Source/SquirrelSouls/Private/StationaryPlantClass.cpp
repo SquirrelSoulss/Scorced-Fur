@@ -14,6 +14,7 @@
 void AStationaryPlantClass::BeginPlay()
 {
 	AEnemyBaseClass::BeginPlay();
+	ShootRef->AttachToComponent(GetMesh(), FAttachmentTransformRules(EAttachmentRule::SnapToTarget, true), TEXT("Head"));
 }
 
 void AStationaryPlantClass::PostInitializeComponents()
@@ -26,7 +27,7 @@ void AStationaryPlantClass::PostInitializeComponents()
 AStationaryPlantClass::AStationaryPlantClass()
 {
 	ShootRef = CreateDefaultSubobject<UArrowComponent>(TEXT("ShootRef"));
-	ShootRef->SetupAttachment(GetMesh(), TEXT("Tounge_2"));
+	ShootRef->SetupAttachment(GetMesh(), TEXT("Jaw1"));
 }
 
 void AStationaryPlantClass::PlayerSpotted_Implementation()
@@ -62,7 +63,6 @@ void AStationaryPlantClass::OnSePawn(APawn* player)
 		mainCharacter = player;
 
 	if (stateManager->CurrentState->IsA(UPlantIdle::StaticClass())) {
-		
 		stateManager->SwitchStateByKey("Suspicious");
 		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Blue, TEXT("Sensed"));
 	}
