@@ -16,6 +16,7 @@ void UEntTransitionP2::OnExitState()
 
 void UEntTransitionP2::TickState()
 {
+	EntRef->CheckFireTransition();
 }
 
 void UEntTransitionP2::InitializeP2()
