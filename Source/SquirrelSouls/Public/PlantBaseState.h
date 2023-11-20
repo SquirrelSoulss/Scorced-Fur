@@ -29,7 +29,7 @@ public:
 	UPROPERTY()
 	float AggroRange = 2000;
 	UPROPERTY()
-	TEnumAsByte<ECollisionChannel> traceChannel = ECC_WorldDynamic;
+	TEnumAsByte<ECollisionChannel> traceChannel = ECC_WorldStatic;
 
 protected:
 	FTimerHandle timerHandle;

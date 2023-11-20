@@ -9,7 +9,7 @@
 void UMovingLungeState::OnEnterState(AActor* stateOwner)
 {
 	Super::OnEnterState(stateOwner);
-	mPlant->shouldTrack = false;
+	//mPlant->shouldTrack = false;
 	mPlant->attackTrigger = true;
 
 	originalGravityscale = mPlant->GetCharacterMovement()->GravityScale;
