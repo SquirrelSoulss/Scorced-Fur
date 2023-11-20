@@ -20,7 +20,7 @@ void UPlantAggro::OnEnterState(AActor* stateOwner)
 	thisPlant->sensesPlayer = true; // senses player connected to animation blueprint, used to change into hostile idle
 	thisPlant->shouldTrack = true;
 
-	float randTime = FMath::RandRange(3, 6);
+	float randTime = FMath::RandRange(2, 4);
 	thisPlant->GetWorld()->GetTimerManager().SetTimer(timerHandle, this, &UPlantAggro::RangedAttack, randTime, false); // randomize the amount of time before the call
 }
 

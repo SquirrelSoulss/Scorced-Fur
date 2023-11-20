@@ -8,8 +8,11 @@ void UMovingHurtState::OnEnterState(AActor* stateOwner)
 {
 	Super::OnEnterState(stateOwner);
 
-	mPlant->takenDamage = true; //subscribe to attack
-	
+	//mPlant->takenDamage = true; //subscribe to attack
+	UAnimInstance* AnimInstance = mPlant->GetMesh()->GetAnimInstance();
+	AnimInstance->Montage_Play(animMontage, 1.0f);
+	//mPlant->PlayAnimMontage(animMontage);
+
 	if (canDodge == true && FMath::RandRange(0,15) > 9) {
 		GetWorld()->GetTimerManager().SetTimer(timerHandle, this, &UMovingHurtState::SwitchToDodge, 0.2f, false);
 		return;

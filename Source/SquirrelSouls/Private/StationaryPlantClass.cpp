@@ -63,7 +63,6 @@ void AStationaryPlantClass::OnSePawn(APawn* player)
 		mainCharacter = player;
 
 	if (stateManager->CurrentState->IsA(UPlantIdle::StaticClass())) {
-		
 		stateManager->SwitchStateByKey("Suspicious");
 		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Blue, TEXT("Sensed"));
 	}
