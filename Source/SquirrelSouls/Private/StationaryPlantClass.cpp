@@ -75,8 +75,9 @@ void AStationaryPlantClass::TakeDamage_Implementation(float Damage, float Poise,
 
 void AStationaryPlantClass::ShootProjectile()
 {
-	
-	APlantProjectile* p = this->GetWorld()->SpawnActor<APlantProjectile>(this->ProjectileClass, ShootRef->GetComponentTransform());
+	FActorSpawnParameters params;
+	params.Owner = this;
+	APlantProjectile* p = this->GetWorld()->SpawnActor<APlantProjectile>(this->ProjectileClass, ShootRef->GetComponentTransform(), params);
 	if (!ShootRef->GetComponentTransform().IsValid()) {
 		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Blue, TEXT("Null ref"));
 
