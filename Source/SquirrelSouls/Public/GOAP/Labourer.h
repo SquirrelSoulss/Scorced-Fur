@@ -24,6 +24,8 @@ public:
 	TMap<FString,TSubclassOf<UGOAPGoal>> availableGoals;
 	UPROPERTY(BlueprintReadOnly, EditDefaultsOnly, Category = "GOAP")
 	TMap<FString,TSubclassOf<UGOAPAction>> availableActions;
+	UPROPERTY(BlueprintReadOnly, EditDefaultsOnly, Category = "GOAP")
+	TMap<FString, bool> myWorldState;
 	UPROPERTY()
 	TArray<UGOAPAction*>myAvailableActions;
 	UPROPERTY()
@@ -39,6 +41,8 @@ public:
 	int32 currentStep = 0;
 	UPROPERTY(BlueprintReadOnly)
 	bool isIdlyWaiting = false;
+	UFUNCTION(BlueprintCallable, Category = "GOAP")
+	void ChangeWorldState(FString key, bool value);
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
@@ -50,8 +54,8 @@ public:
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
-	virtual TMap<FString, bool> GetWorldState_Implementation() override;
-	virtual TMap<FString, bool> CreateGoalState_Implementation() override;
+	virtual TMap<FString, bool> GetWorldState();
+	virtual TMap<FString, bool> CreateGoalState();
 	virtual void PlanFailed(TMap<FString, bool> failedGoal) override;
 	virtual void PlanFound(TMap<FString, bool> goal, TArray<UGOAPAction*> actions) override;
 	virtual void ActionsFinished_Implementation() override;

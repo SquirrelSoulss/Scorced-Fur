@@ -12,6 +12,15 @@ ALabourer::ALabourer()
 	plannerComponent = CreateDefaultSubobject<UGOAPPlanner>(TEXT("Planner"));
 }
 
+void ALabourer::ChangeWorldState(FString key, bool value)
+{
+	GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, FString::Printf(TEXT("Key: %s, Value: %s"), *key, value ? TEXT("true") : TEXT("false")));
+	if(!myWorldState.Contains(key))
+		return;
+
+	myWorldState[key] = value;
+}
+
 // Called when the game starts or when spawned
 void ALabourer::BeginPlay()
 {
@@ -36,12 +45,12 @@ void ALabourer::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 
 }
 
-TMap<FString, bool> ALabourer::GetWorldState_Implementation()
+TMap<FString, bool> ALabourer::GetWorldState()
 {
 	return TMap<FString, bool>();
 }
 
-TMap<FString, bool> ALabourer::CreateGoalState_Implementation()
+TMap<FString, bool> ALabourer::CreateGoalState()
 {
 	return TMap<FString, bool>();
 }
@@ -82,6 +91,8 @@ UGOAPGoal* ALabourer::GetBestGoal()
 		}
 
 	}
+	
+
 	return bestgoal;
 }
 

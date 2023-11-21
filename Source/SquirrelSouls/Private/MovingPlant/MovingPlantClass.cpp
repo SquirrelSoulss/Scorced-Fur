@@ -55,13 +55,11 @@ void AMovingPlantClass::SensedPlayer(APawn* player)
 {
 	if (stateManager->CurrentState->IsA(UMovingIdleState::StaticClass())) {
 		stateManager->SwitchStateByKey("decide"); 
-		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Blue, TEXT("Innercircle"));
 	}
 }
 
 FVector AMovingPlantClass::GetPatrolPoint(FVector patrolPoint)
 {
-	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Blue, TEXT("Patrolpoint given"));// error invalid state
 	randomPoint = patrolPoint;
 
 	return patrolPoint;
