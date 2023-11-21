@@ -29,5 +29,6 @@ public:
 	USphereComponent* CollisionComponent;
 	UPROPERTY(VisibleAnywhere, Category = Movement)
 	UProjectileMovementComponent* ProjectileMovementComponent;
+	UFUNCTION(BlueprintCallable)
 	void FireInDirection(const FVector& ShootDirection);
 };

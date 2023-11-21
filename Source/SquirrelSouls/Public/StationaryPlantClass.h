@@ -23,7 +23,7 @@ public:
 		FRotator targetBoneRotation;
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = Projectile)
-	TSubclassOf<class APlantProjectile> ProjectileClass;
+	TSubclassOf<APlantProjectile> ProjectileClass;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components")
 	class UArrowComponent* ShootRef;
@@ -51,5 +51,6 @@ public:
 	UFUNCTION()
 	virtual void OnSePawn(APawn* player) ;
 	virtual void TakeDamage_Implementation(float Damage, float Poise, bool FireDamage, float KnockbackValue, FVector KnockbackSource) override;
+	UFUNCTION()
 	void ShootProjectile();
 };
