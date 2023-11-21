@@ -8,7 +8,7 @@ void URootDeath::OnEnterState(AActor* stateOwner)
 	Super::OnEnterState(stateOwner);
 
 	RootRef->AnimRef->IsDead = true;
-	RootRef->ShouldRotate = false;
+	RootRef->shouldTrack = false;
 
 }
 

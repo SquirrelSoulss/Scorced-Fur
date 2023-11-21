@@ -11,14 +11,15 @@ ARootClass::ARootClass()
 {
 	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
-	stateManager = CreateDefaultSubobject<UStateManagerComponent>(TEXT("State Manager"));
+
+	maxHealth = 75.f;
+	health = maxHealth;
 }
 
 void ARootClass::BeginPlay()
 {
 	Super::BeginPlay();
 
-	Health = MaxHealth;
 
 	//Find skeletal mesh and get the ABP class
 	//AnimRef = Cast<URootAnimInstance>(FindComponentByClass<USkeletalMeshComponent>()->GetAnimInstance());
@@ -33,7 +34,7 @@ void ARootClass::Tick(float DeltaTime)
 	if (CanHit)
 		CheckIfHit();
 
-	if (PlayerRef != nullptr && ShouldRotate)
+	if (PlayerRef != nullptr && shouldTrack)
 	{
 		FRotator targetRot = UKismetMathLibrary::FindLookAtRotation(GetActorLocation(), PlayerRef->GetActorLocation());
 		FRotator newRotation = FMath::RInterpTo(GetActorRotation(), targetRot, DeltaTime, 2.f); // can change speed in order to speed up tracking during attacks
@@ -70,12 +71,12 @@ void ARootClass::DoDamageToPlayer(float Damage)
 
 void ARootClass::TakeDamage_Implementation(float Damage, float Poise, bool FireDamage, float KnockbackValue, FVector KnockbackSource)
 {
-	Health -= Damage;
-	Health = FMath::Clamp(Health, 0, MaxHealth);
+	health -= Damage;
+	health = FMath::Clamp(health, 0, maxHealth);
 
 	UpdateHealthBar(Damage);
 
-	if (Health <= 0)
+	if (health <= 0)
 	{
 		SwitchState("Death");
 	}

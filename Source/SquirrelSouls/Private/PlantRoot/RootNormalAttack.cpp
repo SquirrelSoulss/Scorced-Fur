@@ -8,7 +8,7 @@ void URootNormalAttack::OnEnterState(AActor* stateOwner)
 	Super::OnEnterState(stateOwner);
 
 	RootRef->AnimRef->IsNormalAttack = true;
-	RootRef->ShouldRotate = true;
+	RootRef->shouldTrack = true;
 	RootRef->PlayerInRadiusCooldown = false;
 
 }

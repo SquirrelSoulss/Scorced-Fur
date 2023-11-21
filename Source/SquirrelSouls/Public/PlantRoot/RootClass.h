@@ -4,18 +4,16 @@
 
 #include "RootAnimInstance.h"
 #include "IDamageRecievers.h"
+#include "SquirrelSouls/Public/EnemyBaseClass.h"
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
 #include "SquirrelSouls/PlayerCharacter.h"
 #include "RootClass.generated.h"
 
 UCLASS()
-class SQUIRRELSOULS_API ARootClass : public AActor, public IIDamageRecievers
+class SQUIRRELSOULS_API ARootClass : public AEnemyBaseClass, public IIDamageRecievers
 {
 	GENERATED_BODY()
-
-	UPROPERTY(EditAnywhere, Category = "StateMachine")
-	class UStateManagerComponent* stateManager;
 
 public:
 	// Sets default values for this actor's properties
@@ -39,18 +37,9 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "AttackVariables")
 	bool CanBeParried = false;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "AttackVariables")
-	bool ShouldRotate = false;
-
 protected:
 
 	virtual void BeginPlay() override;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "AttackVariables")
-	float Health = 75.f;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "AttackVariables")
-	float MaxHealth = 75.f;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "AttackVariables")
 	float DamageToDo = 15.f;
