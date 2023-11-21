@@ -22,6 +22,8 @@ protected:
 
 public:	
 	// Called every frame
+	UFUNCTION(BlueprintImplementableEvent)
+	void GetHealthPotions(int32 amount);
 	virtual void Tick(float DeltaTime) override;
 
 	// Called to bind functionality to input
