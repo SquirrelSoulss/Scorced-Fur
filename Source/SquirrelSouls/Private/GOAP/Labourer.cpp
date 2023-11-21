@@ -14,6 +14,7 @@ ALabourer::ALabourer()
 
 void ALabourer::ChangeWorldState(FString key, bool value)
 {
+	GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, FString::Printf(TEXT("Key: %s, Value: %s"), *key, value ? TEXT("true") : TEXT("false")));
 	if(!myWorldState.Contains(key))
 		return;
 
@@ -90,6 +91,8 @@ UGOAPGoal* ALabourer::GetBestGoal()
 		}
 
 	}
+	
+
 	return bestgoal;
 }
 

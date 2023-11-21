@@ -32,7 +32,6 @@ void AMerchant::Tick(float DeltaTime)
 		currentGoal = bestGoal;
 		currentPlan = plannerComponent->Plan(this, myAvailableActions, GetWorldState(), currentGoal->goalState);
 		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, TEXT("new plan!"));
-
 	}
 	else
 		FollowPlan(DeltaTime);

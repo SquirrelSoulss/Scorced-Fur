@@ -15,4 +15,5 @@ class SQUIRRELSOULS_API UEmptyAction : public UGOAPAction
 	GENERATED_BODY()
 	virtual bool Perform(float DeltaTime) override;
 	virtual bool IsDone() override;
+	bool runAgain = true;
 };

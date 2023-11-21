@@ -12,7 +12,7 @@ float UGOAPGoalServe::GetPriority()
 	{
 		statesMap = dp->GetWorldState();
 		if (statesMap.Contains("customerWaiting")) {
-			if (statesMap["customerWaiting"] = true) {
+			if (statesMap["customerWaiting"] == true) {
 				priority = 100;
 			}
 		}
