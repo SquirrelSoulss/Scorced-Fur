@@ -7,7 +7,7 @@ void URootAggro::OnEnterState(AActor* stateOwner)
 {
 	Super::OnEnterState(stateOwner);
 
-	RootRef->ShouldRotate = true;
+	RootRef->shouldTrack = true;
 }
 
 void URootAggro::OnExitState()

@@ -8,7 +8,7 @@ void URootSwipeAttack::OnEnterState(AActor* stateOwner)
 	Super::OnEnterState(stateOwner);
 
 	RootRef->AnimRef->IsSwipeAttack = true;
-	RootRef->ShouldRotate = true;
+	RootRef->shouldTrack = true;
 	RootRef->PlayerInRadiusCooldown = false;
 }
 
