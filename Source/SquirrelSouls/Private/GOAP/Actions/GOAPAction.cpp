@@ -47,6 +47,10 @@ float UGOAPAction::GetCost()
 	return cost;
 }
 
+void UGOAPAction::AbortAction()
+{
+}
+
 bool UGOAPAction::IsInRange()
 {
 	return inRange;

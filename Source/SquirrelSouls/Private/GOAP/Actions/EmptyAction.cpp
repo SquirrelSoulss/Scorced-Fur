@@ -17,4 +17,5 @@ bool UEmptyAction::Perform(float DeltaTime)
 bool UEmptyAction::IsDone()
 {
 	return false;
+	runAgain = true;
 }

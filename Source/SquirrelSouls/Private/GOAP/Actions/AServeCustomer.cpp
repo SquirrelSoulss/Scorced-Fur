@@ -13,7 +13,7 @@ bool UAServeCustomer::Perform(float DeltaTime)
 	runAgain = false;
 	AMerchant* a = Cast<AMerchant>(myAgent);
 	a->isIdlyWaiting = true;
-	GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, TEXT("Serve customer!"));
+	
 	//Play idle animation set the world state to serving customer or something
 	return false;
 }
@@ -22,4 +22,11 @@ bool UAServeCustomer::IsDone()
 {
 	
 	return true; //change to false
+}
+
+void UAServeCustomer::AbortAction()
+{
+	AMerchant* a = Cast<AMerchant>(myAgent);
+	a->isIdlyWaiting = false;
+	runAgain = true;
 }

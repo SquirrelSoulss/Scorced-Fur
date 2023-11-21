@@ -30,8 +30,10 @@ void AMerchant::Tick(float DeltaTime)
 	bestGoal = GetBestGoal();
 	if (currentGoal == nullptr || bestGoal != currentGoal) {
 		currentGoal = bestGoal;
+		currentPlan[currentStep]->AbortAction();
+		currentStep = 0;
 		currentPlan = plannerComponent->Plan(this, myAvailableActions, GetWorldState(), currentGoal->goalState);
-		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, TEXT("new plan!"));
+		
 	}
 	else
 		FollowPlan(DeltaTime);
