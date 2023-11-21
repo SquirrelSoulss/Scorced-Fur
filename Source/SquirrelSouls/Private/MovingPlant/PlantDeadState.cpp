@@ -2,6 +2,7 @@
 
 
 #include "MovingPlant/PlantDeadState.h"
+#include "GameFramework/CharacterMovementComponent.h"
 #include "EnemyBaseClass.h"
 
 void UPlantDeadState::OnEnterState(AActor* stateOwner)
@@ -11,7 +12,8 @@ void UPlantDeadState::OnEnterState(AActor* stateOwner)
 	if (plant != NULL) {
 		plant->shouldTrack = false;
 		plant->dead = true;
-
+		plant->GetCharacterMovement()->StopMovementImmediately();
+		plant->Mortis();
 	}
 	//start the mesh disintegration and what not
 }
