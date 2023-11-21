@@ -123,7 +123,7 @@ void ALabourer::FollowPlan(float DeltaTime)
 	currentPlan[currentStep]->Perform(DeltaTime);
 	if (currentPlan[currentStep]->IsDone() && currentStep < currentPlan.Num() -1) {
 		currentStep++;
-		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, TEXT("nextstep in plan!"));
+		
 
 	}
 
