@@ -64,7 +64,6 @@ void AStationaryPlantClass::OnSePawn(APawn* player)
 
 	if (stateManager->CurrentState->IsA(UPlantIdle::StaticClass())) {
 		stateManager->SwitchStateByKey("Suspicious");
-		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Blue, TEXT("Sensed"));
 	}
 		
 }
@@ -76,7 +75,23 @@ void AStationaryPlantClass::TakeDamage_Implementation(float Damage, float Poise,
 
 void AStationaryPlantClass::ShootProjectile()
 {
-	APlantProjectile* p = GetWorld()->SpawnActor<APlantProjectile>(ProjectileClass, ShootRef->GetComponentTransform());
+	FActorSpawnParameters params;
+	params.Owner = this;
+	APlantProjectile* p = this->GetWorld()->SpawnActor<APlantProjectile>(this->ProjectileClass, ShootRef->GetComponentTransform(), params);
+	if (!ShootRef->GetComponentTransform().IsValid()) {
+		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Blue, TEXT("Null ref"));
+
+	}
+	if (p == nullptr) {
+		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Blue, TEXT("Null thingy"));
+
+		return;
+	}
+	if (mainCharacter == nullptr) {
+		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Blue, TEXT("Null MC"));
+
+		return;
+	}
 	FVector dir = mainCharacter->GetActorLocation() - GetActorLocation();
 	p->FireInDirection(dir.GetSafeNormal());
 	//mmaybe change this to a object pool type of thing
