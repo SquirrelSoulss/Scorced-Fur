@@ -15,8 +15,6 @@ void UEntAggro::OnEnterState(AActor* stateOwner)
 
 	bCanTickState = true;
 
-	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Aggro"));
-
 	queryParams.AddIgnoredActor(EntRef);
 
 	if (EntRef->AvailableAttacks.Num() <= 0)

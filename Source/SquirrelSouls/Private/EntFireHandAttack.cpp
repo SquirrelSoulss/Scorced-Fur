@@ -7,7 +7,6 @@ void UEntFireHandAttack::OnEnterState(AActor* stateOwner)
 {
 	Super::OnEnterState(stateOwner);
 	EntRef->StartFireSlamAttack();
-	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Emerald, TEXT("eldigt"));
 
 }
 
