@@ -33,6 +33,8 @@ public:
 	float aturnSpeed = 2.f;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combat")
 	bool shouldDamage = false;
+	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable, Category = "Death")
+	void Mortis();
 	
 
 public:
