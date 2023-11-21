@@ -12,6 +12,14 @@ ALabourer::ALabourer()
 	plannerComponent = CreateDefaultSubobject<UGOAPPlanner>(TEXT("Planner"));
 }
 
+void ALabourer::ChangeWorldState(FString key, bool value)
+{
+	if(!myWorldState.Contains(key))
+		return;
+
+	myWorldState[key] = value;
+}
+
 // Called when the game starts or when spawned
 void ALabourer::BeginPlay()
 {

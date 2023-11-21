@@ -41,6 +41,8 @@ public:
 	int32 currentStep = 0;
 	UPROPERTY(BlueprintReadOnly)
 	bool isIdlyWaiting = false;
+	UFUNCTION(BlueprintCallable, Category = "GOAP")
+	void ChangeWorldState(FString key, bool value);
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
