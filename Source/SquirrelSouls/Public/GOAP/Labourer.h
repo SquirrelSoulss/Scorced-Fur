@@ -24,6 +24,8 @@ public:
 	TMap<FString,TSubclassOf<UGOAPGoal>> availableGoals;
 	UPROPERTY(BlueprintReadOnly, EditDefaultsOnly, Category = "GOAP")
 	TMap<FString,TSubclassOf<UGOAPAction>> availableActions;
+	UPROPERTY(BlueprintReadOnly, EditDefaultsOnly, Category = "GOAP")
+	TMap<FString, bool> myWorldState;
 	UPROPERTY()
 	TArray<UGOAPAction*>myAvailableActions;
 	UPROPERTY()

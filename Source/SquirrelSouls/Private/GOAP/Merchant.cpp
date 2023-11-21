@@ -6,9 +6,8 @@
 
 TMap<FString, bool> AMerchant::GetWorldState_Implementation()
 {
-	TMap<FString, bool> s;
-	s.Add(TEXT("customerWaiting"), true);
-	return s;
+	
+	return myWorldState;
 }
 
 TMap<FString, bool> AMerchant::CreateGoalState_Implementation()
