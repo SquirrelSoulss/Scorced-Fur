@@ -29,7 +29,7 @@ public:
 	float cost = 1;
 	ACharacter* myAgent = nullptr;
 	bool usesDeltaTime = false;
-
+	FTimerHandle timerHandle;
 	void SetAgent(ACharacter* usedAgent);
 	void DoReset();
 	virtual void Reset();
