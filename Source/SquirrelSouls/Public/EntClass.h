@@ -36,7 +36,7 @@ struct FAvailableCombos
 };
 
 UCLASS()
-class SQUIRRELSOULS_API AEntClass : public ACharacter, public IIDamageRecievers, public IIEntObserver
+class SQUIRRELSOULS_API AEntClass : public ACharacter, public IIDamageRecievers
 {
 	GENERATED_BODY()
 
@@ -103,7 +103,7 @@ public:
 
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "AttackTypes")
 	void StartHandAttack(bool combo = false, bool fire = false);
-	virtual void StartHandAttack_Implementation(bool combo = false, bool fire = false){}
+	virtual void StartHandAttack_Implementation(bool combo = false, bool fire = false) {}
 
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "AttackTypes")
 	void StartStompAttack(bool combo = false);
@@ -151,7 +151,6 @@ public:
 	UFUNCTION()
 	void RotateToPlayer(float DeltaTime);
 
-
 public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
@@ -159,7 +158,5 @@ public:
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
-	virtual void TakeDamage_Implementation(float Damage, float Poise, bool FireDamage, float KnockbackValue, FVector KnockbackSource) override;
-	virtual void NotifyPlayerTooClose_Implementation() override;
-
+	virtual void TakeDamage_Implementation(float Damage, float Poise, bool FireDamage, float KnockbackValue, FVector KnockbackSource)  override {};
 };

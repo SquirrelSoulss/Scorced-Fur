@@ -135,11 +135,6 @@ FEntAttackTypeData UEntAggro::ChooseAttackLogic(float distance)
 	return EntRef->AvailableAttacks[0];
 }
 
-void UEntAggro::NotifyPlayerTooClose_Implementation()
-{
-	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Yellow, TEXT("hejsan"));
-
-}
 
 
 
