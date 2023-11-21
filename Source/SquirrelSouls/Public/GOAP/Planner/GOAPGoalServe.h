@@ -15,4 +15,5 @@ class SQUIRRELSOULS_API UGOAPGoalServe : public UGOAPGoal
 	GENERATED_BODY()
 public:
 	virtual float GetPriority() override;
+	TMap<FString, bool> statesMap;
 };

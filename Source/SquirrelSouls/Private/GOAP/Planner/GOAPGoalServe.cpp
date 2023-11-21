@@ -2,8 +2,21 @@
 
 
 #include "GOAP/Planner/GOAPGoalServe.h"
+#include "GOAP/Labourer.h"
 
 float UGOAPGoalServe::GetPriority()
 {
-	return 0.0f;
+	ALabourer* dp = Cast<ALabourer>(dataProvider);
+	priority = 1;
+	if (dp != nullptr)
+	{
+		statesMap = dp->GetWorldState();
+		if (statesMap.Contains("customerWaiting")) {
+			if (statesMap["customerWaiting"] = true) {
+				priority = 100;
+			}
+		}
+	}
+
+	return priority;
 }
