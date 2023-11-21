@@ -9,6 +9,7 @@ void UPlantMeleeAttack::OnEnterState(AActor* stateOwner)
 {
 	Super::OnEnterState(stateOwner);
 	thisPlant->meleeAttackTrigger = true; // used to trigger melee attack animation
+	thisPlant->aturnSpeed = 10.f;
 }
 
 void UPlantMeleeAttack::OnExitState()
