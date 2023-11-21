@@ -76,6 +76,8 @@ TArray<UGOAPAction*> UGOAPPlanner::Plan(AActor* agent, TArray<UGOAPAction*> avai
 	while (n != nullptr) {
 		if (n->action != NULL) {
 			result.Insert(n->action, 0);
+			
+
 		}
 		n = n->parent;
 	}
@@ -96,6 +98,7 @@ bool UGOAPPlanner::BuildGraph(UGOAPNode* parent, TArray<UGOAPNode*>& leaves, TAr
 
 			if (InState(goal, currentState)) {
 				leaves.Add(node);
+
 				foundOne = true;
 			}
 			else {

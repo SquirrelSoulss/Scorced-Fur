@@ -21,7 +21,7 @@ bool UAMoveToAStand::Perform(float DeltaTime)
 	}
 		
 	dontRunAgain = true;
-	GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, TEXT("Move To stand!"));
+	
 	return false;
 }
 
@@ -32,6 +32,13 @@ bool UAMoveToAStand::IsDone()
 	
 	//return myAgent->GetVelocity().Length() < 1;
 	return FVector::Distance(myAgent->GetActorLocation(), target->GetActorLocation()) < 120.f; // change to false
+}
+
+void UAMoveToAStand::AbortAction()
+{
+	AAIController* ctrl = Cast<AAIController>(myAgent->GetController()) ;
+	ctrl->StopMovement();
+	dontRunAgain = false;
 }
 
 UAMoveToAStand::UAMoveToAStand()

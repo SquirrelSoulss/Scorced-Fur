@@ -17,5 +17,6 @@ public:
 
 	virtual bool Perform(float DeltaTime) override;
 	virtual bool IsDone() override;
+	virtual void AbortAction() override;
 	bool runAgain = true;
 };

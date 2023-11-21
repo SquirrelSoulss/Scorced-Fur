@@ -38,6 +38,7 @@ public:
 	virtual bool Perform(float DeltaTime);
 	virtual bool RequiresInRange();
 	virtual float GetCost();
+	virtual void AbortAction();
 
 	bool IsInRange();
 	void AddPrecondition(FString key, bool value);
