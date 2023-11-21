@@ -8,7 +8,6 @@ void UEntHandAttack::OnEnterState(AActor* stateOwner)
 	Super::OnEnterState(stateOwner);
 
 	EntRef->StartHandAttack(EntRef->IsCombo, EntRef->IsFireCombo);
-	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Yellow, TEXT("Hand attack"));
 }
 
 void UEntHandAttack::OnExitState()

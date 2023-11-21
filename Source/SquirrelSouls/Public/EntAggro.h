@@ -14,7 +14,7 @@
  */
 
 UCLASS()
-class SQUIRRELSOULS_API UEntAggro : public UEntStateBase, public IIEntObserver
+class SQUIRRELSOULS_API UEntAggro : public UEntStateBase
 {
 	GENERATED_BODY()
 
@@ -40,5 +40,4 @@ public:
 	float GetDistance();
 	FEntAttackTypeData ChooseAttackLogic(float distance);
 
-	virtual void NotifyPlayerTooClose_Implementation() override;
 };
