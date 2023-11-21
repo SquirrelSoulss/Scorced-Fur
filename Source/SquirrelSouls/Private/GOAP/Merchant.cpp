@@ -4,13 +4,13 @@
 #include "GOAP/Merchant.h"
 #include "GOAP/Planner/GOAPPlanner.h"
 
-TMap<FString, bool> AMerchant::GetWorldState_Implementation()
+TMap<FString, bool> AMerchant::GetWorldState()
 {
 	
 	return myWorldState;
 }
 
-TMap<FString, bool> AMerchant::CreateGoalState_Implementation()
+TMap<FString, bool> AMerchant::CreateGoalState()
 {
 	return TMap<FString, bool>();
 }
@@ -20,7 +20,7 @@ void AMerchant::BeginPlay()
 	Super::BeginPlay();
 	bestGoal = GetBestGoal();
 	currentGoal = bestGoal;
-	currentPlan = plannerComponent->Plan(this, myAvailableActions, GetWorldState_Implementation(), bestGoal -> goalState);
+	currentPlan = plannerComponent->Plan(this, myAvailableActions, GetWorldState(), bestGoal -> goalState);
 	
 }
 
@@ -30,7 +30,7 @@ void AMerchant::Tick(float DeltaTime)
 	bestGoal = GetBestGoal();
 	if (currentGoal == nullptr || bestGoal != currentGoal) {
 		currentGoal = bestGoal;
-		currentPlan = plannerComponent->Plan(this, myAvailableActions, GetWorldState_Implementation(), currentGoal->goalState);
+		currentPlan = plannerComponent->Plan(this, myAvailableActions, GetWorldState(), currentGoal->goalState);
 		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, TEXT("new plan!"));
 
 	}

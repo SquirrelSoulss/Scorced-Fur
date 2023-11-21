@@ -36,12 +36,12 @@ void ALabourer::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 
 }
 
-TMap<FString, bool> ALabourer::GetWorldState_Implementation()
+TMap<FString, bool> ALabourer::GetWorldState()
 {
 	return TMap<FString, bool>();
 }
 
-TMap<FString, bool> ALabourer::CreateGoalState_Implementation()
+TMap<FString, bool> ALabourer::CreateGoalState()
 {
 	return TMap<FString, bool>();
 }

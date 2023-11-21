@@ -23,10 +23,7 @@ class SQUIRRELSOULS_API IIGOAP
 
 	// Add interface functions to this class. This is the class that will be inherited to implement this interface.
 public:
-	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "GOAP")
-	TMap<FString, bool> GetWorldState();
-	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "GOAP")
-	TMap<FString, bool> CreateGoalState();
+	
 	//UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "GOAP")
 	virtual void PlanFailed(TMap<FString, bool> failedGoal);
 	//UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "GOAP")
