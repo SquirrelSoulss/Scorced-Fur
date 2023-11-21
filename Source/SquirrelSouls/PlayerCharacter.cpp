@@ -19,6 +19,10 @@ void APlayerCharacter::BeginPlay()
 	
 }
 
+void APlayerCharacter::GetHealthPotions_Implementation(int32 amount)
+{
+}
+
 // Called every frame
 void APlayerCharacter::Tick(float DeltaTime)
 {

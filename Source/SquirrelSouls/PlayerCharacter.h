@@ -22,8 +22,9 @@ protected:
 
 public:	
 	// Called every frame
-	UFUNCTION(BlueprintImplementableEvent)
+	UFUNCTION(BlueprintNativeEvent, Category="Potion")
 	void GetHealthPotions(int32 amount);
+	virtual void GetHealthPotions_Implementation(int32 amount);
 	virtual void Tick(float DeltaTime) override;
 
 	// Called to bind functionality to input
