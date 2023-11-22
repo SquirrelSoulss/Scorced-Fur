@@ -42,6 +42,7 @@ void UEntTransitionP2::InitializeP2()
 		newCombo.isFire = true;
 		newCombo.ComboArray = { "StompAttack", "StompAttack","FireHandAttack" };
 		EntRef->AvailableCombos.Add(newCombo);
+
 	}
 
 }

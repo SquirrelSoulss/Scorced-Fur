@@ -27,7 +27,7 @@ public:
 	virtual void TickState() override;
 
 	UPROPERTY()
-	TEnumAsByte<ECollisionChannel> traceChannel = ECC_Pawn;
+	TEnumAsByte<ECollisionChannel> traceChannel = ECC_GameTraceChannel2;
 	FCollisionQueryParams queryParams;
 
 	FTimerHandle TimerHandle_ChooseAttack;
