@@ -72,7 +72,7 @@ public:
 	bool IsFireDamage = false;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "CanMove")
-	float ChilloutPeriod = 1.5f;
+	float ChilloutPeriod = 1.25f;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 	TArray<FEntAttackTypeData> AvailableAttacks;
