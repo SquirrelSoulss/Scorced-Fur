@@ -10,7 +10,7 @@ void UEntSpawnEnemyAttack::OnEnterState(AActor* stateOwner)
 	Super::OnEnterState(stateOwner);
 
 	EntRef->StartSpawnAttack();
-	GetWorld()->GetTimerManager().SetTimer(TimerHandle_SpawnEnemy, this, &UEntSpawnEnemyAttack::SpawnEnemy, SpawnIntervall, true, 3.f);
+	GetWorld()->GetTimerManager().SetTimer(TimerHandle_SpawnEnemy, this, &UEntSpawnEnemyAttack::SpawnEnemy, SpawnIntervall, true, .75f);
 }
 
 void UEntSpawnEnemyAttack::OnExitState()

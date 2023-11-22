@@ -26,7 +26,7 @@ public:
 	float RandomPointRadius = 1000.f;
 
 	UPROPERTY(EditAnywhere)
-	float SpawnIntervall = 3.f;
+	float SpawnIntervall = .25f;
 
 	UFUNCTION()
 	void SpawnEnemy();
