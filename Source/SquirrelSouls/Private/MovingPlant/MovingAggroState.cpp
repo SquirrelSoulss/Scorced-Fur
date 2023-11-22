@@ -35,7 +35,7 @@ void UMovingAggroState::OnExitState()
 void UMovingAggroState::TickState()
 {
 	Super::TickState();
-	if (FVector::Distance(mPlant->GetActorLocation(), mainCharacter->GetActorLocation()) <= 500.f) //turn into variable
+	if (FVector::Distance(mPlant->GetActorLocation(), mainCharacter->GetActorLocation()) <= 400.f) //turn into variable
 	{
 		if (canTriggerLunge == true) {
 			mPlant->attackTrigger = true;

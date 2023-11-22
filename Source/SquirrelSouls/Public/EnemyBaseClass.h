@@ -35,7 +35,8 @@ public:
 	bool shouldDamage = false;
 	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable, Category = "Death")
 	void Mortis();
-	
+	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable, Category = "Damage")
+	void StartDamage();
 
 public:
 	// Sets default values for this character's properties

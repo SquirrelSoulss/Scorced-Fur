@@ -18,5 +18,7 @@ public:
 	virtual bool Perform(float DeltaTime) override;
 	virtual bool IsDone() override;
 	virtual void AbortAction() override;
+	void GivePotions();
+	bool givenPotions = false;
 	bool runAgain = true;
 };
