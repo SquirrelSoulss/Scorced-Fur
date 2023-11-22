@@ -48,6 +48,7 @@ void UEntAggro::InitializeAttackArray()
 	EntRef->AvailableAttacks.Add({ "HandAttack", 350.f, 0.4f });
 	EntRef->AvailableAttacks.Add({ "StompAttack", 400.f, 0.35f });
 	EntRef->AvailableAttacks.Add({ "JumpAttack", 1500.f, 0.1f });
+	EntRef->AvailableAttacks.Add({ "SpawnAttack", 10000.f, 0.2f });
 	EntRef->AvailableAttacks.Add({ "ComboAttack", 500.f, 0.7f });
 
 	FAvailableCombos newCombo;
@@ -97,7 +98,7 @@ float UEntAggro::GetDistance()
 FEntAttackTypeData UEntAggro::ChooseAttackLogic(float distance)
 {
 	//Debug set attack
-	//return EntRef->AvailableAttacks[4];
+	return EntRef->AvailableAttacks[4];
 
 	TArray<FEntAttackTypeData> ValidAttacks;
 

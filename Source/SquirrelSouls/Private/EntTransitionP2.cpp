@@ -23,7 +23,6 @@ void UEntTransitionP2::InitializeP2()
 {
 	HasInitialized = true;
 
-	EntRef->AvailableAttacks.Add({ "SpawnAttack", 10000.f, 0.2f });
 	EntRef->AvailableAttacks.Add({ "FireSlamAttack", 600.f, 0.25f });
 
 	if (!EntRef)
