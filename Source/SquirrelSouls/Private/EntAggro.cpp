@@ -98,7 +98,7 @@ float UEntAggro::GetDistance()
 FEntAttackTypeData UEntAggro::ChooseAttackLogic(float distance)
 {
 	//Debug set attack
-	return EntRef->AvailableAttacks[4];
+	//return EntRef->AvailableAttacks[4];
 
 	TArray<FEntAttackTypeData> ValidAttacks;
 
